@@ -37,3 +37,5 @@ contains `[kube-proxy, kubelet, container runtime]`
 - Try [monokle](https://monokle.io/)
 - Use [k8s Lens IDE](https://k8slens.dev/)
 - Refresh CIDR / IP masking
+- [kubeshop](https://kubeshop.io/) - debug / maintain huge yaml configs
+- [datree](https://www.datree.io/) - find misconfiguration in security rules
