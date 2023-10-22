@@ -1,0 +1,54 @@
+Using minicube (single node [control plane + worker node])
+## Cluster
+`minikube start`
+`minikube dashboard` - GUI to do all k8s stuffs
+
+> Deployment is the recommended way to manage / scale pods
+## Deployment
+`kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080`
+
+`"/agnhost netexec --http-port=8080"` is a command for the container [init script]
+
+`kubectl get deployments / pods / events / services` - current status
+`kubectl config view` - get config file 
+`kubectl logs <pod-name>` - get logs
+
+## Need for Services
+To expose pods outside of Kubernetes' private network for users to interact with. [Provides Endpoints]
+Pods are auto managed by the **Deployment**. So fundamentally, you'll never know the names / IPs of the active Pods. 
+
+**Scenario**: let's say, you have some frontend pods that needs to work with backend pods. But, how does your frontend pods know about available backend pods?
+> Frontends needn't know or required to keep track of backends...
+> **Services** enters the chat
+
+Services allow decoupling of **Pods**, although, when one pod needs help of another. This is achieved using [**Labels**](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#motivation).
+```json
+metadata: {
+	labels: {
+		'tier': 'backend'
+	}
+}
+```
+Service Discovery: [DNS, Environmental Variables] - All ports in *multiport* should share the same protocol [TCP] in multiport
+
+### Create Service
+`kubectl expose deployment hello-node --type=LoadBalancer --port=8080`
+`minikube service hello-node` - other providers gives you *External IP*, but minikube opens in browser
+User Addons
+```shell
+minikube addons [enable / disable] metrics-server
+
+```
+## Ingress - HTTP(S) oversee
+Traffic are routed based on the ingress rules. With [SSL, Load Balancing],  [Single Listener]
+![[Pasted image 20231022235644.png]]
+Need more advance capabilities?: [Gateway]
+## Cleanup
+```shell
+kubectl delete service hello-node
+kubectl delete deployment hello-node
+minikube stop
+```
+## Sause
+[Getting Started](https://kubernetes.io/docs/tutorials/hello-minikube/)
+[Cuttle doc](https://kubernetes.io/docs/reference/kubectl/)
