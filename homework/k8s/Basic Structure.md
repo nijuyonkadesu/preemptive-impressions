@@ -3,6 +3,11 @@ Deployment > Pod > container
 cli serves the control plane: 
 `{ [Control plane -> xNodes], ... } <- a cluster`
 
+### Kubectl
+uses Kubernetes API to interact with the cluster. Basic structure:`kubectl <action> resource`
+action: [get, create, describe, delete, config, logs, exec, expose]
+resource: [deployments, node, pods, events, services]
+
 CLI modes
 1. imperative Interaction
 2. declarative Interaction `[Manifests / yaml]`
@@ -13,11 +18,25 @@ contains `[API Server, etcd, controller manager, scheduler]`
 etcd: all info about the server `[k-v pairs]`
 
 Managing overall health of *a cluster*. 
-- pod `[new / scale / expose / destroy / manage]`
 ### 2. Worker Node
 contains `[kube-proxy, kubelet, container runtime]`
 [[#Controller & Node Structure]]
 - kubectl - follows the order from scheduler. whines back to control plane if it can't do the job it was given with. 
+![[module_03_nodes.svg]]
+### 3. Pods
+pods can be`[new / scale / expose / destroy / manage]`
+Pods = Resources + [[Docker]] Containers
+Resources: [Shared volumes, networking, commands to start a container, port informations]
+![[module_03_pods.svg]]
+## Tipss
+
+- Try [monokle](https://monokle.io/)
+- Use [k8s Lens IDE](https://k8slens.dev/)
+- Refresh CIDR / IP masking
+- [kubeshop](https://kubeshop.io/) - debug / maintain huge yaml configs
+- [datree](https://www.datree.io/) - find misconfiguration in security rules
+
+---
 
 > [!todo]- Pending concepts to look at
 > - [ ] Istio
@@ -32,10 +51,3 @@ contains `[kube-proxy, kubelet, container runtime]`
 > - [ ] Objects in general
 > - [ ] Networking [VPC - Network Interface, Rules]
 > - [ ] Roles [Role Binding, Authentication -> Authorization (role scoping)]
-## Tipss
-
-- Try [monokle](https://monokle.io/)
-- Use [k8s Lens IDE](https://k8slens.dev/)
-- Refresh CIDR / IP masking
-- [kubeshop](https://kubeshop.io/) - debug / maintain huge yaml configs
-- [datree](https://www.datree.io/) - find misconfiguration in security rules

@@ -9,6 +9,7 @@
 ```
 
 `[[]]` - Internal Links
+`[[Three laws of motion#Second law]]` - Link a particular Heading of a file
 
 Embed Search Results: same as `Ctrl + Shift + F`
 
