@@ -72,7 +72,7 @@ so, you'll have these two as the remote
 It's another way to point to a snapshot (commit). 
 But it's not a branch. You're not supposed to use it to checkout and make changes from a commit that is linked with a tag.
 
-For me atleast, it feels like, this is a work around way to implement '**Releases**' from github side. ie, instead of modifying exisisting 'commit' implementations and blah blah. 
+For me atleast, it feels like, this is used as a workaround way to implement '**Releases**' from github side. ie, that's why it felt pointless to do in Git cli.
 ![[Pasted image 20231028171542.png]]
 using semantic versioning with tags is highly recommended unlike the above screenshot
 annotate a commit using `git tag -a v2.3 -m "tagging"`
@@ -181,5 +181,52 @@ $ git branch -vv
 
 ---
 
+# Rebase
+Reapplying changes over other commit. you can take all the changes that were committed on one branch and replay them on a different branch.
+
+```bash
+git rebase main experiment
+# or       ^ base   ^topic branch
+git switch experiment
+git rebase main
+
+# then do the ffmerge
+git switch main
+git merge experiment
+```
+
+> If you examine the log of a rebased branch, it looks like a linear history: it appears that all the work happened in series, even when it originally happened in parallel.
+
+```bash
+# multiple branch rebasing
+git rebase --onto main server client
+
+# then do the ffmerge
+git switch main
+git merge client
+```
+
+## When to not Rebase
+
+> **Do not rebase commits that exist outside your repository and that people may have based work on**.
+> If you follow that guideline, you’ll be fine. If you don’t, people will hate you, and you’ll be scorned by friends and family
+
+Suppose you have a public repository on GitHub with a few commits. You clone the repository to your local machine and start working on a new feature. You make a few **commits to your local** branch, but you **haven't pushed** them to the remote repository yet.
+
+In the meantime, someone else clones your repository ~~and merges your commits into their own branch~~. They then make some changes of their own and **push their changes** to the remote repository.
+
+Now, **if you rebase your local branch, you will overwrite the commits that have already been pushed to the remote repository**. This will cause problems for the other person, because their changes will no longer be compatible with the history of the repository.
+
+- This is because rebasing can overwrite commits that have already been pushed to the remote repository. This can cause problems for other people who are working on the same project, as their changes may no longer be compatible with the history of the repository.
+
+- If you push commits somewhere and others pull them down and base work on them, and then you rewrite those commits with `git rebase` and push them up again, your collaborators will have to re-merge their work and things will get messy when you try to pull their work back into yours.
+
+![[Pasted image 20231101235525.png]]
+the history of merge (last week) + the history of rebase (this week after `--force push`)
+both is present in another dev's local copy. if he pushes this, the history looks cluttered 
+*(redundant commits that are essentially the same thing)*
+
+---
 # Checkpoint 
 Next: Rebasing https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+Reversing commit: https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging
