@@ -226,7 +226,25 @@ the history of merge (last week) + the history of rebase (this week after `--for
 both is present in another dev's local copy. if he pushes this, the history looks cluttered 
 *(redundant commits that are essentially the same thing)*
 
+## Rebase on top of force-pushed rebase work
+```bash
+git pull --rebase
+# or
+git fetch
+git rebase main
+```
+
+> **Fine:** 
+> If you only ever rebase commits that have never left your own computer, you’ll be just fine
+> If you rebase commits that have been pushed, but that no one else has based commits from, you’ll also be fine
+> 
+> **Not Fine:**
+> If you rebase commits that have already been pushed publicly, and people may have based work on those commits, then you may be in for some frustrating trouble, and the scorn of your teammates.
+
+> [!tip] Merge & Rebase
+> You can get the best of both worlds: rebase local changes before pushing to clean up your work, but never rebase anything that you’ve pushed somewhere
+
 ---
 # Checkpoint 
-Next: Rebasing https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+Next: Protocols https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols (I want to do sec 5 distributed git tho)
 Reversing commit: https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging
