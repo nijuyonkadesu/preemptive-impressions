@@ -23,3 +23,5 @@ immediately
 ![](https://twitter.com/nijuyonkadesu/status/1624807326023835649)
 
 #checkpoint https://help.obsidian.md/Plugins/Core+plugins
+
+![33%](https://progress-bar.dev/33) - look for more cute things like these ...
