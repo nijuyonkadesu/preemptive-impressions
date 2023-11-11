@@ -5,7 +5,7 @@ cli serves the control plane:
 
 ### Kubectl
 uses Kubernetes API to interact with the cluster. Basic structure:`kubectl <action> resource`
-action: [get, create, describe, delete, config, logs, exec, expose]
+action: [get, create, describe, delete, config, logs, exec, expose, scale, rollout {status, undo}]
 resource: [deployments, node, pods, events, services]
 
 CLI modes
@@ -22,12 +22,17 @@ Managing overall health of *a cluster*.
 contains `[kube-proxy, kubelet, container runtime]`
 [[#Controller & Node Structure]]
 - kubectl - follows the order from scheduler. whines back to control plane if it can't do the job it was given with. 
+- kubelet - a process that communicates b/w [[#1. Control Plane|control plane]] and [[#2. Worker Node|worker node]] - manages [[#3. Pods|pods]]
 ![[module_03_nodes.svg]]
 ### 3. Pods
 pods can be`[new / scale / expose / destroy / manage]`
-Pods = Resources + [[Docker]] Containers
+Pods = Resources + [[Docker]] containers
 Resources: [Shared volumes, networking, commands to start a container, port informations]
 ![[module_03_pods.svg]]
+#### Lifecycle
+pod phases        :`pending -> running -> succeed / failure`
+container states : `waiting -> running / terminated` k8s support [hooking](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks) these states to fire events
+pod [readiness](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-readiness-gate) - state more pod *conditions* to declare the pod is ready. 
 ## Tipss
 
 - Try [monokle](https://monokle.io/)
