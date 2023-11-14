@@ -30,3 +30,8 @@ unblended cost (without any discounts / any other complex process involved)
 
 
 - you're responsible for what you put inside AWS
+
+
+# Tips ?
+- Contact Partner Network - Expertise, help choose right services, avoid common pitfalls
+- 
