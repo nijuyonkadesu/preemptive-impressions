@@ -18,14 +18,61 @@ with open('foo.txt', 'rt', encoding='utf-8') as f:
 
 ```
 
-## Regex
+## [Regex](https://regex101.com/)
+In match, everything *stops* when first match is found.
 ```python
-match = re.search(r'word:\w\w\w', str) # r'xxx' is raw text
+import re
+unfilteredSource = """ fineall    okman*&
+xyz alice-b@google.com purple monkey """
+
+firstMatch = re.search(r'\b\w+', unfilteredSource, re.IGNORECASE)
+firstMatch.group()
+
+matches = re.findall(r'\b\w+', unfilteredSource) # A list of all matches
+# if pattern contains () () grouping, then the result is list of **tuples**
+
+re.sub(match_pattern, replacement_pattern, source_string)
 ```
-[watch this](https://youtu.be/saABx34CsBE?si=gJbMzXGIW9PQBw_C) before reading docs: dunno, probably it'll be good
+> [!tip ]+ Anamoly
+> `.*` doesn't match newline
+> `\s` matches newline
+> `^$` match the start and end of the entire string
+
+![[Pasted image 20231115205006.png]]
+```regex
+.  match any character except newline
+\w match word character [a-zA-Z0-9_]. it only matches single character!
+\W match non-word character
+\s match white space [ \n\r\t\f]
+\S match non-white space
+\d match digit
+^  start
+$  end
+\  escape sequence to match chars that have special meaning [\. \\ \@ \$ \^]
+\b boundary - marks the start and end of the word
+	eg: r'\b\w+' grabs all the word of a sentance
+
+[a-z] [from-to] range
+[^ab] anything in this world except a & b (inversion)
+[xxx] match with set of characters (x, x, x are considered as separate pattern)
+                                     ☝️
+(xxx | xx) match with xxx or xx (not ☝️ like this at all)
+r'(...)(...)' match.group(1) & match.group(2) to extract matches
+r'xx(?:blahblahpattern)xx' to ignore a group in regex
+
+{3,5} match repeatedly (3 to 5 matches exactly)
+{3,}  match minimum 3 times
+```
+[watch this](https://youtu.be/saABx34CsBE?si=gJbMzXGIW9PQBw_C) before reading docs: dunno, probably it'll be good (~~didin't watch, m lazy~~)
+
+> [!faq]- Greedy & Non-Greedy
+> `.*?` & `.+?`
+> ignore: the hell is "negative lookahead assertion" ?
 ## [Utilities](https://developers.google.com/edu/python/utilities)
 subprocess - run powersheel / bash scripts
 
+## Checkpoint
+[up next](https://developers.google.com/edu/python/regular-expressions#basic-examples)
 ## Some rusty old notes
 ```python
 class Fine:
