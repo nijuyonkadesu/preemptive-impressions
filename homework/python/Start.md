@@ -112,3 +112,29 @@ dict[1] = 'first' # updation
 dict.pop(2)
 dict.popitem() # del last added K:V - returns tuple
 ```
+tip: avoid inline comments ^
+## Tips from [bootcamp](https://justinbois.github.io/bootcamp/2020_fsri/lessons/l13_intro_to_pandas.html)
+tip 2: If you are writing code and you think to yourself, “This seems like a pretty common things to do,” there is a good chance the someone really smart has written code to do it. If it’s something numerical, there is a good chance it is in NumPy or SciPy. **Use these packages.** Do not reinvent the wheel.
+```python
+for idx, base in enumerate(seq) # instead of range(len(seq))
+*a_tuple # unpack operator
+def concatenate_sequences(a, b, **kwargs): 
+concatenate_sequences(**a_dict)
+# kwargs is a dict (**) treat them as dict and iterate
+```
+### Grouping imports
+1. standard library imports
+2. related third party imports
+3. local application/library specific imports
+You should put a blank line between each group of imports.
+
+### numpy
+- vectorization, boolean indexing on **Series**
+- split - apply - combine
+
+## TDD: pytest
+- start function name with '**test_**' and run pytest command and have assert statements
+- for raising errors, you need to raise in main function + pytest.raises() in test cases.
+- remove old test cases from time to time
+## Forks
+![[Pasted image 20231130151847.png]]
