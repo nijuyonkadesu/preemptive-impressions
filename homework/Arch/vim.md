@@ -80,6 +80,7 @@ eg: d 10 j > removes 10 lines
 `y` - is just within vim  
 `_s` : replace all  
 ## Advanced:  
+[visual actions](https://vimdoc.sourceforge.net/htmldoc/visual.html#CTRL-V)
 `vi{ | vi[ | vi( `- select contents between paranthesis  
 `va` - including the brackets  
 `ya( yi{` - just yank  
@@ -136,3 +137,24 @@ check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iS
   
 Check: <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-the-auto-copplete-window-is-pink-how-to-make-it-semi-t>
 <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-the-auto-copplete-window-is-pink-how-to-make-it-semi-t>
+---
+`:5,16fo`
+`select lines + fo`: fold lines
+^ this is range in commands
+`za` toggle between fold
+`Ctrl w v` - vertical split window or `:vs`
+`:on` closes all other windows
+`Ctrl w r` - rotate windows 
+
+## macros
+`qa` - it saves your movements on 'a'. stop macro recording by pressing 'q'
+to, replay the macro, in normal mode: `@a`
+
+[decent fcc vim guide](https://www.freecodecamp.org/news/learn-linux-vim-basic-features-19134461ab85/#9b6b)
+
+```c
+int encrypt_text(char *text, int bytes);
+int decrypt_text(char *text, int bytes);
+int process_text(char *text, int bytes);
+int another_important_function(int bytes, double precision);
+```
