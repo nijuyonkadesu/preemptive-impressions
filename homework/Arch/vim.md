@@ -137,6 +137,7 @@ check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iS
   
 Check: <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-the-auto-copplete-window-is-pink-how-to-make-it-semi-t>
 <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-the-auto-copplete-window-is-pink-how-to-make-it-semi-t>
+
 ---
 `:5,16fo`
 `select lines + fo`: fold lines
@@ -158,3 +159,8 @@ int decrypt_text(char *text, int bytes);
 int process_text(char *text, int bytes);
 int another_important_function(int bytes, double precision);
 ```
+
+---
+## Fugitive
+https://t.me/ERsiowj12h6s7w282jwheyueyywkwlwj/5496
+https://dzx.fr/blog/introduction-to-vim-fugitive/#introduction
