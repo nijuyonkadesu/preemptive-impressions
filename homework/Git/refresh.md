@@ -248,3 +248,11 @@ git rebase main
 # Checkpoint 
 Next: Protocols https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols (I want to do sec 5 distributed git tho)
 Reversing commit: https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging
+
+# Niwyas approch to fetch a branch
+```bash
+git remote -v
+git fetch origin naiss-dev
+git checkout origin/naiss-dev
+git switch -c naiss-dev
+```
