@@ -150,7 +150,8 @@ Check: <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-t
 ## macros
 `qa` - it saves your movements on 'a'. stop macro recording by pressing 'q'
 to, replay the macro, in normal mode: `@a`
-
+`500@a` 
+`:g/pattern/normal @q` run a macro on all matches _(have to test)_
 [decent fcc vim guide](https://www.freecodecamp.org/news/learn-linux-vim-basic-features-19134461ab85/#9b6b)
 
 ```c
@@ -164,3 +165,37 @@ int another_important_function(int bytes, double precision);
 ## Fugitive
 https://t.me/ERsiowj12h6s7w282jwheyueyywkwlwj/5496
 https://dzx.fr/blog/introduction-to-vim-fugitive/#introduction
+
+## SSH Filesystem 
+while surviving network failures, edit any directory / files in your nvim editor!!
+```bash
+sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 user@192.168.18.3:/home/user/binlog-test ~/sshfiles
+
+nvim sshfiles
+
+# unmount directory
+fusermount -u ~/sshfiles
+```
+> [!tip]+ File ownership
+> The last edit username of the files will be the same as your local machine. If needed use `idmap`, `uidfile`, and `gidfile` to map user / group IDs correctly
+
+`100i0<enter><esc>vggg<ctrl-a>` dope.  `g<ctrl-a>` modifies the increment behaviour
+**[The Power of :g](https://vim.fandom.com/wiki/Power_of_g)**
+
+## Other Cool Things
+[link](https://www.reddit.com/r/neovim/comments/11ias6e/whats_the_coolest_thing_youve_done_with_neovim/) 
+- `.nvim-commands.lua` - to have keybindings with Toggleterm (F1 to build), (F2 to run), (F3 to run the test under the cursor 🤫). Saves the overhead of switching terminal and typing each time.   [the repo](https://github.com/SerenityOS/tree-sitter-jakt/blob/main/.nvim-commands.lua)
+```lua
+-- Load toggle term
+["t"] = { "<cmd>ToggleTerm<CR>", "toggle toggleterm" },
+["T"] = { "<cmd>ToggleTerm direction=tab<CR>", "toggle toggleterm (tab)" },
+-- Load nvim-commands file
+["n"] = { "<cmd>luafile .nvim-commands.lua<CR>", "load nvim-commands.lua" },
+```
+- Copy the huge string literal (longest was several paragraphs of Lorem Ipsum), and use a macro to get each word on its own line. Then I filtered it through `sort`, then `uniq -c`, then a `:s` with some backreferences and boom I had _so many_ lines of `theMap.insert` or whatever the method is called for a Java hashmap.
+- [telescope media!](https://github.com/dharmx/telescope-media.nvim) 
+- compress multiple blank lines into single `:v/./,/./-j`
+
+## Give It A Read
+- https://neovim.io/doc/user/lsp.html
+- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/lsp.md#introduction
