@@ -256,3 +256,17 @@ git fetch origin naiss-dev
 git checkout origin/naiss-dev
 git switch -c naiss-dev
 ```
+
+## git diff:
+
+[further ref](https://www.atlassian.com/git/tutorials/saving-changes/git-diff_)
+```bash
+git diff branch1 branch2 -- path/to/file
+git diff <commit_hash1> <commit_hash2>
+git diff branchA...branchB
+
+# exclude additions and deletion from hightlights
+git diff --diff-filter=MRC
+git diff --find-copies-harder -B -C
+```
+
