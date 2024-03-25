@@ -43,3 +43,9 @@ Need to activate nvm by running init script
 nvm - Node version Manager  
 nvm install (version)  
 nvm use (verrsion)
+
+## bash.rc
+```bash
+alias timef='/usr/bin/time -f "Memory used (kB): %M\nUser time (seconds): %U"'
+alias less='nvim \+":setlocal buftype=nofile" -'
+```

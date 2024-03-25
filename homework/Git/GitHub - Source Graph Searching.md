@@ -24,3 +24,5 @@ repos:>10
 -----------------  
   
 FragmentRegisterBinding language:Kotlin in:readme in:description stars:>10 created:>2021-01-01
+
+`<c-P>` Fuzzy code search
