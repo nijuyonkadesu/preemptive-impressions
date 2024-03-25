@@ -48,4 +48,26 @@ nvm use (verrsion)
 ```bash
 alias timef='/usr/bin/time -f "Memory used (kB): %M\nUser time (seconds): %U"'
 alias less='nvim \+":setlocal buftype=nofile" -'
+export VISUAL=nvim
+```
+
+## cron
+
+```bash
+
+```
+
+```bash
+ssh -T u0_a342@192.168.29.133 -p 8022 << EOF
+    cd vpc_migrate
+    pg_dumpall > watgbridge-$(date +"%d-%m-%Y").sql
+EOF
+scp -P 8022 u0_a342@192.168.29.133:~/vpc_migrate/watgbridge-$(date +"%d-%m-%Y").sql ~/Documents/watg_backup
+scp -P 8022 u0_a342@192.168.29.133:~/watgbridge/wawebstore.db ~/Documents/watg_backup
+scp -P 8022 u0_a342@192.168.29.133:~/watgbridge/config.yaml ~/Documents/watg_backup
+```
+
+```bash
+crontab -e
+@reboot /home/guts/ssh_scripts/watgbridge_reboot_backup_cron.sh
 ```
