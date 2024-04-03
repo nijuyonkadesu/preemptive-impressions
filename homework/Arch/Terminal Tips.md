@@ -11,7 +11,8 @@
 `alias`  
   
 `find /home/user -type f sensetive_data.txt  `
-`find. -type f -size 100M (size > 100)  `
+`find . -type f -size 100M (size > 100)  `
+`find . -type d -name ".git"`
 `df -h`  
 
 `read var` 
@@ -58,6 +59,8 @@ export VISUAL=nvim
 ```
 
 ```bash
+eval "$(ssh-agent -s)"
+sshpass -P passphrase -p '#####' ssh-add ~/.ssh/id_ed25519
 ssh -T u0_a342@192.168.29.133 -p 8022 << EOF
     cd vpc_migrate
     pg_dumpall > watgbridge-$(date +"%d-%m-%Y").sql
@@ -67,6 +70,7 @@ scp -P 8022 u0_a342@192.168.29.133:~/watgbridge/wawebstore.db ~/Documents/watg_b
 scp -P 8022 u0_a342@192.168.29.133:~/watgbridge/config.yaml ~/Documents/watg_backup
 ```
 
+*for some reason, this didn't work... neither did systemd.service*, perhaps need to consume STDOUT somewhere 
 ```bash
 crontab -e
 @reboot /home/guts/ssh_scripts/watgbridge_reboot_backup_cron.sh

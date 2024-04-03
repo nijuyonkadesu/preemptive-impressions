@@ -17,3 +17,8 @@ nvim .asoundrc
   
 aplay -D hw:1,0 -f S24_LE fine.wav
 ```
+
+```bash
+# I hear my own voice, ie: Transparency mode kek
+pw-loopback -d node-id=95
+```
