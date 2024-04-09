@@ -75,3 +75,4 @@ scp -P 8022 u0_a342@192.168.29.133:~/watgbridge/config.yaml ~/Documents/watg_bac
 crontab -e
 @reboot /home/guts/ssh_scripts/watgbridge_reboot_backup_cron.sh
 ```
+

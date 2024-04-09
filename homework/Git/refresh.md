@@ -270,3 +270,4 @@ git diff --diff-filter=MRC
 git diff --find-copies-harder -B -C
 ```
 
+[Git Butler Oldies but Goodies](https://blog.gitbutler.com/git-tips-1-theres-a-git-config-for-that/)

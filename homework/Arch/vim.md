@@ -199,3 +199,10 @@ fusermount -u ~/sshfiles
 ## Give It A Read
 - https://neovim.io/doc/user/lsp.html
 - https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/lsp.md#introduction
+
+## Playlist Making
+```r
+%s/C:/\/run\/media\/guts\/Acer/gI
+%s/\\/\//gI
+```
+unpack uri provider: https://claude.ai/chat/71ec0667-1432-4247-bc7e-0700426bdc00

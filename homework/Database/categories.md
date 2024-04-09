@@ -1,0 +1,8 @@
+- time-series, 
+- geospatial, 
+- document, 
+- search, 
+- graph, 
+- vector databases, 
+- message queues
+- object databases
