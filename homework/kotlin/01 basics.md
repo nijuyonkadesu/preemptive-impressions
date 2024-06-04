@@ -13,8 +13,8 @@
 in: checks for item in an iterable
 
 ```kotlin
-in
-to
+in // check availability
+to // create pair, map entry
 ```
 # Ranges
 ```kotlin
@@ -26,7 +26,8 @@ val alphabets = 'a'..'z'
 val evenIndices = 0..10 step 2
 val reversed = 10 downTo 0 // inclusive both sides
 ```
-
+## Progressions
+Progressions have three essential properties: the `first` element, the `last` element, and a non-zero `step`. The first element is `first`, subsequent elements are the previous element plus a `step`. Iteration over a progression with a positive step is equivalent to an indexed `for` loop in Java/JavaScript.
 # List and MutableList
 Note: look about extension functions
 ```kotlin
@@ -37,7 +38,9 @@ val pink = "pink"
 .last()
 .add(pink) 
 .remove(pink) // automatically finds and removes it
-.eachCount()
+.sortedBy { it.first }
+.sortedBy { it.length }
+.sortedWith {  }
 .addAll()
 .count()
 .sum()
@@ -53,6 +56,9 @@ grouping happens on the fly, it is intermediate I believe.
 
 ```kotlin
 .fold { 1, (acc, element) -> acc }
+.fold (1) { acc, element -> acc + element }
+.eachCount()
+.eachCountTo(somePartialCounting.toMutableMap()) // continue counting from x
 
 val fruits = listOf("cherry", "blueberry", "citrus", "apple", "apricot", "banana", "coconut")
 
@@ -64,7 +70,7 @@ val fruitBasket = fruits.groupingBy { it.first() }
           }) // ^ pair  ------->  ^ destructuring 
              // btw, this approach looks beautiful with streaming data
 
-// much simpler
+// much simpler - trailing lambda syntax
 val fruitBasket = fruits.groupingBy { it.first() }
     .fold(listOf<String>()) { acc, e ->  acc + e  }
 
@@ -86,10 +92,47 @@ val word = "palpable"
 .put(word)
 .remove(word)
 .containsKey(word)
+
+// Returns a list to iterate upon
+.entries
 .keys
 .values
-```
+.associate {  }
+ val sortedEvenFruits = evenFruits.entries
+        .sortedWith { a, b ->
+            b.value.count() - a.value.count()
+        } // Single Abstracted Method (SAM) - comparator
+    println(sortedEvenFruits)
+    
+// Iterating, and val cannot be reassigned 
+val charCodes = intArrayOf(72, 69, 76, 76, 79)
+val byCharCode = charCodes.associate { it to Char(it) }
 
+byCharCode.forEach { code, char ->
+    println("code: ${code}, char: ${char}")
+}
+byCharCode.entries.forEach { entry ->
+	println("code: ${entry.key}, char: ${entry.value}")
+}
+for (charCode in byCharCode){
+    println(charCode.key)
+}
+for ((code, char) in byCharCode){
+    println(char)
+}
+```
+## Sequence
+are zippable.
+```kotlin
+val charCodes = intArrayOf(72, 69, 76, 76, 79)
+val byCharCode = charCodes.associate { it to Char(it) }
+val characters = generateSequence(1) { it * 2 + 1 }
+
+val zipped = charCodes.asSequence().zip(characters) { a,b -> "$a/$b" }
+zipped.forEach {
+    println(it)
+}
+```
 # Functions
 ```kotlin
 fun uglySum(vararg numbers: Int) = numbers.sum()
