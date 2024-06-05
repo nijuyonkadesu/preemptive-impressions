@@ -271,3 +271,6 @@ git diff --find-copies-harder -B -C
 ```
 
 [Git Butler Oldies but Goodies](https://blog.gitbutler.com/git-tips-1-theres-a-git-config-for-that/)
+## Proper way to use tokens
+`gh auth login` command,
+![](https://github.com/cli/cli/issues/286#issuecomment-988229488)

@@ -119,6 +119,7 @@ Replace All:
 `/fun` - search -` n / N ` 
 `?fun  `
 `*` highlighted word search  
+`/word1\|word2\|word3` multiple search highlights
   
 check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iSW_wuxqmKx_xxNtJC_hJbQ7R&index=7)
 [also check](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iSW_wuxqmKx_xxNtJC_hJbQ7R&index=7)  
@@ -143,6 +144,7 @@ Check: <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-t
 `select lines + fo`: fold lines
 ^ this is range in commands
 `za` toggle between fold
+`zE` delete all folds
 `Ctrl w v` - vertical split window or `:vs`
 `:on` closes all other windows
 `Ctrl w r` - rotate windows 
@@ -165,6 +167,8 @@ int another_important_function(int bytes, double precision);
 ## Fugitive
 https://t.me/ERsiowj12h6s7w282jwheyueyywkwlwj/5496
 https://dzx.fr/blog/introduction-to-vim-fugitive/#introduction
+
+`do dp` diffget and diffput for selecting hunk. works on range too
 
 ## SSH Filesystem 
 while surviving network failures, edit any directory / files in your nvim editor!!
