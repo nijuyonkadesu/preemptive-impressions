@@ -1,6 +1,5 @@
 # Standard Library
 - kotlin.math
-- 
 
 # String
 ```kotlin
@@ -8,6 +7,8 @@
 .startsWith('l') // or double quote
 .reversed()
 .split()
+val list = listOf("123", "45")
+println(list.flatMap { it.toList() }) // [1, 2, 3, 4, 5] 
 ```
 # Infix operators
 in: checks for item in an iterable
@@ -28,6 +29,9 @@ val reversed = 10 downTo 0 // inclusive both sides
 ```
 ## Progressions
 Progressions have three essential properties: the `first` element, the `last` element, and a non-zero `step`. The first element is `first`, subsequent elements are the previous element plus a `step`. Iteration over a progression with a positive step is equivalent to an indexed `for` loop in Java/JavaScript.
+```kotlin
+println((1..10).filter { it % 2 == 0 })
+```
 # List and MutableList
 Note: look about extension functions
 ```kotlin
@@ -45,6 +49,13 @@ val pink = "pink"
 .count()
 .sum()
 .map()
+val deepArray = arrayOf(
+    arrayOf(1),
+    arrayOf(2, 3),
+    arrayOf(4, 5, 6)
+)
+println(deepArray.flatten()) 
+// [1, 2, 3, 4, 5, 6]
 ```
 ## Group and folding
 
@@ -92,6 +103,7 @@ val word = "palpable"
 .put(word)
 .remove(word)
 .containsKey(word)
+.toSortedMap()
 
 // Returns a list to iterate upon
 .entries
@@ -120,9 +132,13 @@ for (charCode in byCharCode){
 for ((code, char) in byCharCode){
     println(char)
 }
+val map = mapOf("122" to 2, "3455" to 3)
+println(map.flatMap { (key, value) -> key.take(value).toList() }) 
+// [1, 2, 3, 4, 5] - but why... it's cool tho
 ```
-## Sequence
+# Sequence
 are zippable.
+The sequence produces values until it encounters first `null` value. If [seed](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.sequences/generate-sequence.html) is `null`, an empty sequence is produced. Interesting...
 ```kotlin
 val charCodes = intArrayOf(72, 69, 76, 76, 79)
 val byCharCode = charCodes.associate { it to Char(it) }
@@ -132,6 +148,16 @@ val zipped = charCodes.asSequence().zip(characters) { a,b -> "$a/$b" }
 zipped.forEach {
     println(it)
 }
+
+var count = 3
+
+val sequence = generateSequence {
+    (count--).takeIf { it > 0 } // will return null, when value becomes non-positive,
+    // and that will terminate the sequence
+}
+
+println(sequence.toList()) // [3, 2, 1]
+sequence.forEach {  }  // <- iterating that sequence second time will fail 
 ```
 # Functions
 ```kotlin
@@ -175,5 +201,4 @@ fun main() {
 // functions
 .filter {  }
 .map {  }
-.
 ```
