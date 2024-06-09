@@ -6,9 +6,20 @@
 .uppercase()
 .startsWith('l') // or double quote
 .reversed()
+.substring()
+.replace()
+.contains()
 .split()
 val list = listOf("123", "45")
-println(list.flatMap { it.toList() }) // [1, 2, 3, 4, 5] 
+list.flatMap { it.toList() } // [1, 2, 3, 4, 5] 
+numbers.joinToString(prefix = "<", postfix = ">", separator = "•", limit = 5, truncated = "...!")
+"%(d means %1\$d".format(-31416)
+"%,d".format(Locale.US, 12345)
+.trimIndent()
+val a = """Trimmed to margin text:
+          |if(a > 1) {
+          |    return a
+          |}""".trimMargin()
 ```
 # Infix operators
 in: checks for item in an iterable
@@ -47,6 +58,7 @@ val pink = "pink"
 .sortedWith {  }
 .addAll()
 .count()
+.take()
 .sum()
 .map()
 val deepArray = arrayOf(
@@ -160,11 +172,44 @@ println(sequence.toList()) // [3, 2, 1]
 sequence.forEach {  }  // <- iterating that sequence second time will fail 
 ```
 # Functions
+When using an acronym as part of a declaration name, capitalize it if it consists of two letters (`IOStream`); capitalize only the first letter if it is longer (`XmlFormatter`, `HttpInputStream`).
+- Factory classes are easy to make using `companion object`
 ```kotlin
 fun uglySum(vararg numbers: Int) = numbers.sum()
 uglySum(1,2,3,4,5)
+
+typealias MouseClickHandler = (Any, MouseEvent) -> Unit
+typealias PersonIndex = Map<String, Person>
+
+// internal use only
+private val _elementList = mutableListOf<Element>()
+// exposed public readonly version
+val elementList: List<Element>
+	 get() = _elementList
+
+// Do not use a labeled return for the last statement in a lambda.
+ints.forEach lit@{
+        // ...
+    }
+```
+## Extentions 
+- use local extenstion functions
+- Top-Level Extension Functions with Private Visibility (File level)
+- if function primarily works with only one object, make it to an extension function
+## Infix
+Declare a function as infix only when it works on two objects which play a similar role. Good examples: `and`, `to`, `zip`. Bad example: `add`.
+```kotlin
+infix fun <A, B> A.to(that: B): Pair<A, B> = Pair(this, that)
 ```
 ## Scope Functions
+- Executing a lambda on non-nullable objects: `let`
+- Introducing an expression as a variable in local scope: `let`
+- Object configuration: `apply`
+- Object configuration and computing the result: `run`
+- Running statements where an expression is required: non-extension `run`
+- Additional effects: `also`
+- Grouping function calls on an object: `with`
+further [reference](https://kotlinlang.org/docs/scope-functions.html#distinctions)
 ```kotlin
 .let {} // to operate on non-null objects - it
 .run {} // initialization tasks on object - this (implicit this. before vars)
@@ -202,3 +247,37 @@ fun main() {
 .filter {  }
 .map {  }
 ```
+
+# Modifiers
+```kotlin
+public / protected / private / internal
+expect / actual
+final / open / abstract / sealed / const
+external
+override
+lateinit
+tailrec
+vararg
+suspend
+inner
+enum / annotation / fun // as a modifier in `fun interface`
+companion
+inline / value
+infix
+operator
+data
+```
+# KClass
+Main usecase comes when performing dependency injection. So don't touch and use Dagger ~.
+Maybe this also uses platform types.
+obtain a `KClass` instance using the `::class` syntax on a type or an instance.
+# Null Safety
+Declare variables with `?` at the end, these can be nullable.
+`nullString?.length ?: 0` - elvis operator
+# Templating
+...
+
+# Notes
+[Extra Rules For Libraries](https://kotlinlang.org/docs/coding-conventions.html#coding-conventions-for-libraries)
+[API Guidelines](https://kotlinlang.org/docs/api-guidelines-introduction.html)
+[Spring Boot](https://kotlinlang.org/docs/jvm-create-project-with-spring-boot.html)
