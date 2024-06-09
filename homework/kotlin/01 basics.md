@@ -3,6 +3,7 @@
 
 # String
 ```kotlin
+.length
 .uppercase()
 .startsWith('l') // or double quote
 .reversed()
@@ -48,6 +49,8 @@ Note: look about extension functions
 ```kotlin
 val colors = listOf("pink", "purple")
 val pink = "pink"
+val bitMapLike = List(26) { 0 }
+.size
 .contains(pink)
 .first()
 .last()
@@ -104,8 +107,10 @@ println(sorted)
 # Set
 ```kotlin
 val color = "purple"
+.size
 .add(color)
 .remove(color)
+.addAll()
 ```
 
 # Map is JSON 
@@ -116,6 +121,7 @@ val word = "palpable"
 .remove(word)
 .containsKey(word)
 .toSortedMap()
+.putIfAbsent(key, value)
 
 // Returns a list to iterate upon
 .entries
@@ -131,7 +137,7 @@ val word = "palpable"
 // Iterating, and val cannot be reassigned 
 val charCodes = intArrayOf(72, 69, 76, 76, 79)
 val byCharCode = charCodes.associate { it to Char(it) }
-
+.forEachIndexed { idx, ele -> }
 byCharCode.forEach { code, char ->
     println("code: ${code}, char: ${char}")
 }
