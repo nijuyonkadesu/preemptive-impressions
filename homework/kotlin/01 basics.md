@@ -3,6 +3,7 @@
 
 # String
 ```kotlin
+fun String.alphabetized() = String(toCharArray().apply { sort() })
 .length
 .uppercase()
 .startsWith('l') // or double quote
@@ -127,7 +128,21 @@ val word = "palpable"
 .entries
 .keys
 .values
-.associate {  }
+
+// Add / update values on the go
+map.compute(4) { key, value -> (value?.toInt() ?: 0) + 4 }
+// update values on the go
+map.computeIfPresent(4) { key, value -> value + 1 }
+
+// to create a map from a collection 
+.associate {  } // define both key and value using infix operator 'to'
+.associateBy {  } // define the key, 'it' 'as is' is the value
+.associateWith {  } // 'it' 'as is' is the key 
+
+// ughhhh, when a predicate inside this baka turns true, it just everything what comes next without a second thought... could have just used a .filter { }
+.dropWhile()
+.drop()
+
  val sortedEvenFruits = evenFruits.entries
         .sortedWith { a, b ->
             b.value.count() - a.value.count()
@@ -181,6 +196,7 @@ sequence.forEach {  }  // <- iterating that sequence second time will fail
 When using an acronym as part of a declaration name, capitalize it if it consists of two letters (`IOStream`); capitalize only the first letter if it is longer (`XmlFormatter`, `HttpInputStream`).
 - Factory classes are easy to make using `companion object`
 ```kotlin
+fun Int.fine(): Double = toDouble() // 1.0
 fun uglySum(vararg numbers: Int) = numbers.sum()
 uglySum(1,2,3,4,5)
 
