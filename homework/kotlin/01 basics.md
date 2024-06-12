@@ -1,6 +1,13 @@
 # Standard Library
 - kotlin.math
 
+# Handy Defaults
+```kotlin
+Int.MAX_VALUE
+Int.MIN_VALUE
+.max()
+.min()
+```
 # String
 ```kotlin
 fun String.alphabetized() = String(toCharArray().apply { sort() })
@@ -52,6 +59,9 @@ val colors = listOf("pink", "purple")
 val pink = "pink"
 val bitMapLike = List(26) { 0 }
 .size
+.chunked(7) // [[xxx], [xxx]]
+.takeLastWhile()
+.binarySearch()
 .contains(pink)
 .first()
 .last()
