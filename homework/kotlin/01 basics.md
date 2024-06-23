@@ -70,9 +70,12 @@ val bitMapLike = List(26) { 0 }
 .sortedBy { it.first }
 .sortedBy { it.length }
 .sortedWith {  }
+.runningReduce {  } // accumulates all values
+.reduceRight {  }
 .addAll()
 .count()
 .take()
+.getOrElse()
 .sum()
 .map()
 val deepArray = arrayOf(
