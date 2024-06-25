@@ -131,8 +131,15 @@ check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iS
 `Shift + K` => get function description  
 `:g/func/#` - list out all fuctions in a file  
 [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)  
-  
----
+
+## Resize window
+- Ctrl+W +/-: increase/decrease height (ex. `20<C-w>+`)
+- Ctrl+W >/<: increase/decrease width (ex. `30<C-w><`)
+- Ctrl+W _: set height (ex. `50<C-w>_`)
+- Ctrl+W |: set width (ex. `50<C-w>|`)
+- Ctrl+W =: equalize width and height of all windows
+
+See also: `:help CTRL-W`
 ## netrw shortcuts  
 `gh`: hide git files  
   
@@ -167,6 +174,7 @@ int another_important_function(int bytes, double precision);
 ## Fugitive
 https://t.me/ERsiowj12h6s7w282jwheyueyywkwlwj/5496
 https://dzx.fr/blog/introduction-to-vim-fugitive/#introduction
+[vim casts](http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/)
 
 `do dp` diffget and diffput for selecting hunk. works on range too
 
