@@ -177,6 +177,7 @@ https://dzx.fr/blog/introduction-to-vim-fugitive/#introduction
 [vim casts](http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/)
 
 `do dp` diffget and diffput for selecting hunk. works on range too
+`:G log -- %` commits made on current file
 
 ## SSH Filesystem 
 while surviving network failures, edit any directory / files in your nvim editor!!
