@@ -219,3 +219,12 @@ fusermount -u ~/sshfiles
 %s/\\/\//gI
 ```
 unpack uri provider: https://claude.ai/chat/71ec0667-1432-4247-bc7e-0700426bdc00
+
+## Run script and output to window
+https://superuser.com/questions/868920/open-the-output-of-a-shell-command-in-a-split-pane
+
+`:vnew | 0read ! <command>` 
+
+# LSP
+`:LspInfo` - get info
+`LspStop 2` - give ID to detach a lsp from the buffer [ref](https://www.reddit.com/r/neovim/comments/pnl2zs/comment/hcq3of3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) 

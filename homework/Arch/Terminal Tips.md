@@ -4,6 +4,11 @@
 `| sort`  
 `| sed <pattern>`
 
+`tree -d -L 2` list only directories with depth level 2
+```zsh
+for d (parent-dir/*/*(N/)) (cd -- $d && tree) | less
+```
+https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectories
   
 `ctrl + r` (old command search)  
   
@@ -45,7 +50,13 @@ set -g history-limit 1000000
 set -sg escape-time 0 # No command delay
 set -g status-keys vi
 setw -g mode-keys vi
-set -g default-terminal "screen-256color"
+# set -g default-terminal "screen-256color"
+set -g default-terminal "xterm-kitty"                                  
+set -g terminal-overrides "xterm-kitty"
+set -ga terminal-overrides ",xterm-256color:Tc"                        
+set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+# ref: https://www.reddit.com/r/neovim/comments/uanvdw/neovimtmux_color_problem/
 
 set-option -ga terminal-overrides ",xterm-256color:Tc"
 set-option -g status-position top
