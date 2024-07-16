@@ -228,3 +228,16 @@ https://superuser.com/questions/868920/open-the-output-of-a-shell-command-in-a-s
 # LSP
 `:LspInfo` - get info
 `LspStop 2` - give ID to detach a lsp from the buffer [ref](https://www.reddit.com/r/neovim/comments/pnl2zs/comment/hcq3of3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) 
+
+# Friendly Snippets
+https://github.com/rafamadriz/friendly-snippets/tree/main
+`Ctrl + f`: select the next highlight in snippet
+`Ctrl + b`: select the prev highlight in thte snippet 
+
+## neovim diff
+[sause](https://oozou.com/til/use-neovim-as-a-git-difftool-57) 
+[Docs](https://neovim.io/doc/user/diff.html)
+`:vert diffsplit folder/file` - vertical diff between files 
+```sh
+nvim -d file1 file2
+```

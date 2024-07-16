@@ -151,3 +151,16 @@ crontab -e
 @reboot /home/guts/ssh_scripts/watgbridge_reboot_backup_cron.sh
 ```
 
+# kitty
+Has TrueColors by default, gpu acceleated, less memory intensive, it's great. One small caviat -
+TODO: have to find a solution to search keywords in terminal. 
+
+kittens have useful tools for to copy items to clipboard even through ssh.
+and view images through terminal wahhh. 
+```sh
+kitty +kittens icat ./file.png
+kitty +kittens diff ./fileone ./filetwo
+```
+`->` [read me](https://wiki.archlinux.org/title/kitty)
+`->` [diff docs](https://sw.kovidgoyal.net/kitty/kittens/diff/) can work on images too!
+

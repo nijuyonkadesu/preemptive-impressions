@@ -5,7 +5,8 @@ add a single key, then remove password login (edit sshd config)
 
 `ssh u0_a342@shell.cocooil.tech -p 8022  `
 `ssh-keygen -t ed25519  `
-`ssh-copy-id -i .ssh/id_ed25519.pub u0_a342@shell.cocooil.tech -p 8022  `
+`ssh-copy-id -i .ssh/id_ed25519.pub u0_a342@shell.cocooil.tech -p 8022`
+set kittens ssh add terminfo in `.bashrc` 
   
 [https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/install-and-setup/tunnel-guide/local/](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/install-and-setup/tunnel-guide/local/)  
   

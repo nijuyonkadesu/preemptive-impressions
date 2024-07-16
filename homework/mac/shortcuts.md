@@ -14,6 +14,9 @@ https://github.com/kovidgoyal/kitty/issues/692 - create a new tab from current d
 ```
 brew install --cask maccy
 brew install --cask alt-tab
+brew install --cask kitty
+brew install fzf
+brew install fd ripgrep libpq
 ```
 
 set maccy shortcut to `^ + v`
@@ -35,6 +38,22 @@ alias l='ls -CF'
 alias python='python3.10'
 alias timef='/usr/bin/time -f "Memory used (kB): %M\nUser time (seconds): %U"'
 alias less='nvim \+":setlocal buftype=nofile" -'
+alias rm="trash"
+alias makevenv="python -m venv venv"
+alias i="ipython"
+alias activate="source venv/bin/activate"
+alias rcreload="source ~/.zshrc"
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+alias kitten="kitty +kitten"
+alias d="kitten diff"
+
+# Quick neovim pointers
+alias notes='cd $NOTES && nvim .'
+alias obsidian='cd $PREEMPTIVE_IMPRESSIONS && nvim .'
+
+# Git Tricks
+alias glgraph='git log --graph --oneline --all --simplify-by-decoration'
+
 
 # Increase limit
 export HISTSIZE=10000
@@ -47,4 +66,9 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
+# Shortcuts
+export EDITOR=nvim 
+export PREEMPTIVE_IMPRESSIONS="$HOME/Documents/preemptive-impressions/"
+export NOTES="$HOME/Documents/notes"
 ```
