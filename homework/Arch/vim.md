@@ -130,6 +130,11 @@ check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iS
 
 `Shift + K` => get function description  
 `:g/func/#` - list out all fuctions in a file  
+`:dlist /` - list file specific definitions from root - check these in your free time `:help definition-search, :help 'include', :help 'define', :help 'suffixesadd'`
+`:vimgrep something %`
+`:copen` - quickfix list with results populated from above command
+`:ccl` - close quickfix list
+https://stackoverflow.com/questions/13306664/pipe-search-result-to-other-tab-window-buffer-in-vim 
 [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)  
 
 ## Resize window
@@ -151,13 +156,14 @@ Check: <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-t
 `select lines + fo`: fold lines
 ^ this is range in commands
 `za` toggle between fold
+`zr` unfold all
 `zE` delete all folds
 `Ctrl w v` - vertical split window or `:vs`
 `:on` closes all other windows
 `Ctrl w r` - rotate windows 
 
 ## macros
-`qa` - it saves your movements on 'a'. stop macro recording by pressing 'q'
+`qa` - it saves your movements on buffer 'a'. stop macro recording by pressing 'q'
 to, replay the macro, in normal mode: `@a`
 `500@a` 
 `:g/pattern/normal @q` run a macro on all matches _(have to test)_

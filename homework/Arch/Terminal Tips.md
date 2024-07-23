@@ -4,6 +4,8 @@
 `| sort`  
 `| sed <pattern>`
 
+**ripgrep** (often shortened to `rg`) and **fd** are modern alternatives to the traditional `grep` and `find` commands
+
 `tree -d -L 2` list only directories with depth level 2
 ```zsh
 for d (parent-dir/*/*(N/)) (cd -- $d && tree) | less
@@ -163,4 +165,8 @@ kitty +kittens diff ./fileone ./filetwo
 ```
 `->` [read me](https://wiki.archlinux.org/title/kitty)
 `->` [diff docs](https://sw.kovidgoyal.net/kitty/kittens/diff/) can work on images too!
+
+`ctrl + shift + h` to search on screen buffer
+[alternative to live search](https://sw.kovidgoyal.net/kitty/marks/)
+
 
