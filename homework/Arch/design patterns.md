@@ -2,6 +2,8 @@
 1. Strategy Pattern: 
     - Prevent class explosion.
     - Every method inside this class is a wrapper of another class with a single method.
+    - FOR SINGLE METHOD ONLY??
+    - Dependency injection, composability
 > means, one concrete class, but behaviour varies through composition of different method implemntation.
 > Interesting: Applying abstractions on methods rather than on classes.
 
@@ -31,7 +33,7 @@
 
 5. Abstract Factory Pattern: 
     - An interface to create families of related products without specifying their concrete classes.
-    - have control over creating multiple objects.
+    - have control over creating multiple objects, but related ones together.
 > irl: cross-platform UI libraries 
 > Interesting: builds on factory pattern, but imposing strict rules
 
@@ -75,6 +77,7 @@
 11. Bridge Pattern:
     - Decouple abstraction from implementation. [yes blows mind]
     - Adapt over a concrete
+    - Similar to Abstract Factory Pattern, except the combination of classes is relaxed
 > Example: Say there are two types of `<concrete [Abstraction]>` Book [MediaResource] and Portrait [View]. Bride allows to mix any of those two regardless of the concrete implementation. 
 > Interesting: Coupling an abstract class with another interface, so that the concrets can vary independently...
 > Interface segregation principle
@@ -84,4 +87,11 @@
 > A-A
 
 12. Template Method Pattern:
-    - 
+    - Defines a skeleton of an algorithm where some steps are deferred to subclasses, where the remaining is constant.
+    - Those common operations should be the same across all cases. It has to be, else go shop for another design pattern.
+    - Do you really nead this?? Why not Strategy Pattern work for you?? think for yourself...
+    - Custom Hooks [before, after], interesing...
+    - Quite dangerous if used inappropriately.
+> Validate (const) - custom operation1, 2, 3, ... - validate (const)
+> Open Closed principle?
+> Dependency Inversion??
