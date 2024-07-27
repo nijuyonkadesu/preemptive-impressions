@@ -83,7 +83,7 @@
 > Interface segregation principle
 > kind of extends proxy pattern?
 > Check visitor pattern too
-> Diagram: https://youtu.be/F1YQ7YRjttI?si=puCLBLW1uJ5I9glE&t=1849
+> Diagram: https://youtu.be/F1YQ7YRjttI?t=1849
 > A-A
 
 12. Template Method Pattern:
@@ -114,7 +114,7 @@
 > Replace a conditional with polymorphism - How? - by implementing the same interface! (that's lame)
 > jQuery, React, Redux reducers
 > Send data downwards, and events upwards.
-> ref: https://youtu.be/EWDmWbJ4wRA?si=DpE-eFwE-vfNI6Xv&t=2571
+> ref: https://youtu.be/EWDmWbJ4wRA?t=2571
 
 >> A nice youtube comment
 > A list is still considered a hierarchical structure. It has a head (root), a tail (leaf), and potentially stuff in the middle. As you clearly stated, composite pattern is all about establishing the structure WITHOUT changing the underlying behavior of the component of the structure. Decorator is not about structure, but about changing (augmenting) the behavior of the component.
@@ -123,4 +123,18 @@
 > I think the confusion can be attributed in part (at least for me) to the fact that Decorator Pattern is categorized as a STRUCTURAL design pattern rather than BEHAVIORAL. I think this is a mistake because clearly the intent of the pattern is to add additional responsibilities (behaviors) to objects.
 
 14. Iterator Pattern
-    -
+    - Single responsibility
+    - Give me each of the items one by one, I'll iterate. That's all. I don't care what their types are, I'll iterate, and that's my only job.
+    - Simply gives the element when asked for.
+    - Lazy evaluation. 
+    - Infinity
+    - Be wary if you send a reference or a copy of the object or a infinite generator
+    - remember current index.
+    - without exposing the underlying structure. [coz, in an aggregation, it can be of anything]
+    - ITERABLE, ITERATOR 
+
+> ref: https://youtu.be/uNTNEfwYXhI?t=3092
+> command query separation: separate mutable and immutable operations into functions. Do not mix them, if not the result will be a mess.
+
+## Intesting co-pilot nonsense
+> Interesting: Downcasting, Upcasting, Polymorphism, Inheritance, Composition, Aggregation, Association, Dependency, Encapsulation, Abstraction, Interface, Abstract Class, Concrete Class, Class, Object, Instance, Method, Function, Variable, Constant, Property, Attribute, Field, Parameter, Argument, Return Value, Type, Value, Reference, Pointer, Memory, Stack, Heap, Garbage Collection, Recursion, Iteration, Loop, Condition, Branch, Expression, Statement, Block, Scope, Namespace, Module, Package, Library, Framework, API, SDK, Compiler, Interpreter, Transpiler, Debugger, Profiler, Editor, IDE, Version Control, Repository, Branch, Commit, Merge, Pull Request, Issue, Ticket, Agile, Scrum, Kanban, Waterfall, Lean, XP, Pair Programming, TDD, BDD, DDD, CI, CD, DevOps, Microservices, Serverless, Container, Virtualization, Cloud, IaaS, PaaS, SaaS, FaaS, Web, HTTP, REST, SOAP, GraphQL, TCP, UDP, IP, DNS, CDN, SSL, TLS, CORS, CSP, JWT, OAuth, OpenID, SAML, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoperability, Security, Privacy, Anonymity, Identity, Access Control, Authorization, Authentication, Federation, SSO, MFA, RBAC, ABAC, ACL, CAP, BASE, ACID, CRUD, CQRS, Event Sourcing, DDD, Hexagonal, Onion, Clean, Micro, Serverless, Monolithic, SOA, REST, GraphQL, gRPC, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoper
