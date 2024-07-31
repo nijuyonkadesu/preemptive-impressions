@@ -136,5 +136,23 @@
 > ref: https://youtu.be/uNTNEfwYXhI?t=3092
 > command query separation: separate mutable and immutable operations into functions. Do not mix them, if not the result will be a mess.
 
+15. State Pattern
+    - Memoryless, works based on current state
+    - state1 -> transisiton -> state2, and loops are there ofc
+    - replacing conditional with polymorphism
+    - alter an object's behavior when its internal state changes - the object appears to change it's class
+    - states | behaviours - combinations 
+    - Keep in mind that coupling to interfaces / abstrations is better than coupling to concrete  classes. 
+    - Components: 
+```
+    [turn stile]
+    **the thing** that **can** have states 
+         Context -------------------> State (Interface)
+              ^                         |
+              |____<change state>____ [open, close, processing] (or, return a new state instead of mutating state)
+    ```
+> ref: https://youtu.be/N12L5D78MAA?t=3074
+> Interesting: we've modeled the state and how it responds to different events, but we have not modeled how the events themselves are triggered. That will be the business logic tied up with 'Context'.
+
 ## Intesting co-pilot nonsense
 > Interesting: Downcasting, Upcasting, Polymorphism, Inheritance, Composition, Aggregation, Association, Dependency, Encapsulation, Abstraction, Interface, Abstract Class, Concrete Class, Class, Object, Instance, Method, Function, Variable, Constant, Property, Attribute, Field, Parameter, Argument, Return Value, Type, Value, Reference, Pointer, Memory, Stack, Heap, Garbage Collection, Recursion, Iteration, Loop, Condition, Branch, Expression, Statement, Block, Scope, Namespace, Module, Package, Library, Framework, API, SDK, Compiler, Interpreter, Transpiler, Debugger, Profiler, Editor, IDE, Version Control, Repository, Branch, Commit, Merge, Pull Request, Issue, Ticket, Agile, Scrum, Kanban, Waterfall, Lean, XP, Pair Programming, TDD, BDD, DDD, CI, CD, DevOps, Microservices, Serverless, Container, Virtualization, Cloud, IaaS, PaaS, SaaS, FaaS, Web, HTTP, REST, SOAP, GraphQL, TCP, UDP, IP, DNS, CDN, SSL, TLS, CORS, CSP, JWT, OAuth, OpenID, SAML, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoperability, Security, Privacy, Anonymity, Identity, Access Control, Authorization, Authentication, Federation, SSO, MFA, RBAC, ABAC, ACL, CAP, BASE, ACID, CRUD, CQRS, Event Sourcing, DDD, Hexagonal, Onion, Clean, Micro, Serverless, Monolithic, SOA, REST, GraphQL, gRPC, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoper
