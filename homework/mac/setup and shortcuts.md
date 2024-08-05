@@ -11,18 +11,27 @@ https://github.com/kovidgoyal/kitty/issues/692 - create a new tab from current d
 
 
 # brew
-```
+```bash
 brew install --cask maccy
 brew install --cask alt-tab
 brew install --cask kitty
 brew install fzf
 brew install fd ripgrep libpq
+brew install java
+brew install powerlevel10k
+brew install iterm2 
+brew install tgpt 
+sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk \
+     /Library/Java/JavaVirtualMachines/openjdk.jdk
 ```
+asfasd
 
 set maccy shortcut to `^ + v`
 change alt-tab to show apps from current spaces only `⌥ + tab`
 
 # .zshrc
+
+
 ```sh
 #:: Reverse search in tmux workaround in macos
 bindkey '^R' history-incremental-search-backward
@@ -55,7 +64,7 @@ alias obsidian='cd $PREEMPTIVE_IMPRESSIONS && nvim .'
 alias glgraph='git log --graph --oneline --all --simplify-by-decoration'
 
 
-# Increase limit
+# Increase limit - actually, this is not working...
 export HISTSIZE=10000
 export SAVEHIST=10000
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
@@ -71,4 +80,8 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 export EDITOR=nvim 
 export PREEMPTIVE_IMPRESSIONS="$HOME/Documents/preemptive-impressions/"
 export NOTES="$HOME/Documents/notes"
+
+# Mac specific
+export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 ```

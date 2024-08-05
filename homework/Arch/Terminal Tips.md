@@ -21,9 +21,13 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
 `find . -type f -size 100M (size > 100)  `
 `find . -type d -name ".git"`
 `df -h`  
-
+`base64 -d <<< bWluaW8=`
+`echo -n "" | base64 -d`
+`head -2 trains-big.csv`
+`tar cCf / - usr | cpipe -vt > /dev/null` - modify to measure current activity in STDIN / STDOUT
 `read var` 
-  
+`fc` / `ctrl + x + e` - edit long commands in preffered editor
+ 
 Nvidia card status  
 `cat /sys/class/drm/card*/device/power_state`  
 DO is full power ([https://docs.kernel.org/power/pci.html#native-pci-power-management](https://docs.kernel.org/power/pci.html#native-pci-power-management))
@@ -169,4 +173,15 @@ kitty +kittens diff ./fileone ./filetwo
 `ctrl + shift + h` to search on screen buffer
 [alternative to live search](https://sw.kovidgoyal.net/kitty/marks/)
 
+# Who are these people!!
+https://stackoverflow.com/questions/43573081/fast-i-o-in-c-stdin-out
+umm, pipes eh
 
+## Postgres
+```sh 
+# List tables from another schema other than public 
+/dt schema.* 
+/dt+ 
+/l 
+/c database
+```

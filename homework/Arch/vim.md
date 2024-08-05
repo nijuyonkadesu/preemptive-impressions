@@ -133,6 +133,7 @@ check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iS
 `:dlist /` - list file specific definitions from root - check these in your free time `:help definition-search, :help 'include', :help 'define', :help 'suffixesadd'`
 `:vimgrep something %`
 `:copen` - quickfix list with results populated from above command
+`:cn`, `:cp` - next / prev item in a quickfix list (better than `<Ctrl ww>` and switching back and forth)
 `:ccl` - close quickfix list
 https://stackoverflow.com/questions/13306664/pipe-search-result-to-other-tab-window-buffer-in-vim 
 [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)  
