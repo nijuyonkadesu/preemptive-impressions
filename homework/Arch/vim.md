@@ -247,4 +247,13 @@ https://github.com/rafamadriz/friendly-snippets/tree/main
 `:vert diffsplit folder/file` - vertical diff between files 
 ```sh
 nvim -d file1 file2
+:diffthis 
+:diffoff # turns off diff in current window
+:diffs file.yaml
+:diffs -o file
+:vert diffsplit file.yaml
+:G diff a/file.yaml b/file.yaml
+:G difftool a/file.yaml b/file.yaml
+:h :diffsplit
 ```
+

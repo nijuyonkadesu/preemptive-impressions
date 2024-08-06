@@ -257,9 +257,10 @@ git checkout origin/naiss-dev
 git switch -c naiss-dev
 ```
 
-## git diff:
+## Diff Between Files Across commits and branches:
 
 [further ref](https://www.atlassian.com/git/tutorials/saving-changes/git-diff_)
+[FAQs](https://www.cloudbees.com/blog/git-diff-a-complete-comparison-tutorial-for-git#how-do-i-diff-a-file-over-time-in-the-same-branch)
 ```bash
 git diff branch1 branch2 -- path/to/file
 git diff <commit_hash1> <commit_hash2>
@@ -269,6 +270,30 @@ git diff branchA...branchB
 git diff --diff-filter=MRC
 git diff --find-copies-harder -B -C
 ```
+### GPT Generated
+To compare files from different points in git history, you can use various Git commands and tools. Here are the commands for each of your scenarios:
+git `diff` or git `difftool` to open in preferred editor
+
+1. **Compare a file from an old commit with the latest version with uncommitted changes:**
+   ```sh
+   git diff <old_commit> -- <file>
+   git diff <old_commit> -- <old_path/file> <new_path/file>
+   ```
+2. **Compare a file between two different commits:**
+   ```sh
+   git diff <commit1> <commit2> -- <file>
+   git diff <commit1>:<old_path/file> <commit2>:<new_path/file>
+   ```
+3. **Compare a file from different branches:**
+   ```sh
+   git diff <branch1> <branch2> -- <file>
+   git diff <branch1>:<old_path/file> <branch2>:<new_path/file>
+   ```
+4. **Compare a file from a specific commit with a local file:**
+   ```sh
+   git diff <commit> -- <file> <local_file>
+   git diff <commit>:<old_path/file> <local_path/file>
+   ```
 
 [Git Butler Oldies but Goodies](https://blog.gitbutler.com/git-tips-1-theres-a-git-config-for-that/)
 ## Proper way to use tokens
