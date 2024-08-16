@@ -270,7 +270,15 @@ git diff branchA...branchB
 git diff --diff-filter=MRC
 git diff --find-copies-harder -B -C
 ```
+
+## VIM Fugitive diff
+```bash
+:Gdiff 0956ab904
+:Gdiff @
+```
+
 ### GPT Generated
+[chat](https://chatgpt.com/share/7b902d8a-c693-44c1-82a1-ec76280a430c) 
 To compare files from different points in git history, you can use various Git commands and tools. Here are the commands for each of your scenarios:
 git `diff` or git `difftool` to open in preferred editor
 

@@ -27,6 +27,8 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
 `tar cCf / - usr | cpipe -vt > /dev/null` - modify to measure current activity in STDIN / STDOUT
 `read var` 
 `fc` / `ctrl + x + e` - edit long commands in preffered editor
+`jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
+`jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
  
 Nvidia card status  
 `cat /sys/class/drm/card*/device/power_state`  
@@ -178,10 +180,35 @@ https://stackoverflow.com/questions/43573081/fast-i-o-in-c-stdin-out
 umm, pipes eh
 
 ## Postgres
+When to use which index [docs](https://www.postgresql.org/docs/current/indexes-types.html).
+[GIN indexes](https://pganalyze.com/blog/gin-index) 
+
 ```sh 
 # List tables from another schema other than public 
 /dt schema.* 
 /dt+ 
 /l 
 /c database
+
+# List all schemas
+SELECT schema_name
+FROM information_schema.schemata;
+
+TRUNCATE TABLE "load-test.relational_database_large_test_16gb";
+# ERROR:  relation "load-test.relational_database_large_test_16gb" does not exist
+
+SHOW search_path;
+SET search_path TO "load-test";
+
+#    search_path
+# -----------------
+#  "$user", public
+# (1 row)
+# ref: https://stackoverflow.com/questions/34098326/how-to-select-a-schema-in-postgres-when-using-psql
+
+# Index
+# ref: https://gitlab.com/gitlab-org/gitlab/-/issues/336930 (GIN pending-list overhead)
+\di+ index_merge_requests_on_description_trigram
+exec REINDEX INDEX index_merge_requests_on_description_trigram
+
 ```
