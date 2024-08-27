@@ -130,6 +130,7 @@ check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iS
 
 `Shift + K` => get function description  
 `:g/func/#` - list out all fuctions in a file  
+`:v/pattern/d` - inverse regex matches, and delete the lines
 `:dlist /` - list file specific definitions from root - check these in your free time `:help definition-search, :help 'include', :help 'define', :help 'suffixesadd'`
 `:vimgrep something %`
 `:copen` - quickfix list with results populated from above command
@@ -169,6 +170,14 @@ to, replay the macro, in normal mode: `@a`
 `500@a` 
 `:g/pattern/normal @q` run a macro on all matches _(have to test)_
 [decent fcc vim guide](https://www.freecodecamp.org/news/learn-linux-vim-basic-features-19134461ab85/#9b6b)
+**Bulk Cut Paste matching pattern**
+`/KC_\w*`: pattern 
+`qh`: record movements at buffer '@h'
+`ndiw<Ctrl>wwp<Ctrl>ww`: perform this movement to paste the cut word in another window
+`100@h` - repeat until everything is done
+`:sort u` - keep only unique values
+`:'<,'>s/\\//g ` - string json -> json. (don't forget to remove the surrounding `"` quotes tho)
+
 
 ```c
 int encrypt_text(char *text, int bytes);

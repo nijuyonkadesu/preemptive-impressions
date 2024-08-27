@@ -50,6 +50,10 @@ see if the card is in D0: cat
 - https://stackoverflow.com/questions/5609192/how-do-i-set-tmux-to-open-specified-windows-at-startup
 - quick 4 pane launch `tmux new-session \; split-window -v -p 20 \; split-window -h \; select-layout tiled \; resize-pane -t 1 -y 40 \; split-window -h \;`
 
+- tmux-sessioner + fuzzy find (avoid cd hell): https://www.reddit.com/r/tmux/comments/1ch9tqp/primeagen_tmux_session_management/
+- [primeagen](https://github.com/ThePrimeagen/.dotfiles/blob/master/tmux/.tmux.conf) 
+- [fixed](https://github.com/brunobmello25/dotfiles/blob/main/bin%2F.local%2Fscripts%2Ftmux-sessionizer) 
+
 ### conf file:
 ```bash
 set -g mouse on
@@ -58,37 +62,37 @@ set -g history-limit 1000000
 set -sg escape-time 0 # No command delay
 set -g status-keys vi
 setw -g mode-keys vi
-# set -g default-terminal "screen-256color"
-set -g default-terminal "xterm-kitty"                                  
-set -g terminal-overrides "xterm-kitty"
-set -ga terminal-overrides ",xterm-256color:Tc"                        
+set -g default-terminal "xterm-kitty"                                                                    
+set -as terminal-overrides ",xterm-kitty:RGB"
 set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
 set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
-# ref: https://www.reddit.com/r/neovim/comments/uanvdw/neovimtmux_color_problem/
 
-set-option -ga terminal-overrides ",xterm-256color:Tc"
-set-option -g status-position top
+set-option -g status-position top 
 set-option -g status-interval 1
+
+# colors 
+set -g status-style 'bg=#333333 fg=#5eacd3'
 
 #-------------------------------------------------------------------------------
 # Keys binding
 #-------------------------------------------------------------------------------
-bind v split-window -h -c "#{pane_current_path}"
-bind h split-window -v -c "#{pane_current_path}"
+unbind C-b
+set-option -g prefix C-b
+bind-key C-b send-prefix
+set -g base-index 1
+bind V split-window -h -c "#{pane_current_path}"
+bind H split-window -v -c "#{pane_current_path}"
 unbind '"'
 unbind %
 
 bind c new-window -c "$HOME"
 
-# Switch panes using Alt + vim keys
-bind -n M-h select-pane -L
-bind -n M-l select-pane -R
-bind -n M-j select-pane -U
-bind -n M-k select-pane -D
-
-# Switch windows
-bind -n S-Left previous-window
-bind -n S-Right next-window
+# Switch panes using like vim keys
+bind -r ^ last-window
+bind -r k select-pane -U
+bind -r j select-pane -D
+bind -r h select-pane -L
+bind -r l select-pane -R
 
 # Copy
 unbind [
@@ -112,14 +116,20 @@ bind-key -n DoubleClick1Pane \
 bind r source-file ~/.config/tmux/tmux.conf \; display "Reload configurations..."
 
 # Do not display the original window's name when renaming it
-bind , command-prompt -p "(rename-window '#W')" "rename-window '%%'"
+bind , command-prompt -p "(rename-window '#W') " "rename-window '%%'"
 
 # Do not display the orignal pane's name when renaming it
 bind '$' command-prompt -p "(rename-session '#S')" "rename-session '%%'"
+
+# tmux-sessionizer
+bind-key -r S run-shell "~/.local/bin/tmux-sessionizer ~/redacted/services-core/services"
+bind-key -r P run-shell "~/.local/bin/tmux-sessionizer ~/redacted/platform-core"
+bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
 ```
 
 ### Commands
 `tmux a -t 0` attach to the tmux window
+`tmux ls`
 
 
 ### Node Version Manager
