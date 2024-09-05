@@ -29,6 +29,7 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
 `fc` / `ctrl + x + e` - edit long commands in preffered editor
 `jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
 `jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
+`7z t file.zip` check zip for corruption
  
 Nvidia card status  
 `cat /sys/class/drm/card*/device/power_state`  
