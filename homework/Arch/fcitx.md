@@ -40,10 +40,5 @@ fcitx5-diagnose
 # For GTK applications like firefox single line mode
 sudo pacman -S fcitx5-gtk
 ```
-
-```~/.config/environment.d/imejp.conf 
-XMODIFIERS=@im=fcitx
-GTK_IM_MODULE=fcitx
-QT_IM_MODULE=fcitx
-```
+- No need to set any envs anywhere. 
 
