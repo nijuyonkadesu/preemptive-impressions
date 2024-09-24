@@ -59,6 +59,7 @@ alias d="kitten diff"
 # Quick neovim pointers
 alias notes='cd $NOTES && nvim .'
 alias obsidian='cd $PREEMPTIVE_IMPRESSIONS && nvim .'
+alias tmuxs=~/.local/bin/tmux-sessionizer
 
 # Git Tricks
 alias glgraph='git log --graph --oneline --all --simplify-by-decoration'

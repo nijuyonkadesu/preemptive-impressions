@@ -30,6 +30,8 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
 `jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
 `jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
 `7z t file.zip` check zip for corruption
+`ab -k -c 350 -n 5000 http://<rpi ip>:3000/` command sends 5k requests in total with a concurrency of 350 requests. One could tweak these numbers as per requirements.
+ref: [mock http request](https://gochronicles.com/benchmark-restful-apis/) 
  
 Nvidia card status  
 `cat /sys/class/drm/card*/device/power_state`  
