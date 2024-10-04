@@ -261,9 +261,12 @@ nvim -d file1 file2
 :diffs file.yaml
 :diffs -o file
 :vert diffsplit file.yaml
-:Gdiff a/file.yaml b/file.yaml
-:Gdifftool a/file.yaml b/file.yaml
+:G diff a/file.yaml b/file.yaml
+:G difftool a/file.yaml b/file.yaml
 :h :diffsplit
+:G diff @
+:windo diffo
+:windo difft
 ```
 ## Mason, lsp-zero, null-ls relation
 https://www.reddit.com/r/neovim/comments/13xyixb/some_questions_about_code_formatting_with_lspzero/

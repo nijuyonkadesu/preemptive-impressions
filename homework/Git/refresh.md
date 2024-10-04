@@ -271,11 +271,16 @@ git diff --diff-filter=MRC
 git diff --find-copies-harder -B -C
 ```
 
-## VIM Fugitive diff
+## VIM Fugitive
+
+### Diff
 ```bash
 :Gdiff 0956ab904
 :Gdiff @
 ```
+
+### Cherrypick
+`:G cherrypick -x 0956ab904` - resolve the conflicts, commit
 
 ### GPT Generated
 [chat](https://chatgpt.com/share/7b902d8a-c693-44c1-82a1-ec76280a430c) 
