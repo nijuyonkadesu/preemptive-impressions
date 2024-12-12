@@ -225,3 +225,9 @@ SET search_path TO "load-test";
 exec REINDEX INDEX index_merge_requests_on_description_trigram
 
 ```
+
+## Kill Process
+```sh 
+killall -9 node 
+ps aux | grep node
+```

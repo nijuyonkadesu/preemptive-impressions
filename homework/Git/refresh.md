@@ -245,6 +245,10 @@ git rebase main
 > You can get the best of both worlds: rebase local changes before pushing to clean up your work, but never rebase anything that you’ve pushed somewhere
 
 ---
+# Fixup! commits 
+[fixup](https://github.com/TheAssemblyArmada/Thyme/wiki/Using-Fixup-Commits) - your fix up commits will be merged back to the original commit during rebase and keeps your history clean and linear.
+Then do, `rf` in vim fugitive, which identifies the fixup commits
+
 # Checkpoint 
 Next: Protocols https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols (I want to do sec 5 distributed git tho)
 Reversing commit: https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging

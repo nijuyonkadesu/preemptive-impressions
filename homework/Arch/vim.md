@@ -139,6 +139,16 @@ check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iS
 https://stackoverflow.com/questions/13306664/pipe-search-result-to-other-tab-window-buffer-in-vim 
 [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)  
 
+**redirect search results to a new buffer**
+```sh
+:redir @a
+:g/for.*bar/#
+:redir END
+:enew
+:put! a
+```
+[**Redir even better**](https://www.reddit.com/r/neovim/comments/1dyweok/redirnvim_redirect_command_output_to_neovim_split/) 
+
 ## Resize window
 - Ctrl+W +/-: increase/decrease height (ex. `20<C-w>+`)
 - Ctrl+W >/<: increase/decrease width (ex. `30<C-w><`)
@@ -154,6 +164,7 @@ Check: <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-t
 <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-the-auto-copplete-window-is-pink-how-to-make-it-semi-t>
 
 ---
+`set foldmethod=indent` - for python folding
 `:5,16fo`
 `select lines + fo`: fold lines
 ^ this is range in commands
@@ -194,6 +205,8 @@ https://dzx.fr/blog/introduction-to-vim-fugitive/#introduction
 
 `do dp` diffget and diffput for selecting hunk. works on range too
 `:G log -- %` commits made on current file
+`:G diff-tree --no-commit-id --name-only -r <commit_id>` list of changed files of a commit
+`:G diff --name-only temp/VP-686-query-profiling VP-686-query-profiling` - list of changed files between two branches
 
 ## SSH Filesystem 
 while surviving network failures, edit any directory / files in your nvim editor!!
@@ -231,8 +244,7 @@ fusermount -u ~/sshfiles
 
 ## Playlist Making
 ```r
-%s/C:/\/run\/media\/guts\/Acer/gI
-%s/\\/\//gI
+%s/C:/\/run\/media\/guts\/Acer/gI %s/\\/\//gI
 ```
 unpack uri provider: https://claude.ai/chat/71ec0667-1432-4247-bc7e-0700426bdc00
 
@@ -270,3 +282,9 @@ nvim -d file1 file2
 ```
 ## Mason, lsp-zero, null-ls relation
 https://www.reddit.com/r/neovim/comments/13xyixb/some_questions_about_code_formatting_with_lspzero/
+
+## Replace \n with actual new line 
+`set magic`
+`:s/,/,^M/g`
+You get ^M character by presssing ctrl+v and then enter
+[ref](https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim) 
