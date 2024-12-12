@@ -47,7 +47,6 @@ alias l='ls -CF'
 alias python='python3.10'
 alias timef='/usr/bin/time -f "Memory used (kB): %M\nUser time (seconds): %U"'
 alias less='nvim \+":setlocal buftype=nofile" -'
-alias rm="trash"
 alias makevenv="python -m venv venv"
 alias i="ipython"
 alias activate="source venv/bin/activate"
@@ -55,11 +54,14 @@ alias rcreload="source ~/.zshrc"
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 alias kitten="kitty +kitten"
 alias d="kitten diff"
+alias llm='tgpt -m'
+alias ks='kubectl config use-context'
 
 # Quick neovim pointers
 alias notes='cd $NOTES && nvim .'
 alias obsidian='cd $PREEMPTIVE_IMPRESSIONS && nvim .'
 alias tmuxs=~/.local/bin/tmux-sessionizer
+alias downloads='cd ~/Downloads && nvim .'
 
 # Git Tricks
 alias glgraph='git log --graph --oneline --all --simplify-by-decoration'
@@ -81,6 +83,7 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 export EDITOR=nvim 
 export PREEMPTIVE_IMPRESSIONS="$HOME/Documents/preemptive-impressions/"
 export NOTES="$HOME/Documents/notes"
+export MANPAGER="nvim +Man!"
 
 # Mac specific
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin

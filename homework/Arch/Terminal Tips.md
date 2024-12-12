@@ -61,14 +61,11 @@ see if the card is in D0: cat
 ```bash
 set -g mouse on
 set -g renumber-windows on
-set -g history-limit 1000000
+set -g history-limit 10000
 set -sg escape-time 0 # No command delay
 set -g status-keys vi
 setw -g mode-keys vi
-set -g default-terminal "xterm-kitty"                                                                    
-set -as terminal-overrides ",xterm-kitty:RGB"
-set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
-set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+set -g default-terminal "$TERM"                                                                    
 
 set-option -g status-position top 
 set-option -g status-interval 1
@@ -88,7 +85,7 @@ bind H split-window -v -c "#{pane_current_path}"
 unbind '"'
 unbind %
 
-bind c new-window -c "$HOME"
+bind c new-window -c "#{pane_current_path}"
 
 # Switch panes using like vim keys
 bind -r ^ last-window
@@ -125,9 +122,10 @@ bind , command-prompt -p "(rename-window '#W') " "rename-window '%%'"
 bind '$' command-prompt -p "(rename-session '#S')" "rename-session '%%'"
 
 # tmux-sessionizer
+bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
 bind-key -r S run-shell "~/.local/bin/tmux-sessionizer ~/redacted/services-core/services"
 bind-key -r P run-shell "~/.local/bin/tmux-sessionizer ~/redacted/platform-core"
-bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
+bind-key -r N run-shell "~/.local/bin/tmux-sessionizer ~/Documents/notes"
 ```
 
 ### Commands
@@ -230,4 +228,56 @@ exec REINDEX INDEX index_merge_requests_on_description_trigram
 ```sh 
 killall -9 node 
 ps aux | grep node
+```
+
+## tmux-sessionizer
+
+```sh
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    dirs=$(find -L ~/redacted ~/redacted/platform-core ~/redacted/services-core/services ~/Documents/preemptive-impressions  -mindepth 1 -maxdepth 1 -type d)
+    selected=$(printf "%s\n%s\n%s\n%s" "$dirs" "$HOME/Documents/notes" "$HOME/logs" "$HOME/test" | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+# OK - tmux is not running
+if [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c "$selected"
+    exit 0
+fi
+
+# OK - tmux is running but client is not attached, session with selected_name does not exist
+if [[ -z $TMUX ]] && ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -s $selected_name -c "$selected"
+    tmux a -t $selected_name
+    exit 0
+fi
+
+# OK - tmux is running but client is not attached, session with selected_name exists
+if [[ -z $TMUX ]] && tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux a -t $selected_name
+    exit 0
+fi
+
+# OK - tmux is running and client is attached, session with selected_name does not exist
+if [[ ! -z $TMUX ]] && ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c "$selected"
+    tmux switch-client -t $selected_name
+    exit 0
+fi
+
+# OK - tmux is running and client is attached, session with selected_name exists
+if [[ ! -z $TMUX ]] && tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux switch-client -t $selected_name
+    exit 0
+fi
 ```
