@@ -169,7 +169,8 @@ Check: <https://stackoverflow.com/questions/67898068/neovim-is-transparent-but-t
 `select lines + fo`: fold lines
 ^ this is range in commands
 `za` toggle between fold
-`zr` unfold all
+`zR` unfold all
+`zM` fold all
 `zE` delete all folds
 `Ctrl w v` - vertical split window or `:vs`
 `:on` closes all other windows

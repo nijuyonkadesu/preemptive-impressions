@@ -55,3 +55,8 @@ I came across the same problem. With ALSA it is possible to use the name of the 
 ```bash
 aplay -D hw:CARD=3,DEV=0 -v -f DSD_U32_BE -c 2 -r 88200 [file]
 ```
+
+## Free busy audio server 
+```bash 
+systemctl --user restart pipewire-pulse.service
+```

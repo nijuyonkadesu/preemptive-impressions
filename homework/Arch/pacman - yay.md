@@ -15,3 +15,9 @@ asd.service
 ## Mirror List
 sudo nano /etc/pacman.d/mirrorlist  
 [https://archlinux.org/mirrorlist/](https://archlinux.org/mirrorlist/)
+
+## Messed up by removing important package?
+check the files: 
+`cat /var/log/pacman.log | grep "removed"` 
+or download manually the file, and install through `pacman -U <file>`
+

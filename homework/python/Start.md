@@ -1,3 +1,25 @@
+## In Arch
+Install pyenv to manage multiple python versions. And add the directory to path variable. The version specified in `.python-version` file will be used. 
+Do not put pyenv init script in bashrc!! it broke kde login and sleep entirely.
+
+Maybe instead add alias into .bashrc
+`alias setup-python-3.10="eval \"\$(pyenv init -)\" && pyenv local 3.10 && poetry env use 3.10 && pyenv local 3.10 && poetry shell"`
+
+```sh
+pyenv install 3.10
+pyenv init
+```
+
+# To fix errors with poetry
+[ref](https://stackoverflow.com/questions/70950511/using-poetry-with-pyenv-and-having-python-version-issues) 
+
+```sh
+pyenv local 3.10
+poetry use env 3.10
+poetry install
+poetry shell
+```
+
 ```python
 r'raw text \t' #doens't converted into tab
 
