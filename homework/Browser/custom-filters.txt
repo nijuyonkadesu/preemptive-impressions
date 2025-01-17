@@ -1,0 +1,6 @@
+linkedin.com##.fie-impression-container:has-text(/\bAI\b/i)
+linkedin.com##.fie-impression-container:has-text(/\bArtificial Intelligence\b/i)
+linkedin.com##.fie-impression-container:has-text(/\bjavascript\b/i)
+linkedin.com##.fie-impression-container:has-text(/\bhtml\b/i)
+linkedin.com##.fie-impression-container:has-text(/\bcss\b/i)
+
