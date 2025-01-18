@@ -104,6 +104,8 @@ Replace All:
 - Highlight with `v`  
 - press `':'  `
 - `s/\(\w.*\) ` 
+
+Replace with confirmation: `:s/search/replacement/gc`
   
 `select - g + ctrl + a` increment all  
 `%` - jump between brackets  
@@ -136,6 +138,7 @@ check from [12:44 ](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iS
 `:copen` - quickfix list with results populated from above command
 `:cn`, `:cp` - next / prev item in a quickfix list (better than `<Ctrl ww>` and switching back and forth)
 `:ccl` - close quickfix list
+`:cdo command` - apply the commands only on the files that that are present in quickfix list. 
 https://stackoverflow.com/questions/13306664/pipe-search-result-to-other-tab-window-buffer-in-vim 
 [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)  
 
