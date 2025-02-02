@@ -20,6 +20,7 @@ network:
           - 8.8.8.8
   wifis:
     wlxd8448903c476:
+      optional: true
       addresses:
         - 192.168.29.200/24
       dhcp4: false
@@ -97,7 +98,4 @@ vim.g.clipboard = {
 and in `~/.config/tmux/tmux.conf` add: `set -g set-clipboard on`
 
 # 04 - tmuxs
-TODO: 
-1. tmux-sessionizer file
-2. setup alias & stuff in bashrc
-3. clipboard copy from tmux how
+1. work on https://github.com/nijuyonkadesu/dotfiles/issues/5
