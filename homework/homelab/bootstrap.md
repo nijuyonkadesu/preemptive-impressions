@@ -99,3 +99,15 @@ and in `~/.config/tmux/tmux.conf` add: `set -g set-clipboard on`
 
 # 04 - tmuxs
 1. work on https://github.com/nijuyonkadesu/dotfiles/issues/5
+
+
+# 05 - samba (on HDD)
+
+sudo apt install samba
+TODO:
+create a new user ref: https://youtu.be/2Btkx9toufg?si=rC5alcBl_Q0jOvCb&t=3376
+add [share] section in /etc/samba/smb.conf file
+modify fstab
+testparm
+mount -a
+systemctl restart smbd.service nmbd.service

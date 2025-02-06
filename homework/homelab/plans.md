@@ -2,9 +2,9 @@
 
 1. how to manage users
 2. how to manage SSH keys (and is it possible to keep in sync with github??) [DONE]
-3. how to install neovim & tmux (and setup configurations)
+3. how to install neovim & tmux (and setup configurations) [DONE]
 4. what is this os, understand UBUNTU's way of doing things
-5. Install golang
+5. Install golang [DONE]
 6. tailscale setup (temporary)
 7. how to safely expose to internet
 8. configure ufw (allow all ssh connections tho) - if you've configured samba, those things will get blocked too
@@ -14,12 +14,21 @@
 0. read the best practices (managing volume network and blah blah)
 1. install canonical k8s
 2. bring in the watgbridge bot here
-3. Only 100G is used. plan for the remaining storage...
-4. flash bios 
+3. Only 100G is used. plan for the remaining storage... X
+4. flash bios X [DONE]
+5. backups setup
+6. openvpn? 
+
+# Clean Up: 
+- dev/sda5 - E:// - wipe (TODO: ~/.old/ mido & violet copy back to disc)
+DONE: samba this partition
+
+- the steps I did are wrong: mkfs.ext4 on /dev/sda -> fdisk on /dev/sda -> allocate a partition, generate GPT, -> mkfs.ext4 on /dev/sda1
 
 # Telegram helper
 Controling system with the help of telegram bot?? (umm)
 
+[TODO]
 0. notify when the system is up or shutdown
 1. run a local telegram bot server? 
 
@@ -91,9 +100,14 @@ sudo chmod -R 750 /mnt/newdrive/
 - vgdisplay
 - lvdisplay
 - lvextend -L+100G /dev/ubuntu-vg/ubuntu-lv
+- resize2fs /dev/ubuntu-vg/ubuntu-lv
 - hdparam
 - tune2fs -l /dev/sda5
 - hdparm -I /dev/sda
+- mkfs.ext4
+- fschk
+
+chown to shichika chichika. coz, nogrouo not woeking
 
 ## simple mount
 - `sudo mount -o ro src dest`
@@ -103,12 +117,21 @@ sudo chmod -R 750 /mnt/newdrive/
 
 
 # Generic File Sharing!!! - but interesting!
-- use nfs tho
+- use nfs tho (tch no android client)
 - install samba, add a new user, set password
 - add [share] section in /etc/samba/samba.conf. Also mention valid username?
 -     ^^^^^^ it can be anything!! our-ip/path -> asks for prompt -> access the files
 
+## NFS Setup 
+
+sudo apt install nfs-kernel-server
 
 # how to auth for github
 - change remote url
 `git remote set-url origin git@github.com:username/repository.git`
+
+## Next cloud - with common db 
+apt install podman
+- Plan: single postgres (for all podman applications)
+- proper storage configs 
+- plan for db backups
