@@ -52,6 +52,7 @@ then check /etc/apt/apt.conf.d ?? and uncomment auto reboot and specify reboot t
 
 ####################
 # Add user
+[archwiki](https://wiki.archlinux.org/title/Users_and_groups) 
 a user with no admin permissions
 sudo add user <newusername>
 sudo del user <newusername>

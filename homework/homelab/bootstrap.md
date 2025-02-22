@@ -111,3 +111,58 @@ modify fstab
 testparm
 mount -a
 systemctl restart smbd.service nmbd.service
+
+
+# 06 - homelab group for k8s & self hosted stuffs
+[todo see if service accounts are needed immediately](https://claude.ai/chat/06ceec6f-7bd7-4622-9e47-e9649d621233) 
+
+sudo groupadd basement
+
+[tweaking charmedk8s](https://documentation.ubuntu.com/canonical-kubernetes/latest/snap/howto/) 
+[get started](https://documentation.ubuntu.com/canonical-kubernetes/latest/snap/tutorial/getting-started/)
+
+```sh
+# First create the user and group if not done already
+sudo groupadd basement
+sudo useradd -m -r -s /bin/bash -g basement charm
+
+# sudo requires password
+sudo passwd charm
+
+# Create necessary directories
+sudo mkdir -p /home/charm/.kube
+
+# Install k8s under the charm user
+su charm
+sudo snap install k8s --classic
+
+# Bootstrap k8s as charm user
+sudo k8s bootstrap
+
+# Configure k8s to store its config in charm's home directory
+sudo k8s config dump | grep path
+sudo k8s set local-storage.local-path=/home/charm/.kube/storage
+
+# Important: Set up access for your regular user
+# TODO: no config file found
+mkdir -p ~/.kube
+sudo cp /home/charm/.kube/config ~/.kube/
+sudo chown -R $USER:$USER ~/.kube
+
+# Add your user to both groups
+sudo usermod -aG basement $USER
+
+sudo passwd -l charm
+
+# setup k9s
+wget https://github.com/derailed/k9s/releases/download/v0.40.5/k9s_linux_amd64.deb
+sudo dpkg -i k9s_linux_amd64.deb
+sudo cp /etc/kubernetes/admin.conf ~/.kube/config
+sudo chown -R shichika:shichika ~/.kube
+
+
+# kubeapi ig
+sudo k8s kubectl proxy 
+ssh -L 8001:127.0.0.1:8001 shichika@ustable
+```
+
