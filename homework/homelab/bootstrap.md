@@ -1,6 +1,8 @@
 # 01 - Network
 
 Example netplan yaml with a default gateway. Without default route, ipv4 networks will not work.
+`/24` - the subnet mask should match with your router. It tells your system which IPs are local and which ones are external that 
+needs to be routed through the gateway
 
 ```yaml
 network:
@@ -132,9 +134,10 @@ sudo passwd charm
 # Create necessary directories
 sudo mkdir -p /home/charm/.kube
 
-# Install k8s under the charm user
+# Install k8s under
 su charm
 sudo snap install k8s --classic
+sudo snap install kubectl --classic
 
 # Bootstrap k8s as charm user
 sudo k8s bootstrap
@@ -164,5 +167,23 @@ sudo chown -R shichika:shichika ~/.kube
 # kubeapi ig
 sudo k8s kubectl proxy 
 ssh -L 8001:127.0.0.1:8001 shichika@ustable
+
+# test
+kubectl run -it --rm --restart=Never --image=alpine testpod -- /bin/sh
+apk add curl
+curl -X GET http://telegram-bot-api.bot:8081/ping
+# {"ok":false,"error_code":404,"description":"Not Found"}
+```
+
+## Upcoming: 
+- expose all ingress in the machine as it is
+
+# Ingress setup
+- for external ip, metallb must be configured
+[metallb](https://metallb.io/concepts/) 
+
+```sh
+sudo k8s enable ingress
+sudo k8s enable load-balancer
 ```
 

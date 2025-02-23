@@ -18,6 +18,8 @@
 4. flash bios X [DONE]
 5. backups setup
 6. openvpn? 
+7. metallb
+8. [nextcloud](https://github.com/nextcloud/all-in-one/tree/main) 
 
 # Clean Up: 
 - dev/sda5 - E:// - wipe (TODO: ~/.old/ mido & violet copy back to disc)

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: telegram-bot-api
+  name: telegram-bot-api
+  namespace: bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telegram-bot-api
+  template:
+    metadata:
+      labels:
+        app: telegram-bot-api
+    spec:
+      containers:
+        - args:
+          - --local
+          name: telegram-bot-api
+          image: localhost/telegram-bot-api:latest
+          # push your image to k8s namespace using ctr tool
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8081
+            hostPort: 8081
+          env:
+            - name: TELEGRAM_API_ID
+              valueFrom:
+                secretKeyRef:
+                  name: telegram-bot-secrets
+                  key: TELEGRAM_API_ID
+            - name: TELEGRAM_API_HASH
+              valueFrom:
+                secretKeyRef:
+                  name: telegram-bot-secrets
+                  key: TELEGRAM_API_HASH
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: telegram-bot-api
+  namespace: bot
+spec:
+  selector:
+    app: telegram-bot-api
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+  # need metallb
+  type: LoadBalancer
+
