@@ -139,6 +139,16 @@ nvm - Node version Manager
 nvm install (version)  
 nvm use (verrsion)
 
+### Helm Inspect 
+Gives diff between helm values vs currently applied kubernetes remote values
+
+```sh
+pip install helm-inspect
+# Callibrate & find the difs
+helm-inspect -r appbackend -n platform -c
+helm-inspect -r appbackend -n platform
+```
+
 ## bash.rc
 ```bash
 alias timef='/usr/bin/time -f "Memory used (kB): %M\nUser time (seconds): %U"'
