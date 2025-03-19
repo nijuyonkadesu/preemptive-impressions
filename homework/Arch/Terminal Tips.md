@@ -281,3 +281,17 @@ if [[ ! -z $TMUX ]] && tmux has-session -t=$selected_name 2> /dev/null; then
     exit 0
 fi
 ```
+
+
+## Accidental
+
+```sh
+$ nvim .
+
+[1]+  Stopped                 nvim .
+```
+
+when you do this, you push your program to background and stops it. 
+`jobs` - list the stopped programs
+`fg` - brings it back to the foreground. 
+`fg %1` - if you have multiple jobs running

@@ -22,7 +22,6 @@
 8. [nextcloud](https://github.com/nextcloud/all-in-one/tree/main) 
 
 # Clean Up: 
-- dev/sda5 - E:// - wipe (TODO: ~/.old/ mido & violet copy back to disc)
 DONE: samba this partition
 
 - the steps I did are wrong: mkfs.ext4 on /dev/sda -> fdisk on /dev/sda -> allocate a partition, generate GPT, -> mkfs.ext4 on /dev/sda1
