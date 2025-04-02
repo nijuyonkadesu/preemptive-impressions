@@ -20,6 +20,7 @@
 6. openvpn? 
 7. metallb
 8. [nextcloud](https://github.com/nextcloud/all-in-one/tree/main) 
+9. A simple server / blog site with public certificates
 
 # Clean Up: 
 DONE: samba this partition
@@ -29,9 +30,10 @@ DONE: samba this partition
 # Telegram helper
 Controling system with the help of telegram bot?? (umm)
 
-[TODO]
+[TODO] - run systemd services using quadlet - dont't use k8s for this (Use, astolfo the arch user for this?)
 0. notify when the system is up or shutdown
 1. run a local telegram bot server? 
+2. other helpful commands that administers the PC
 
 ## Doubts
 1. what are those numbers in conf.d files?? should it always start with numbers?
