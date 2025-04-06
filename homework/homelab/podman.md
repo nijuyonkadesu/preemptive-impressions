@@ -6,17 +6,30 @@
 1. Check man page for systemd
 2. https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html
 
-1. Rootless: ~/.config/containers/systemd/
-2. Root: /etc/containers/systemd/
+- Rootless: ~/.config/containers/systemd/
+- Root: /etc/containers/systemd/
+
+## Steps 
+
+1. do relevant parts from `./tdlib.md` 
+2. rtfm
+3. create a `.container` file 
+4. configure env in a plain file with root:root (for now)
+5. copy the `.container` file to Root dir
+6. systemd daemon reload
+7. start it
 
 # TODO: 
 
-1. GO look at sample systemd.unit files or smth and get idea of general structure
+1. [OK] GO look at sample systemd.unit files or smth and get idea of general structure
     a. `cd /etc/systemd/` - aight
-2. Then my goal is to run telegram server as a service with podman secret
-3. Expose a port and see if it's addressable over local network (over tailscale too)
-4. continue reading podman-systemd.unit, container section 
-5. Move this readme one level up
+2. [OK] Then my goal is to run telegram server as a service with podman secret
+3. [OK] Expose a port and see if it's addressable over local network (over tailscale too)
+4. [OK] continue reading podman-systemd.unit, container section 
+5. [OK] copy the .container file to Root dir
+6. [OK] Image pull error
+7. automate image building and updating
+8. security is a big question lmao, explore on `Network=` under `[Service]`
 
 # Secrets
 
@@ -49,5 +62,28 @@
 
 ```sh
 man podman-systemd.unit
+man systemd.service
+
 systemctl --user list-unit-files
+# podman storage is isolated for each user, so load your image with root 
+# for make it available in root systemd
+podman save localhost/telegram-bot-api:latest -o telegram-bot-api.tar
+sudo podman load -i telegram-bot-api.tar
+
+# for now instead of secrets
+cd /etc/containers/homelab
+sudo nvim telegram-bot-api.env
+chmod 600 telegram-bot-api.env
+chown root:root telegram-bot-api.env
+
+sudo cp homework/homelab/deployment/telegram-bot-api.container /etc/containers/systemd/
+
+sudo systemctl daemon-reload
+systemctl status telegram-bot-api.service
+# you cannot enable service, because it is considered transcient
+systemctl start telegram-bot-api.service
+journalctl -xeu telegram-bot-api.service
+
+# ping wuahhh, it works ~
+curl -X GET localhost:8081/ping
 ```

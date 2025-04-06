@@ -1,0 +1,16 @@
+[Unit]
+Description=Telegram Bot Server hosted by @shichika
+
+[Container]
+Image=localhost/telegram-bot-api:latest
+Pull=never
+Exec=--local
+PublishPort=8081:8081
+EnvironmentFile=/etc/containers/homelab/telegram-bot-api.env
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
+
