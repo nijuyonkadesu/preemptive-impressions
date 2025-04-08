@@ -305,3 +305,10 @@ when you do this, you push your program to background and stops it.
 `jobs` - list the stopped programs
 `fg` - brings it back to the foreground. 
 `fg %1` - if you have multiple jobs running
+
+## PS1 - Default in Arch
+
+```sh
+PS1='[\u@\h \W]\$ '
+```
+

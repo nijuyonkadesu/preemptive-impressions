@@ -11,7 +11,10 @@ Volume=/var/lib/telegram-bot-api/data:/data
 EnvironmentFile=/etc/containers/homelab/telegram-bot-api.env
 
 [Service]
-Restart=always
+Restart=on-failure
+# TODO: add shichika or charm user access to these folders (for watgbridge to access)
+ExecStartPre=/bin/mkdir -p /var/lib/telegram-bot-api/temp
+ExecStartPre=/bin/mkdir -p /var/lib/telegram-bot-api/data
 
 [Install]
 WantedBy=default.target

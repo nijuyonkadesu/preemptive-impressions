@@ -32,6 +32,7 @@
 8. security is a big question lmao, explore on `Network=` under `[Service]`
 9. [ok] storage issue within the server (ughh, directories are not auto created)
     a. but it's not storage issue
+10. add preexec for folder creation
 
 # Secrets
 
@@ -79,9 +80,12 @@ chmod 600 telegram-bot-api.env
 chown root:root telegram-bot-api.env
 
 sudo cp homework/homelab/deployment/telegram-bot-api.container /etc/containers/systemd/
-# this is annoying, will remove later
-sudo mkdir -p /var/lib/telegram-bot-api/temp /var/lib/telegram-bot-api/data
-sudo chown -R root:root /var/lib/telegram-bot-api/temp /var/lib/telegram-bot-api/data
+/usr/lib/systemd/system-generators/podman-system-generator --dryrun
+
+# so that watgbridge service too can access media files
+getent group basement
+sudo chown -R root:basement /var/lib/telegram-bot-api/temp /var/lib/telegram-bot-api/data
+sudo chmod -R 770 /var/lib/telegram-bot-api/temp /var/lib/telegram-bot-api/data
 
 sudo systemctl daemon-reload
 systemctl status telegram-bot-api.service
