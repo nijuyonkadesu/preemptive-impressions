@@ -4,15 +4,14 @@ Description=Telegram Bot Server hosted by @shichika
 [Container]
 Image=localhost/telegram-bot-api:latest
 Pull=never
-Exec=--local --temp-dir=/temp --dir=/data
+Exec=--local --temp-dir=/var/lib/telegram-bot-api/temp --dir=/var/lib/telegram-bot-api/data
 PublishPort=8081:8081
-Volume=/var/lib/telegram-bot-api/temp:/temp
-Volume=/var/lib/telegram-bot-api/data:/data
+Volume=/var/lib/telegram-bot-api/temp:/var/lib/telegram-bot-api/temp
+Volume=/var/lib/telegram-bot-api/data:/var/lib/telegram-bot-api/data
 EnvironmentFile=/etc/containers/homelab/telegram-bot-api.env
 
 [Service]
 Restart=on-failure
-# TODO: add shichika or charm user access to these folders (for watgbridge to access)
 ExecStartPre=/bin/mkdir -p /var/lib/telegram-bot-api/temp
 ExecStartPre=/bin/mkdir -p /var/lib/telegram-bot-api/data
 

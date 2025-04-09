@@ -33,6 +33,8 @@
 9. [ok] storage issue within the server (ughh, directories are not auto created)
     a. but it's not storage issue
 10. add preexec for folder creation
+12. revert directory renames and make docker for watgbridge
+13. backup scripts for postgres & watgbridge
 
 # Secrets
 
@@ -95,4 +97,8 @@ journalctl -xeu telegram-bot-api.service
 
 # ping wuahhh, it works ~
 curl -X GET localhost:8081/ping
+
+# to fix new files created under root issue
+# ps. sigh, didin't help
+sudo -u shichika podman build -f homework/homelab/deployment/tgbotapi.dockerfile -t localhost/telegram-bot-api:latest
 ```
