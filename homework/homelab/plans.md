@@ -21,6 +21,9 @@
 7. metallb
 8. [nextcloud](https://github.com/nextcloud/all-in-one/tree/main) 
 9. A simple server / blog site with public certificates
+10. another user for samba - with read only permissions
+11. find all setup touch points 
+    - consolidate all .conf files and copy them
 
 # Clean Up: 
 DONE: samba this partition

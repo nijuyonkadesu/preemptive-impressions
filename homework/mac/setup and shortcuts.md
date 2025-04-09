@@ -89,3 +89,21 @@ export MANPAGER="nvim +Man!"
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 ```
+
+# Foobar2000 layout file
+
+[docs](https://wiki.hydrogenaud.io/index.php?title=Foobar2000:Mac:Layout) 
+
+```sh
+splitter vertical style=thin
+ tabs NSSplitViewItem.canCollapse NSSplitViewItem.behavior=NSSplitViewItemBehaviorSidebar
+  albumlist
+  playlist-picker
+ splitter horizontal style=thin
+  splitter vertical style=thin
+   selection-properties
+   albumart
+  splitter vertical style=thin
+   playlist
+  playback-controls
+```
