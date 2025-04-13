@@ -7,3 +7,7 @@ scenario: client -> ssh into -> server
 
 This prevents man in the middle attack. User will be notified if unauthorized changes were made to any of these two keys.
 Otherwise, user can just log into server without any messages
+
+# systemd
+
+(TODO: consolidate)

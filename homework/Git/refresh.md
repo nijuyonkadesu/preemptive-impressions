@@ -11,9 +11,10 @@ git log -S func_name #(find the last commit that added or removed a reference to
 ```
 
 ## .gitignore
+
 standard regex `[ ]`, `?`, `*`, `-` (range)
 Standard glob pattern ?
-start with / - avoids resursivity 
+start with / - avoids resursivity
 end with / - indicates it's a directory
 ! negate a pattern
 `a/**/z` match all nested directories
@@ -37,24 +38,35 @@ doc/*.txt
 # ignore all .pdf files in the doc/ directory and any of its subdirectories
 doc/**/*.pdf
 ```
+
 It's possible to have .gitignore files inside other directories
 
 ## Danger Zone
+
 If done carelessly, your work might get lost
+
 ### amend - undo / edit commit
+
 ```bash
 git commit --amend
 ```
+
 ### Checkout a file 💀 - stashing / branching is better
+
 ```bash
 git checkout -- file_name.ext
 ```
+
 ### restore
+
 ```bash
 git restore --staged file_name
 ```
+
 ---
+
 ## Remotes
+
 ```bash
 git remote -v
 git remote show origin
@@ -62,14 +74,17 @@ git remote add ci-team git@github.com:User/UserRepo.git
 
 git ls-remote <remote> # (list all reference to remote)
 ```
+
 fetch - do manual rebase
 pull - auto merging
 
 in Fork based devolopment, the forked copy you have is the **'origin'**
 the original repository is the **'upstream'**
 so, you'll have these two as the remote
+
 ## Tags
-It's another way to point to a snapshot (commit). 
+
+It's another way to point to a snapshot (commit).
 But it's not a branch. You're not supposed to use it to checkout and make changes from a commit that is linked with a tag.
 
 For me atleast, it feels like, this is used as a workaround way to implement '**Releases**' from github side. ie, that's why it felt pointless to do in Git cli.
@@ -78,10 +93,12 @@ using semantic versioning with tags is highly recommended unlike the above scree
 annotate a commit using `git tag -a v2.3 -m "tagging"`
 
 ---
+
 # Branching - working silos
 
-A pointer that moves to any stored ***snapshots*** (commits of blobs).
+A pointer that moves to any stored **_snapshots_** (commits of blobs).
 ![[Pasted image 20231027224231.png]]
+
 ```bash
 # To display commits that are ahead of head pointer
 git log --all
@@ -100,8 +117,10 @@ git switch - # switch to previously checkout branch
 # Merging
 
 ## Scenario
-You're working in your web project's new **story** feature. And suddenly, you're assigned on to fix a issue. You do that, and push it to **production**. 
+
+You're working in your web project's new **story** feature. And suddenly, you're assigned on to fix a issue. You do that, and push it to **production**.
 And, you're again back at branch story.
+
 ```git
          *  <- issue #69 hotfix branch
 	   /  \
@@ -119,13 +138,15 @@ git mergetool
 ```
 
 > [!tip]- Just use github desktop
-> coz, when all your files are littered with `>>>>>>>>>>>>>>>> upstream` & `<<<<<<<<<<<<<<<< staged` changes, you'll have hell of time to manually sort it out. 
-> 
+> coz, when all your files are littered with `>>>>>>>>>>>>>>>> upstream` & `<<<<<<<<<<<<<<<< staged` changes, you'll have hell of time to manually sort it out.
+>
 > Additionally, there's no proper 'understandable' guide on how to properly 'navigate' in vim between fugitive diff screen
 
 ## Branch Management
+
 Ahh, I've totally forgotten that you can branch form a branch... ehhh...
 ![[Pasted image 20231028182733.png]]
+
 ```bash
 git branch --move old new   # (rename branch locally)
 git push --set-upstream new # (yea, headache. so never rename branch)
@@ -144,8 +165,10 @@ Waiting for rebase topic to come...
 ![[Pasted image 20231028183137.png]]
 
 ## Remote Branches
+
 Fetch only brings down remote tracking branches. They are not available to edit, not available to be checkedout. Can't modify those branches.
 **you're supposed to merge them manually!**
+
 ```bash
 git clone -o fufufufu # (instead of origin)
 git fetch team-ci/master
@@ -158,16 +181,21 @@ git push origin serverfix:best-server-fix # (push in different name to origin)
 # look for the 'track remote' in STDOUT. if not go link manually a upstrem branch
 git checkout -b serverfix origin/serverfix # (editable copy of origin/serverfix)
 ```
+
 ### Change upstream of a branch
+
 ```console
 $ git branch -u origin/serverfix
 Branch serverfix set up to track remote branch serverfix from origin.
 ```
+
 ### Branch status in coherent to origin
+
 ```bash
 git fetch --all
 git branch -vv # (a detailed report on current branch)
 ```
+
 ```console
 $ git branch -vv
   iss53     7e424c3 [origin/iss53: ahead 2] Add forgotten brackets
@@ -175,6 +203,7 @@ $ git branch -vv
 * serverfix f8674d9 [teamone/server-fix-good: ahead 3, behind 1] This should do
   testing   5ea463a Try something new
 ```
+
 > **`... ahead 3, behind 1`**
 > it means local has 3 unpushed commits. and, 1 unmerged commit from the origin
 > **these stats may change after a fetch when new changes happen in repository**
@@ -182,6 +211,7 @@ $ git branch -vv
 ---
 
 # Rebase
+
 Reapplying changes over other commit. you can take all the changes that were committed on one branch and replay them on a different branch.
 
 ```bash
@@ -223,10 +253,11 @@ Now, **if you rebase your local branch, you will overwrite the commits that have
 
 ![[Pasted image 20231101235525.png]]
 the history of merge (last week) + the history of rebase (this week after `--force push`)
-both is present in another dev's local copy. if he pushes this, the history looks cluttered 
-*(redundant commits that are essentially the same thing)*
+both is present in another dev's local copy. if he pushes this, the history looks cluttered
+_(redundant commits that are essentially the same thing)_
 
 ## Rebase on top of force-pushed rebase work
+
 ```bash
 git pull --rebase
 # or
@@ -234,10 +265,10 @@ git fetch
 git rebase main
 ```
 
-> **Fine:** 
+> **Fine:**
 > If you only ever rebase commits that have never left your own computer, you’ll be just fine
 > If you rebase commits that have been pushed, but that no one else has based commits from, you’ll also be fine
-> 
+>
 > **Not Fine:**
 > If you rebase commits that have already been pushed publicly, and people may have based work on those commits, then you may be in for some frustrating trouble, and the scorn of your teammates.
 
@@ -245,15 +276,19 @@ git rebase main
 > You can get the best of both worlds: rebase local changes before pushing to clean up your work, but never rebase anything that you’ve pushed somewhere
 
 ---
-# Fixup! commits 
+
+## Fixup! commits
+
 [fixup](https://github.com/TheAssemblyArmada/Thyme/wiki/Using-Fixup-Commits) - your fix up commits will be merged back to the original commit during rebase and keeps your history clean and linear.
 Then do, `rf` in vim fugitive, which identifies the fixup commits
 
-# Checkpoint 
+## Checkpoint
+
 Next: Protocols https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols (I want to do sec 5 distributed git tho)
 Reversing commit: https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging
 
 # Niwyas approch to fetch a branch
+
 ```bash
 git remote -v
 git fetch origin naiss-dev
@@ -261,10 +296,11 @@ git checkout origin/naiss-dev
 git switch -c naiss-dev
 ```
 
-## Diff Between Files Across commits and branches:
+# Diff Between Files Across commits and branches:
 
 [further ref](https://www.atlassian.com/git/tutorials/saving-changes/git-diff_)
 [FAQs](https://www.cloudbees.com/blog/git-diff-a-complete-comparison-tutorial-for-git#how-do-i-diff-a-file-over-time-in-the-same-branch)
+
 ```bash
 git diff branch1 branch2 -- path/to/file
 git diff <commit_hash1> <commit_hash2>
@@ -275,19 +311,22 @@ git diff --diff-filter=MRC
 git diff --find-copies-harder -B -C
 ```
 
-## VIM Fugitive
+# VIM Fugitive
 
-### Diff
+## Diff
+
 ```bash
 :Gdiff 0956ab904
 :Gdiff @
 ```
 
-### Cherrypick
+## Cherrypick
+
 `:G cherrypick -x 0956ab904` - resolve the conflicts, commit
 
-### GPT Generated
-[chat](https://chatgpt.com/share/7b902d8a-c693-44c1-82a1-ec76280a430c) 
+## GPT Generated
+
+[chat](https://chatgpt.com/share/7b902d8a-c693-44c1-82a1-ec76280a430c)
 To compare files from different points in git history, you can use various Git commands and tools. Here are the commands for each of your scenarios:
 git `diff` or git `difftool` to open in preferred editor
 
@@ -313,6 +352,10 @@ git `diff` or git `difftool` to open in preferred editor
    ```
 
 [Git Butler Oldies but Goodies](https://blog.gitbutler.com/git-tips-1-theres-a-git-config-for-that/)
-## Proper way to use tokens
-`gh auth login` command,
-![](https://github.com/cli/cli/issues/286#issuecomment-988229488)
+
+# Proper way to use tokens
+
+- `gh auth login` command,
+- or add your public key into github signing keys & auth keys
+- change remote url `git remote set-url origin git@github.com:username/repository.git`
+- https://github.com/cli/cli/issues/286#issuecomment-988229488

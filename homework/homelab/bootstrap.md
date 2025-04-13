@@ -1,7 +1,7 @@
 # 01 - Network
 
 Example netplan yaml with a default gateway. Without default route, ipv4 networks will not work.
-`/24` - the subnet mask should match with your router. It tells your system which IPs are local and which ones are external that 
+`/24` - the subnet mask should match with your router. It tells your system which IPs are local and which ones are external that
 needs to be routed through the gateway
 
 ```yaml
@@ -52,7 +52,8 @@ Creates a keypair in present in ~/.ssh/
 ```sh
 ssh-keygen -t ed25519 -C "cherio!"
 ```
-You can either copy your .pub files from other machines into this machine's `authorized_keys` file 
+
+You can either copy your .pub files from other machines into this machine's `authorized_keys` file
 or run: `ssh-copy-id user@<ip>` from your client machine
 or, import public keys from github `ssh-import-id gh:nijuyonkadesu`
 
@@ -60,13 +61,13 @@ or, import public keys from github `ssh-import-id gh:nijuyonkadesu`
 
 ```sh
 # Install neovim from source
-sudo apt-get install ninja-build gettext cmake curl build-essential 
+sudo apt-get install ninja-build gettext cmake curl build-essential
 mkdir ~/build
 # Modify the tmuxs script tho
 cd ~/build
 git clone --depth 1 https://github.com/neovim/neovim -b stable
-sudo make install
 make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
 
 # Final setup before launching neovim
 sudo apt install ripgrep fd-find fzf
@@ -77,12 +78,12 @@ cd ~/.config && git clone https://github.com/nijuyonkadesu/dotfiles nvim
 # tmuxs
 mkdir logs
 mkdir test
-mkdir redacted 
+mkdir redacted
 ```
 
-# 04 - SSH clipboard: 
+# 04 - SSH clipboard:
 
-[ref](https://mil.ad/blog/2024/remote-clipboard.html#:~:text=Configuring%20neovim%20to%20use%20OSC%2D52&text=This%20allows%20you%20to%20use,have%20them%20work%20across%20SSH.) 
+[ref](https://mil.ad/blog/2024/remote-clipboard.html#:~:text=Configuring%20neovim%20to%20use%20OSC%2D52&text=This%20allows%20you%20to%20use,have%20them%20work%20across%20SSH.)
 
 ```lua
 vim.g.clipboard = {
@@ -97,30 +98,29 @@ vim.g.clipboard = {
   },
 }
 ```
+
 and in `~/.config/tmux/tmux.conf` add: `set -g set-clipboard on`
 
 # 04 - tmuxs
-1. work on https://github.com/nijuyonkadesu/dotfiles/issues/5
 
+1. work on https://github.com/nijuyonkadesu/dotfiles/issues/5
 
 # 05 - samba (on HDD)
 
-sudo apt install samba
-TODO:
-create a new user ref: https://youtu.be/2Btkx9toufg?si=rC5alcBl_Q0jOvCb&t=3376
-add [share] section in /etc/samba/smb.conf file
-modify fstab
-testparm
-mount -a
-systemctl restart smbd.service nmbd.service
-
+- `sudo apt install samba`
+- create a new user ref: https://youtu.be/2Btkx9toufg?si=rC5alcBl_Q0jOvCb&t=3376
+- add `[share]` section in /etc/samba/smb.conf file
+- `modify fstab`
+- `testparm`
+- `mount -a`
+- `systemctl restart smbd.service nmbd.service`
 
 # 06 - homelab group for k8s & self hosted stuffs
-[todo see if service accounts are needed immediately](https://claude.ai/chat/06ceec6f-7bd7-4622-9e47-e9649d621233) 
 
-sudo groupadd basement
+[todo see if service accounts are needed immediately](https://claude.ai/chat/06ceec6f-7bd7-4622-9e47-e9649d621233)
+`sudo groupadd basement`
 
-[tweaking charmedk8s](https://documentation.ubuntu.com/canonical-kubernetes/latest/snap/howto/) 
+[tweaking charmedk8s](https://documentation.ubuntu.com/canonical-kubernetes/latest/snap/howto/)
 [get started](https://documentation.ubuntu.com/canonical-kubernetes/latest/snap/tutorial/getting-started/)
 
 ```sh
@@ -134,17 +134,16 @@ sudo passwd charm
 # Create necessary directories
 sudo mkdir -p /home/charm/.kube
 
-# Install k8s under
-su charm
-sudo snap install k8s --classic
-sudo snap install kubectl --classic
+# Install k8s under (don't forget to run with charm, otherwise, it'll be in root user. it doesn't matter actually)
+sudo -u charm snap install k8s --classic
+sudo -u charm snap install kubectl --classic
 
 # Bootstrap k8s as charm user
-sudo k8s bootstrap
+sudo -u charm k8s bootstrap
 
 # Configure k8s to store its config in charm's home directory
-sudo k8s config dump | grep path
-sudo k8s set local-storage.local-path=/home/charm/.kube/storage
+sudo -u charm k8s config dump | grep path
+sudo -u charm k8s set local-storage.local-path=/home/charm/.kube/storage
 
 # Important: Set up access for your regular user
 # TODO: no config file found
@@ -165,7 +164,7 @@ sudo chown -R shichika:shichika ~/.kube
 
 
 # kubeapi ig
-sudo k8s kubectl proxy 
+sudo k8s kubectl proxy
 ssh -L 8001:127.0.0.1:8001 shichika@ustable
 
 # test
@@ -175,15 +174,14 @@ curl -X GET http://telegram-bot-api.bot:8081/ping
 # {"ok":false,"error_code":404,"description":"Not Found"}
 ```
 
-## Upcoming: 
-- expose all ingress in the machine as it is
-
 # Ingress setup
+
 - for external ip, metallb must be configured
-[metallb](https://metallb.io/concepts/) 
+  [metallb](https://metallb.io/concepts/)
 
 ```sh
 sudo k8s enable ingress
 sudo k8s enable load-balancer
 ```
 
+- TODO: expose all ingress in the machine as it is
