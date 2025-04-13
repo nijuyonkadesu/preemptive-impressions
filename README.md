@@ -7,3 +7,9 @@ To spectate the content in the best possible way, Open the `.md` files within ob
 3. Open Obsidian, and select a parent folder (eg: homework). This is called an **obsidian vault**
 ## Just Lobb White Theme
 ![image](https://github.com/nijuyonkadesu/preemptive-impressions/assets/85601344/bd8b63bb-1d7b-4eac-a6fe-07e236569691)
+
+## Built Using Quartz v4
+
+🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+
+[Join the Discord Community](https://discord.gg/cRFFHYye7t)
