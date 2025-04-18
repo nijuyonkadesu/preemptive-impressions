@@ -30,6 +30,8 @@
 6. [OK] Image pull error
 7. automate image building and updating
 8. security is a big question lmao, explore on `Network=` under `[Service]`
+    - Podman quadlet supports "Socket activation of containers" https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#socket-activation-of-containers
+    - This allows you to run a network server with `Network=none` (--network=none). If the server would be compromised, the intruder would not have the privileges to use the compromised server as a spam bot. There are other advantages, such as support for preserved source IP address and better performance when running a container with rootless Podman + Pasta in a custom network. 
 9. [ok] storage issue within the server (ughh, directories are not auto created)
     a. but it's not storage issue
 10. add preexec for folder creation

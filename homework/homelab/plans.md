@@ -24,6 +24,7 @@
 10. another user for samba - with read only permissions
 11. find all setup touch points 
     - consolidate all .conf files and copy them
+12. A rag application on my identity notes, to retrieve items based on search (postgres or chroma)
 
 # Clean Up: 
 DONE: samba this partition
