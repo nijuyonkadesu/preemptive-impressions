@@ -104,6 +104,14 @@ sudo chown -R username /mnt/newdrive/
 sudo chmod -R 750 /mnt/newdrive/
 
 ## Simple disk related cmds
+
+[3 concept](https://documentation.ubuntu.com/server/explanation/storage/about-lvm/index.html): 
+
+1. pv - pysical volume
+2. vg - volume group (collection of pysical volume, disk pools)
+3. lv - logical volume (holds filesystem)
+
+[manage storage](https://documentation.ubuntu.com/server/how-to/storage/manage-logical-volumes/#manage-logical-volumes) 
 - pvdisplay
 - vgdisplay
 - lvdisplay
@@ -114,6 +122,7 @@ sudo chmod -R 750 /mnt/newdrive/
 - hdparm -I /dev/sda
 - mkfs.ext4
 - fschk
+- [modify /swap.img](https://askubuntu.com/questions/178712/how-to-increase-swap-space) 
 
 chown to shichika chichika. coz, nogrouo not woeking
 
@@ -129,6 +138,7 @@ chown to shichika chichika. coz, nogrouo not woeking
 - install samba, add a new user, set password
 - add [share] section in /etc/samba/samba.conf. Also mention valid username?
 -     ^^^^^^ it can be anything!! our-ip/path -> asks for prompt -> access the files
+[how to guide - reference](https://documentation.ubuntu.com/server/how-to/networking/) 
 
 ## NFS Setup 
 

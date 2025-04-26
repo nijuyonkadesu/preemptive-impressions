@@ -26,4 +26,5 @@ do manual fschk
 
 # System information
 hostnamectl
+lshw
 

@@ -2,7 +2,9 @@
 
 Example netplan yaml with a default gateway. Without default route, ipv4 networks will not work.
 `/24` - the subnet mask should match with your router. It tells your system which IPs are local and which ones are external that
-needs to be routed through the gateway
+needs to be routed through the gateway.
+
+[netplan docs](https://netplan.readthedocs.io/en/stable/howto/) 
 
 ```yaml
 network:
@@ -172,6 +174,19 @@ kubectl run -it --rm --restart=Never --image=alpine testpod -- /bin/sh
 apk add curl
 curl -X GET http://telegram-bot-api.bot:8081/ping
 # {"ok":false,"error_code":404,"description":"Not Found"}
+```
+
+## Stop & Start k8s
+
+```sh
+snap services
+sudo snap stop --disable k8s
+sudo snap start --enable k8s
+# probably these will vanish after a reboot.
+sudo systemctl | grep -E 'kube|csi|coredns' | less
+
+# Temporary start
+sudo snap start k8s
 ```
 
 # Ingress setup

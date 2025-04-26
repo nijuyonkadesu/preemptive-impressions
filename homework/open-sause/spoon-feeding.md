@@ -1,0 +1,4 @@
+- [aosabook](https://aosabook.org/en/v2/sqlalchemy.html)
+- [martin fowler](https://martinfowler.com/architecture/)
+- [scaling postgres](https://www.youtube.com/watch?v=D71Uq9WByIM)
+  - supabase is an alternative to single threaded pgbouncer

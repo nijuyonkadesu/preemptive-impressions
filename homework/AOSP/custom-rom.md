@@ -28,7 +28,7 @@
 
 check final build zip in `out/target/product/<codename>`.
 
-## Only works for Official ROMs
+## Official ROMs
 
 Do not download device specific repos manually. For LOS, use lunch cli tool. Don't forget to add TheMuppets for vendor proprietary files.
 
@@ -46,7 +46,7 @@ Build:
 - what about OSS vendor?
 - what about unsupported / new device?
 
-# Resources to Build your own kernel
+# Kernel
 
 1. http://goo.gl/b3A2EX
 2. https://www.geeksforgeeks.org/compile-our-own-android-kernel-in-5-simple-steps/

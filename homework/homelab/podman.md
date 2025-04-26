@@ -102,5 +102,5 @@ curl -X GET localhost:8081/ping
 
 # to fix new files created under root issue
 # ps. sigh, didin't help
-sudo -u shichika podman build -f homework/homelab/deployment/tgbotapi.dockerfile -t localhost/telegram-bot-api:latest
+sudo podman build -f homework/homelab/deployment/tgbotapi.dockerfile -t localhost/telegram-bot-api:latest
 ```
