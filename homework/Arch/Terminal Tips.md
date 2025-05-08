@@ -31,6 +31,7 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
 15. `jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
 16. `7z t file.zip` check zip for corruption
 17. `ab -k -c 350 -n 5000 http://<rpi ip>:3000/` command sends 5k requests in total with a concurrency of 350 requests. One could tweak these numbers as per requirements.
+18. `rg '\b(in)\w+' Literature/ -i -o | sort -u | less` - bruteforce search using ripgrep
     ref: [mock http request](https://gochronicles.com/benchmark-restful-apis/)
 
 ## Nvidia card status

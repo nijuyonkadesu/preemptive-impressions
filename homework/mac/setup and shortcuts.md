@@ -91,7 +91,9 @@ export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 ```
 
-# Foobar2000 layout file
+# Foobar2000
+
+## layout file
 
 [Layout Docs](https://wiki.hydrogenaud.io/index.php?title=Foobar2000:Mac:Layout)
 
@@ -107,4 +109,26 @@ splitter vertical style=thin
   splitter vertical style=thin
    playlist
   playback-controls
+```
+
+## Album Art
+
+slash is opposite from windows
+
+```sh
+front.*
+cover.*
+%filename%.*
+%album%.*
+folder.*
+BK/*.*
+cover.*
+Cover1.*
+front.*
+image/*.*
+Scan/*.*
+scans/*.*
+Scans/*.*
+*.jpg
+*.*
 ```
