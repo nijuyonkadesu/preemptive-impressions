@@ -1,35 +1,28 @@
-# Plan for tomorrow
-
-1. how to manage users
-2. how to manage SSH keys (and is it possible to keep in sync with github??) [DONE]
-3. how to install neovim & tmux (and setup configurations) [DONE]
-4. what is this os, understand UBUNTU's way of doing things
-5. Install golang [DONE]
-6. tailscale setup (temporary)
-7. how to safely expose to internet
-8. configure ufw (allow all ssh connections tho) - if you've configured samba, those things will get blocked too
-   - try configuring firewalld (caution: it denys connection by default)
-   - fail2ban (ssh)
-
 # In couple of days
 
 0. read the best practices (managing volume network and blah blah)
-1. install canonical k8s
-2. bring in the watgbridge bot here
-3. Only 100G is used. plan for the remaining storage... X
+1. install canonical k8s [DONE]
+2. bring in the watgbridge bot here [DONE]
+3. Only 100G is used. plan for the remaining storage... [DONE]
 4. flash bios X [DONE]
 5. backups setup
 6. openvpn? (physical firewall, site-to-site vpn, inc network knowledge)
-7. metallb
-8. A simple server / blog site with public certificates
-9. another user for samba - with read only permissions
-10. find all setup touch points
+7. immich
+8. metallb
+9. A simple server / blog site with public certificates
+10. another user for samba - with read only permission [DONE]
+11. find all setup touch points [DONE]
     - consolidate all .conf files and copy them
-11. A rag application on my identity notes, to retrieve items based on search (postgres or chroma)
-12. expose to internet:
+12. A rag application on my identity notes, to retrieve items based on search (postgres or chroma)
+13. expose to internet:
     - ngnix proxy
     - cloudflare domain
     - static IP from ISP (cloudflare tunnel without static IP)
+14. configure ufw (allow all ssh connections tho)
+    - if you've configured samba, those things will get blocked too
+    - try configuring
+    - use firewalld (caution: it denys connection by default)
+    - fail2ban (ssh)
 
 # Clean Up:
 
@@ -41,7 +34,8 @@ DONE: samba this partition
 
 Controling system with the help of telegram bot?? (umm)
 
-[TODO] - run systemd services using quadlet - dont't use k8s for this (Use, astolfo the arch user for this?) 0. notify when the system is up or shutdown
+- dont't use k8s for this (Use, astolfo the arch user for this?)
+- notify when the system is up or shutdown
 
 1. run a local telegram bot server?
 2. other helpful commands that administers the PC
@@ -58,8 +52,10 @@ Controling system with the help of telegram bot?? (umm)
 
 ## automation?? (server chores):
 
+```sh
 sudo apt install unattended-upgades
 sudo apt install update-notifier-common
+```
 
 then check /etc/apt/apt.conf.d ?? and uncomment auto reboot and specify reboot time??
 
@@ -67,7 +63,7 @@ then check /etc/apt/apt.conf.d ?? and uncomment auto reboot and specify reboot t
 
 - [2FA](https://ubuntu.com/server/docs/openssh-server) login on root accounts only
 
-####################
+---
 
 # Add user
 
@@ -99,6 +95,7 @@ sudo su -
 - wipefs (and path) - nahhh
 - gdisk (to create a volume from a old drive)
 - mkfs to format
+
 ```js
 /dev/sda1
         ^ partition number!!
@@ -145,7 +142,7 @@ chown to shichika chichika. coz, nogrouo not woeking
 
 ## simple mount
 
-- `sudo mount -o ro src dest`
+`sudo mount -o ro src dest`
 
 ## raid
 
@@ -161,17 +158,11 @@ chown to shichika chichika. coz, nogrouo not woeking
 
 ## NFS Setup
 
+```sh
 sudo apt install nfs-kernel-server
+```
 
 # how to auth for github
 
 - change remote url
   `git remote set-url origin git@github.com:username/repository.git`
-
-## Next cloud - with common db
-
-apt install podman
-
-- Plan: single postgres (for all podman applications)
-- proper storage configs
-- plan for db backups
