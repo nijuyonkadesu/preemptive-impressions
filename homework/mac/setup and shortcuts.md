@@ -1,16 +1,18 @@
-
 (KDE connect) untrusted: `xattr -d com.apple.quarantine kdeconnect-indicator.app`
 
 `cmd + shift + 4/5` for screenshots
 `cmd + H` - hide, better than minimize
-`cmd + TAB + 🔽`  
+`cmd + TAB + 🔽`
+
 > (First press and hold `CMD` key, tap `Tab` key multiple times to switch to the app, then press `Down` arrow key. Navigate using arrow keys, then press return to activate selected window.)
+
 ## PIP Fix
+
 no, install poetry using pip install in 3.10 python.
 https://github.com/kovidgoyal/kitty/issues/692 - create a new tab from current dir
 
-
 # brew
+
 ```bash
 brew install --cask maccy
 brew install --cask alt-tab
@@ -18,19 +20,18 @@ brew install --cask kitty
 brew install fzf
 brew install fd ripgrep libpq
 brew install java
-brew install powerlevel10k
-brew install iterm2 
-brew install tgpt 
+brew install iterm2 # backup just incase
+brew install tgpt
 sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk \
      /Library/Java/JavaVirtualMachines/openjdk.jdk
 ```
-asfasd
+
+Refer [[Arch/Terminal-Tips#kitty]] for kitty setup.
 
 set maccy shortcut to `^ + v`
 change alt-tab to show apps from current spaces only `⌥ + tab`
 
 # .zshrc
-
 
 ```sh
 #:: Reverse search in tmux workaround in macos
@@ -80,7 +81,7 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
 # Shortcuts
-export EDITOR=nvim 
+export EDITOR=nvim
 export PREEMPTIVE_IMPRESSIONS="$HOME/Documents/preemptive-impressions/"
 export NOTES="$HOME/Documents/notes"
 export MANPAGER="nvim +Man!"
@@ -90,9 +91,11 @@ export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 ```
 
-# Foobar2000 layout file
+# Foobar2000
 
-[docs](https://wiki.hydrogenaud.io/index.php?title=Foobar2000:Mac:Layout) 
+## layout file
+
+[Layout Docs](https://wiki.hydrogenaud.io/index.php?title=Foobar2000:Mac:Layout)
 
 ```sh
 splitter vertical style=thin
@@ -106,4 +109,26 @@ splitter vertical style=thin
   splitter vertical style=thin
    playlist
   playback-controls
+```
+
+## Album Art
+
+slash is opposite from windows
+
+```sh
+front.*
+cover.*
+%filename%.*
+%album%.*
+folder.*
+BK/*.*
+cover.*
+Cover1.*
+front.*
+image/*.*
+Scan/*.*
+scans/*.*
+Scans/*.*
+*.jpg
+*.*
 ```

@@ -1,109 +1,143 @@
-## Revision
-1. Strategy Pattern: 
-    - Prevent class explosion.
-    - Every method inside this class is a wrapper of another class with a single method.
-    - FOR SINGLE METHOD ONLY??
-    - Dependency injection, composability
+## 1. Strategy Pattern:
+
+- Prevent class explosion.
+- Every method inside this class is a wrapper of another class with a single method.
+- FOR SINGLE METHOD ONLY??
+- Dependency injection, composability
+
+> [!NOTE]
 > means, one concrete class, but behaviour varies through composition of different method implemntation.
 > Interesting: Applying abstractions on methods rather than on classes.
 
-2. Observation Pattern:
-    - Push updates to subscribers.
-    - subscribers take Subject when instantiation -> means, they can read update directly
+## 2. Observation Pattern:
+
+- Push updates to subscribers.
+- subscribers take Subject when instantiation -> means, they can read update directly
+
+> [!NOTE]
 > Interesting: having the 'Subject' class itself stored inside 'Observer'
 
-3. Decorator Pattern: 
-    - Prevent class explosion
-    - Actually useful only when the behaviour between decorators are significantly different. [behaviour variation]
-    - Change behaviour of object at runtime.
-    - One = new Two(One)
-    - Three = new Three(Two), and two indirectly contains one, so any operation performed on three, modifies two, and two indirectly modifies one. And construction of new classes can be done at runtime, and therefor the Decorator pattern. 
-    - Coffee = new MoreCaffine(Coffee)
-    - Coffee = new MoreSugar(Coffee) // Coffee here is MoreCaffine which inturns wraps the original Coffee. [they all implement the same interface]
+## 3. Decorator Pattern:
+
+- Prevent class explosion
+- Actually useful only when the behaviour between decorators are significantly different. [behaviour variation]
+- Change behaviour of object at runtime.
+- One = new Two(One)
+- Three = new Three(Two), and two indirectly contains one, so any operation performed on three, modifies two, and two indirectly modifies one. And construction of new classes can be done at runtime, and therefor the Decorator pattern.
+- Coffee = new MoreCaffine(Coffee)
+- Coffee = new MoreSugar(Coffee) // Coffee here is MoreCaffine which inturns wraps the original Coffee. [they all implement the same interface]
+
+> [!NOTE]
 > Interesting: two different ideas, but implements the same interface.
-> Interesting: The idea 2 holds a instance of idea 1, so that the changes can propagate recursively. 
+> Interesting: The idea 2 holds a instance of idea 1, so that the changes can propagate recursively.
 > irl: deprecations
 
-4. Factory Pattern: 
-    - Avoid class explosions, depend only on key classes.
-    - Defer instantiation to sub classes, but parameters differs, and the way in which consturcted differes. [polymorphism]
-    - How / Why / With which parameters you want to construct an object doesn't matter, at the end you want an object. That's all. 
+## 4. Factory Pattern:
+
+- Avoid class explosions, depend only on key classes.
+- Defer instantiation to sub classes, but parameters differs, and the way in which consturcted differes. [polymorphism]
+- How / Why / With which parameters you want to construct an object doesn't matter, at the end you want an object. That's all.
+
+> [!NOTE]
 > Spaceship, astroid game example. [CreateObstacle Factory]
 > Parametring portions of the system
 
-5. Abstract Factory Pattern: 
-    - An interface to create families of related products without specifying their concrete classes.
-    - have control over creating multiple objects, but related ones together.
-> irl: cross-platform UI libraries 
+## 5. Abstract Factory Pattern:
+
+- An interface to create families of related products without specifying their concrete classes.
+- have control over creating multiple objects, but related ones together.
+
+> [!NOTE]
+> irl: cross-platform UI libraries
 > Interesting: builds on factory pattern, but imposing strict rules
 
-6. Singleton Pattern:
-    - Single global instance of heavy class
-    - check-lock-check creation during instantiation. 
+## 6. Singleton Pattern:
 
-7. Commmand Pattern: 
-    - Undo for every action. [execute, unexecute]
-    - two sections: [hardcoded region] (variable) <- | <- [generalized region] (constant)
-    - two behaviour:   [actual action]        <-     | <- [trigger action]
-    - couple with queue mechanism to facilitae undo
-> Invoker (different device which has commands instances stored in them), quite interesting. 
+- Single global instance of heavy class
+- check-lock-check creation during instantiation.
+
+## 7. Commmand Pattern:
+
+- Undo for every action. [execute, unexecute]
+- two sections: [hardcoded region] (variable) <- | <- [generalized region] (constant)
+- two behaviour: [actual action] <- | <- [trigger action]
+- couple with queue mechanism to facilitae undo
+
+> [!NOTE]
+> Invoker (different device which has commands instances stored in them), quite interesting.
 > check gary bernhardt's talk: boundaries (avoid mutation when possible)
 
 [Adapter, Facade, Proxy, Decorator]
 
-8. Adapter Pattern: 
-    - Just middle class that we design, to work with some rapidly changing external library (or on something that you don't have any control over)
-    - or, to handle input format / stadard changes in a centralized manner. 
+## 8. Adapter Pattern:
+
+- Just middle class that we design, to work with some rapidly changing external library (or on something that you don't have any control over)
+- or, to handle input format / stadard changes in a centralized manner.
+
+> [!NOTE]
 > mind having dependency injection
 > DO NOT ADD / REMOVE / MODIFY EXISTING BEHAVIOUR THAT WE ARE TARGETTING FOR, JUST A PASSTHROUGH ONLY
 
-9. Facade Pattern: 
-    - To interact with complex system, complex wired system. 
-    - The black box of the above system, but with simple interface. 
-    - Unified interface to a set of interfaces in a subsystem. (provides a higher-level interface) 
-> !!NOT ADDING ADDIONAL BEHAVIOUR!!
+## 9. Facade Pattern:
+
+- To interact with complex system, complex wired system.
+- The black box of the above system, but with simple interface.
+- Unified interface to a set of interfaces in a subsystem. (provides a higher-level interface)
+
+> [!NOTE] !!NOT ADDING ADDIONAL BEHAVIOUR!!
 > "There is not some order to this madness, it's just madness" - Christopher Okhravi
 > Side note: "The princile of least knowledge": Talk only to your immediate friends, but not friends of friends. Coz, coupling
 
-10. Proxy Pattern:
-    - Interface is **unchanged**, but introduces interception of all requests before accessing the underlying thing. 
-    - Interception, Access control, security, caching, lazy evaluation, logging,...
-    - **Remote** - remote resources, differnt location, [Node Promises]. Takes responsibility of retrieving that external resource for you. 
-    - **Virtual** - lazy evaluation
-    - **Protection** - access management
-    - has an instance of the of object this proxy is proxying.
+## 10. Proxy Pattern:
+
+- Interface is **unchanged**, but introduces interception of all requests before accessing the underlying thing.
+- Interception, Access control, security, caching, lazy evaluation, logging,...
+- **Remote** - remote resources, differnt location, [Node Promises]. Takes responsibility of retrieving that external resource for you.
+- **Virtual** - lazy evaluation
+- **Protection** - access management
+- has an instance of the of object this proxy is proxying.
+
+> [!NOTE]
 > Remote, Virtual, Protection
 
-11. Bridge Pattern:
-    - Decouple abstraction from implementation. [yes blows mind]
-    - Adapt over a concrete
-    - Similar to Abstract Factory Pattern, except the combination of classes is relaxed
-> Example: Say there are two types of `<concrete [Abstraction]>` Book [MediaResource] and Portrait [View]. Bride allows to mix any of those two regardless of the concrete implementation. 
+## 11. Bridge Pattern:
+
+- Decouple abstraction from implementation. [yes blows mind]
+- Adapt over a concrete
+- Similar to Abstract Factory Pattern, except the combination of classes is relaxed
+
+> [!NOTE]
+> Example: Say there are two types of `<concrete [Abstraction]>` Book [MediaResource] and Portrait [View]. Bride allows to mix any of those two regardless of the concrete implementation.
 > Interesting: Coupling an abstract class with another interface, so that the concrets can vary independently...
 > Interface segregation principle
 > kind of extends proxy pattern?
 > Check visitor pattern too
-> Diagram: https://youtu.be/F1YQ7YRjttI?t=1849
+> Diagram: [ref: youtube](https://youtu.be/F1YQ7YRjttI?t=1849)
 > A-A
 
-12. Template Method Pattern:
-    - Defines a skeleton of an algorithm where some steps are deferred to subclasses, where the remaining is constant.675986
-    - Those common operations should be the same across all cases. It has to be, else go shop for another design pattern.
-    - Do you really nead this?? Why not Strategy Pattern work for you?? think for yourself...
-    - Custom Hooks [before, after], interesing...
-    - Quite dangerous if used inappropriately.
+## 12. Template Method Pattern:
+
+- Defines a skeleton of an algorithm where some steps are deferred to subclasses, where the remaining is constant.675986
+- Those common operations should be the same across all cases. It has to be, else go shop for another design pattern.
+- Do you really nead this?? Why not Strategy Pattern work for you?? think for yourself...
+- Custom Hooks [before, after], interesing...
+- Quite dangerous if used inappropriately.
+
+> [!NOTE]
 > Validate (const) - custom operation1, 2, 3, ... - validate (const)
 > Open Closed principle?
 > Dependency Inversion??
 
-13. Composite Pattern:
-    - Collection of objects, or single object it doesn't matter - Treat inidividual components and collection of components uniformly. 
-    - Full power of trees!! [strings in javascript?]
-    - Data usefully Modeled Heirarchically + Computing over the heirarchy becomes trival, coz, you can treat all nodes as some. 
-    - Tree Structures - Part Whole hierarchies... 
-    - TODO: need more understanding...
-    - Initalizing this structure is still a mystry to me, coz, I think, we cannot treat Todo, TodoList, and Project the same way during initialization stage...
-    - The base functionality is similar to Decorator pattern.
+## 13. Composite Pattern:
+
+- Collection of objects, or single object it doesn't matter - Treat inidividual components and collection of components uniformly.
+- Full power of trees!! [strings in javascript?]
+- Data usefully Modeled Heirarchically + Computing over the heirarchy becomes trival, coz, you can treat all nodes as some.
+- Tree Structures - Part Whole hierarchies...
+- TODO: need more understanding...
+- Initalizing this structure is still a mystry to me, coz, I think, we cannot treat Todo, TodoList, and Project the same way during initialization stage...
+- The base functionality is similar to Decorator pattern.
+
 ```
            [TodoList]<li>
       Component(everything)<-.
@@ -111,53 +145,65 @@
   Leaf(unique), Composite(unique)
    [Todo]<li>      [Project]<ul> (responsible to use proper html tags)
 ```
-> Replace a conditional with polymorphism - How? - by implementing the same interface! (that's lame)
-> jQuery, React, Redux reducers
-> Send data downwards, and events upwards.
-> ref: https://youtu.be/EWDmWbJ4wRA?t=2571
 
->> A nice youtube comment
+> [!NOTE]
+> Replace a conditional with polymorphism - How? - by implementing the same interface! (that's lame).
+> jQuery, React, Redux reducers.
+> Send data downwards, and events upwards.
+> [ref: youtube](https://youtu.be/EWDmWbJ4wRA?t=2571)
+
+> [!tip]- A nice youtube comment
 > A list is still considered a hierarchical structure. It has a head (root), a tail (leaf), and potentially stuff in the middle. As you clearly stated, composite pattern is all about establishing the structure WITHOUT changing the underlying behavior of the component of the structure. Decorator is not about structure, but about changing (augmenting) the behavior of the component.
-> Your example of decorator gave me an idea. In Rich Text Editors, text can be "decorated" with different styles like bolded, italicized, and underlined. It can also be decorated with color. It can also be decorated with font families. These decorations can be used in conjunction with each other.  This sort of thing cannot (should not) be done using Composite Pattern.
+> Your example of decorator gave me an idea. In Rich Text Editors, text can be "decorated" with different styles like bolded, italicized, and underlined. It can also be decorated with color. It can also be decorated with font families. These decorations can be used in conjunction with each other. This sort of thing cannot (should not) be done using Composite Pattern.
 > In the same context, Composite Pattern can be used to establish structures such as toolbars, menu bars, and even the document device context. This is important because (for instance) when you resize your Word Processor window, you will want to resize all of the children elements that belong to it (in order to keep the aspect ratio, for instance). This sort of functionality cannot (should not) be done with a Decorator Pattern.
 > I think the confusion can be attributed in part (at least for me) to the fact that Decorator Pattern is categorized as a STRUCTURAL design pattern rather than BEHAVIORAL. I think this is a mistake because clearly the intent of the pattern is to add additional responsibilities (behaviors) to objects.
 
-14. Iterator Pattern
-    - Single responsibility
-    - Give me each of the items one by one, I'll iterate. That's all. I don't care what their types are, I'll iterate, and that's my only job.
-    - Simply gives the element when asked for.
-    - Lazy evaluation. 
-    - Infinity
-    - Be wary if you send a reference or a copy of the object or a infinite generator
-    - remember current index.
-    - without exposing the underlying structure. [coz, in an aggregation, it can be of anything]
-    - ITERABLE, ITERATOR 
+## 14. Iterator Pattern
 
-> ref: https://youtu.be/uNTNEfwYXhI?t=3092
+- Single responsibility
+- Give me each of the items one by one, I'll iterate. That's all. I don't care what their types are, I'll iterate, and that's my only job.
+- Simply gives the element when asked for.
+- Lazy evaluation.
+- Infinity
+- Be wary if you send a reference or a copy of the object or a infinite generator
+- remember current index.
+- without exposing the underlying structure. [coz, in an aggregation, it can be of anything]
+- ITERABLE, ITERATOR
+
+> [!NOTE]
 > command query separation: separate mutable and immutable operations into functions. Do not mix them, if not the result will be a mess.
+> [ref: youtube](https://youtu.be/uNTNEfwYXhI?t=3092)
 
-15. State Pattern
-    - Memoryless, works based on current state
-    - state1 -> transisiton -> state2, and loops are there ofc
-    - replacing conditional with polymorphism
-    - alter an object's behavior when its internal state changes - the object appears to change it's class
-    - states | behaviours - combinations 
-    - Keep in mind that coupling to interfaces / abstrations is better than coupling to concrete  classes. 
-    - Components: 
+## 15. State Pattern
+
+- Memoryless, works based on current state
+- state1 -> transisiton -> state2, and loops are there ofc
+- replacing conditional with polymorphism
+- alter an object's behavior when its internal state changes - the object appears to change it's class
+- states | behaviours - combinations
+- Keep in mind that coupling to interfaces / abstrations is better than coupling to concrete classes.
+- Components:
+
 ```
     [turn stile]
-    **the thing** that **can** have states 
+    **the thing** that **can** have states
          Context -------------------> State (Interface)
               ^                         |
-              |____<change state>____ [open, close, processing] (or, return a new state instead of mutating state)
-    ```
-> ref: https://youtu.be/N12L5D78MAA?t=3074
+              |____<change state>____ [open, close, processing] or,
+                                      [return a new state instead of mutating state]
+```
+
+> [!NOTE]
 > Interesting: we've modeled the state and how it responds to different events, but we have not modeled how the events themselves are triggered. That will be the business logic tied up with 'Context'.
+> [ref: youtube](https://youtu.be/N12L5D78MAA?t=3074)
 
-16. Null Object Pattern
-    - nothing, no operation
+## 16. Null Object Pattern
 
+- nothing, no operation
+
+> [!NOTE]
 > kek, the creator of null apologized for creating 'null', kekkekekekekek, Sandy Metz
 
 ## Intesting co-pilot nonsense
-> Interesting: Downcasting, Upcasting, Polymorphism, Inheritance, Composition, Aggregation, Association, Dependency, Encapsulation, Abstraction, Interface, Abstract Class, Concrete Class, Class, Object, Instance, Method, Function, Variable, Constant, Property, Attribute, Field, Parameter, Argument, Return Value, Type, Value, Reference, Pointer, Memory, Stack, Heap, Garbage Collection, Recursion, Iteration, Loop, Condition, Branch, Expression, Statement, Block, Scope, Namespace, Module, Package, Library, Framework, API, SDK, Compiler, Interpreter, Transpiler, Debugger, Profiler, Editor, IDE, Version Control, Repository, Branch, Commit, Merge, Pull Request, Issue, Ticket, Agile, Scrum, Kanban, Waterfall, Lean, XP, Pair Programming, TDD, BDD, DDD, CI, CD, DevOps, Microservices, Serverless, Container, Virtualization, Cloud, IaaS, PaaS, SaaS, FaaS, Web, HTTP, REST, SOAP, GraphQL, TCP, UDP, IP, DNS, CDN, SSL, TLS, CORS, CSP, JWT, OAuth, OpenID, SAML, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoperability, Security, Privacy, Anonymity, Identity, Access Control, Authorization, Authentication, Federation, SSO, MFA, RBAC, ABAC, ACL, CAP, BASE, ACID, CRUD, CQRS, Event Sourcing, DDD, Hexagonal, Onion, Clean, Micro, Serverless, Monolithic, SOA, REST, GraphQL, gRPC, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoper
+
+Downcasting, Upcasting, Polymorphism, Inheritance, Composition, Aggregation, Association, Dependency, Encapsulation, Abstraction, Interface, Abstract Class, Concrete Class, Class, Object, Instance, Method, Function, Variable, Constant, Property, Attribute, Field, Parameter, Argument, Return Value, Type, Value, Reference, Pointer, Memory, Stack, Heap, Garbage Collection, Recursion, Iteration, Loop, Condition, Branch, Expression, Statement, Block, Scope, Namespace, Module, Package, Library, Framework, API, SDK, Compiler, Interpreter, Transpiler, Debugger, Profiler, Editor, IDE, Version Control, Repository, Branch, Commit, Merge, Pull Request, Issue, Ticket, Agile, Scrum, Kanban, Waterfall, Lean, XP, Pair Programming, TDD, BDD, DDD, CI, CD, DevOps, Microservices, Serverless, Container, Virtualization, Cloud, IaaS, PaaS, SaaS, FaaS, Web, HTTP, REST, SOAP, GraphQL, TCP, UDP, IP, DNS, CDN, SSL, TLS, CORS, CSP, JWT, OAuth, OpenID, SAML, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoperability, Security, Privacy, Anonymity, Identity, Access Control, Authorization, Authentication, Federation, SSO, MFA, RBAC, ABAC, ACL, CAP, BASE, ACID, CRUD, CQRS, Event Sourcing, DDD, Hexagonal, Onion, Clean, Micro, Serverless, Monolithic, SOA, REST, GraphQL, gRPC, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoper

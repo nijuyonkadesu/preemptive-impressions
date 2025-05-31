@@ -1,52 +1,58 @@
-`| lime  `
-`| less  `
-`| grep <keyword> ` 
-`| sort`  
-`| sed <pattern>`
+- `| lime  `
+- `| less  `
+- `| grep <keyword> `
+- `| sort`
+- `| sed <pattern>`
 
 **ripgrep** (often shortened to `rg`) and **fd** are modern alternatives to the traditional `grep` and `find` commands
 
 `tree -d -L 2` list only directories with depth level 2
+
 ```zsh
 for d (parent-dir/*/*(N/)) (cd -- $d && tree) | less
 ```
+
 https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectories
-  
-`ctrl + r` (old command search)  
-  
-`yes | command` (gives auto yes that requires user interaction)  
-`alias`  
-  
-`find /home/user -type f sensetive_data.txt  `
-`find . -type f -size 100M (size > 100)  `
-`find . -type d -name ".git"`
-`df -h`  
-`base64 -d <<< bWluaW8=`
-`echo -n "" | base64 -d`
-`head -2 trains-big.csv`
-`tar cCf / - usr | cpipe -vt > /dev/null` - modify to measure current activity in STDIN / STDOUT
-`read var` 
-`fc` / `ctrl + x + e` - edit long commands in preffered editor
-`jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
-`jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
-`7z t file.zip` check zip for corruption
-`ab -k -c 350 -n 5000 http://<rpi ip>:3000/` command sends 5k requests in total with a concurrency of 350 requests. One could tweak these numbers as per requirements.
-ref: [mock http request](https://gochronicles.com/benchmark-restful-apis/) 
- 
-Nvidia card status  
-`cat /sys/class/drm/card*/device/power_state`  
-DO is full power ([https://docs.kernel.org/power/pci.html#native-pci-power-management](https://docs.kernel.org/power/pci.html#native-pci-power-management))
-see if the card is in D0: cat
-`cat /sys/bus/pci/devices/0000:01:00.0/power/runtime_statussuspended`
+
+1. `ctrl + r` (old command search)
+2. `yes | command` (gives auto yes that requires user interaction)
+3. `alias`
+4. `find /home/user -type f sensetive_data.txt  `
+5. `find . -type f -size 100M (size > 100)  `
+6. `find . -type d -name ".git"`
+7. `df -h`
+8. `base64 -d <<< bWluaW8=`
+9. `echo -n "" | base64 -d`
+10. `head -2 trains-big.csv`
+11. `tar cCf / - usr | cpipe -vt > /dev/null` - modify to measure current activity in STDIN / STDOUT
+12. `read var`
+13. `fc` / `ctrl + x + e` - edit long commands in preffered editor
+14. `jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
+15. `jq '[.[] | select(.config_type | startswith("platform"))]' input.json`
+16. `7z t file.zip` check zip for corruption
+17. `ab -k -c 350 -n 5000 http://<rpi ip>:3000/` command sends 5k requests in total with a concurrency of 350 requests. One could tweak these numbers as per requirements.
+18. `rg '\b(in)\w+' Literature/ -i -o | sort -u | less` - bruteforce search using ripgrep
+    ref: [mock http request](https://gochronicles.com/benchmark-restful-apis/)
+
+## Nvidia card status
+
+- D0 is full power ([https://docs.kernel.org/power/pci.html#native-pci-power-management](https://docs.kernel.org/power/pci.html#native-pci-power-management))
+- `cat /sys/class/drm/card*/device/power_state`
+- see if the card is in D0: cat
+- `cat /sys/bus/pci/devices/0000:01:00.0/power/runtime_statussuspended`
 
 ## Shortcuts
-`<C w>` delete a word backwards
-`<C k>` delete entire thing following the cursor
-`<C e>` go to end
-`<C a>` go to begining
+
+- `<C w>` delete a word backwards
+- `<C k>` delete entire thing following the cursor
+- `<C e>` go to end
+- `<C a>` go to begining
+
 ## tmux
-*with tmux.conf*
+
+_with tmux.conf_
 `Ctrl + b`
+
 - d - detach
 - v, h - split
 - z full screen
@@ -54,10 +60,11 @@ see if the card is in D0: cat
 - quick 4 pane launch `tmux new-session \; split-window -v -p 20 \; split-window -h \; select-layout tiled \; resize-pane -t 1 -y 40 \; split-window -h \;`
 
 - tmux-sessioner + fuzzy find (avoid cd hell): https://www.reddit.com/r/tmux/comments/1ch9tqp/primeagen_tmux_session_management/
-- [primeagen](https://github.com/ThePrimeagen/.dotfiles/blob/master/tmux/.tmux.conf) 
-- [fixed](https://github.com/brunobmello25/dotfiles/blob/main/bin%2F.local%2Fscripts%2Ftmux-sessionizer) 
+- [primeagen .conf](https://github.com/ThePrimeagen/.dotfiles/blob/master/tmux/.tmux.conf)
+- [sessionizer with minor fixes](https://github.com/brunobmello25/dotfiles/blob/main/bin%2F.local%2Fscripts%2Ftmux-sessionizer)
 
-### conf file:
+### tmux.conf
+
 ```bash
 set -g mouse on
 set -g renumber-windows on
@@ -65,12 +72,12 @@ set -g history-limit 10000
 set -sg escape-time 0 # No command delay
 set -g status-keys vi
 setw -g mode-keys vi
-set -g default-terminal "$TERM"                                                                    
+set -g default-terminal "$TERM"
 
-set-option -g status-position top 
+set-option -g status-position top
 set-option -g status-interval 1
 
-# colors 
+# colors
 set -g status-style 'bg=#333333 fg=#5eacd3'
 
 #-------------------------------------------------------------------------------
@@ -123,33 +130,36 @@ bind '$' command-prompt -p "(rename-session '#S')" "rename-session '%%'"
 
 # tmux-sessionizer
 bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
-bind-key -r S run-shell "~/.local/bin/tmux-sessionizer ~/redacted/services-core/services"
-bind-key -r P run-shell "~/.local/bin/tmux-sessionizer ~/redacted/platform-core"
+bind-key -r S run-shell "~/.local/bin/tmux-sessionizer ~/redacted/s-core/services"
+bind-key -r P run-shell "~/.local/bin/tmux-sessionizer ~/redacted/p-core"
 bind-key -r N run-shell "~/.local/bin/tmux-sessionizer ~/Documents/notes"
 ```
 
 ### Commands
+
 `tmux a -t 0` attach to the tmux window
 `tmux ls`
 
+## Node Version Manager
 
-### Node Version Manager
 Need to activate nvm by running init script
 nvm - Node version Manager  
-nvm install (version)  
-nvm use (verrsion)
+nvm install lts/jod  
+nvm use lts/jod
 
-### Helm Inspect 
+## Helm Inspect
+
 Gives diff between helm values vs currently applied kubernetes remote values
 
 ```sh
 pip install helm-inspect
-# Callibrate & find the difs
+# Callibrate & find the diffs
 helm-inspect -r appbackend -n platform -c
 helm-inspect -r appbackend -n platform
 ```
 
 ## bash.rc
+
 ```bash
 alias timef='/usr/bin/time -f "Memory used (kB): %M\nUser time (seconds): %U"'
 alias less='nvim \+":setlocal buftype=nofile" -'
@@ -161,6 +171,8 @@ export VISUAL=nvim
 ```bash
 
 ```
+
+## Commands over SSH
 
 ```bash
 eval "$(ssh-agent -s)"
@@ -174,41 +186,47 @@ scp -P 8022 u0_a342@192.168.29.133:~/watgbridge/wawebstore.db ~/Documents/watg_b
 scp -P 8022 u0_a342@192.168.29.133:~/watgbridge/config.yaml ~/Documents/watg_backup
 ```
 
-*for some reason, this didn't work... neither did systemd.service*, perhaps need to consume STDOUT somewhere 
+_for some reason, this didn't work... neither did systemd.service_, perhaps need to consume STDOUT somewhere
+
 ```bash
 crontab -e
 @reboot /home/guts/ssh_scripts/watgbridge_reboot_backup_cron.sh
 ```
 
-# kitty
+## kitty
+
 Has TrueColors by default, gpu acceleated, less memory intensive, it's great. One small caviat -
-TODO: have to find a solution to search keywords in terminal. 
+TODO: have to find a solution to search keywords in terminal.
 
 kittens have useful tools for to copy items to clipboard even through ssh.
-and view images through terminal wahhh. 
+and view images through terminal wahhh.
+
 ```sh
 kitty +kittens icat ./file.png
 kitty +kittens diff ./fileone ./filetwo
 ```
-`->` [read me](https://wiki.archlinux.org/title/kitty)
-`->` [diff docs](https://sw.kovidgoyal.net/kitty/kittens/diff/) can work on images too!
+
+- `->` [read me](https://wiki.archlinux.org/title/kitty)
+- `->` [diff docs](https://sw.kovidgoyal.net/kitty/kittens/diff/) can work on images too!
 
 `ctrl + shift + h` to search on screen buffer
 [alternative to live search](https://sw.kovidgoyal.net/kitty/marks/)
 
-# Who are these people!!
+## Who are these people!!
+
 https://stackoverflow.com/questions/43573081/fast-i-o-in-c-stdin-out
 umm, pipes eh
 
 ## Postgres
-When to use which index [docs](https://www.postgresql.org/docs/current/indexes-types.html).
-[GIN indexes](https://pganalyze.com/blog/gin-index) 
 
-```sh 
-# List tables from another schema other than public 
-/dt schema.* 
-/dt+ 
-/l 
+When to use which index [docs](https://www.postgresql.org/docs/current/indexes-types.html).
+[GIN indexes](https://pganalyze.com/blog/gin-index)
+
+```sh
+# List tables from another schema other than public
+/dt schema.*
+/dt+
+/l
 /c database
 
 # List all schemas
@@ -235,12 +253,15 @@ exec REINDEX INDEX index_merge_requests_on_description_trigram
 ```
 
 ## Kill Process
-```sh 
-killall -9 node 
+
+```sh
+killall -9 node
 ps aux | grep node
 ```
 
 ## tmux-sessionizer
+
+Place the file in `~/.local/bin/tmux-sessionizer` & `chmod +x`.
 
 ```sh
 #!/usr/bin/env bash
@@ -248,7 +269,7 @@ ps aux | grep node
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    dirs=$(find -L ~/redacted ~/redacted/platform-core ~/redacted/services-core/services ~/Documents/preemptive-impressions  -mindepth 1 -maxdepth 1 -type d)
+    dirs=$(find -L ~/redacted ~/redacted/p-core ~/redacted/s-core/services ~/Documents/preemptive-impressions  -mindepth 1 -maxdepth 1 -type d)
     selected=$(printf "%s\n%s\n%s\n%s" "$dirs" "$HOME/Documents/notes" "$HOME/logs" "$HOME/test" | fzf)
 fi
 
@@ -292,7 +313,6 @@ if [[ ! -z $TMUX ]] && tmux has-session -t=$selected_name 2> /dev/null; then
 fi
 ```
 
-
 ## Accidental
 
 ```sh
@@ -301,9 +321,9 @@ $ nvim .
 [1]+  Stopped                 nvim .
 ```
 
-when you do this, you push your program to background and stops it. 
+when you do this, you push your program to background and stops it.
 `jobs` - list the stopped programs
-`fg` - brings it back to the foreground. 
+`fg` - brings it back to the foreground.
 `fg %1` - if you have multiple jobs running
 
 ## PS1 - Default in Arch
@@ -311,4 +331,3 @@ when you do this, you push your program to background and stops it.
 ```sh
 PS1='[\u@\h \W]\$ '
 ```
-

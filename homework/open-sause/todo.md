@@ -1,0 +1,2 @@
+- quorum consistency? 
+- precomputations
