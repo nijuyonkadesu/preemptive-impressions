@@ -110,6 +110,10 @@ Replace with confirmation: `:s/search/replacement/gc`
 - select `g + ctrl + a` increment all numbers
 - `%` - jump between brackets
 - `gd` - jump to definition
+- `gh` select the right side changes on diff view - **need more guide**
+- `gv` - select last selected 
+- `gi` - last insert position
+- `ga` - ascii, hex, octal of a character 
 - `ctrl w o` (close all window except the hightlighted)
 
 ---
@@ -126,10 +130,10 @@ Replace with confirmation: `:s/search/replacement/gc`
 - [also check](https://www.youtube.com/watch?v=FrMRyXtiJkc&list=PLm323Lc7iSW_wuxqmKx_xxNtJC_hJbQ7R&index=7)
 - `Ctrl w o` close all window
 - `Ctrl w` = equal size of all windows
-- `gh` select the right side changes on diff view - **need more guide**
-
 - `Shift + K` => get function description
-- `:g/func/#` - list out all fuctions in a file
+
+- `:setlocal spell` - enable spell check in current buffer
+- `:g/func/#` - list out all functions in a file
 - `:v/pattern/d` - inverse regex matches, and delete the lines
 - `:dlist /` - list file specific definitions from root - check these in your free time `:help definition-search, :help 'include', :help 'define', :help 'suffixesadd'`
 - `:vimgrep something %`
@@ -137,6 +141,7 @@ Replace with confirmation: `:s/search/replacement/gc`
 - `:cn`, `:cp` - next / prev item in a quickfix list (better than `<Ctrl ww>` and switching back and forth)
 - `:ccl` - close quickfix list
 - `:cdo command` - apply the commands only on the files that that are present in quickfix list.
+- `:retab` - space to tabs 
 - https://stackoverflow.com/questions/13306664/pipe-search-result-to-other-tab-window-buffer-in-vim
 - [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)
 
@@ -216,6 +221,8 @@ int another_important_function(int bytes, double precision);
 - `:G log -- %` commits made on current file
 - `:G diff-tree --no-commit-id --name-only -r <commit_id>` list of changed files of a commit
 - `:G diff --name-only temp/VP-686-query-profiling VP-686-query-profiling` - list of changed files between two branches
+
+- `gh` select the right side changes on diff view - **need more guide**
 
 ## neovim diff
 

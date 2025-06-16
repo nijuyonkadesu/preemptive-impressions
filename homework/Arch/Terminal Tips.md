@@ -33,6 +33,13 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
 17. `ab -k -c 350 -n 5000 http://<rpi ip>:3000/` command sends 5k requests in total with a concurrency of 350 requests. One could tweak these numbers as per requirements.
 18. `rg '\b(in)\w+' Literature/ -i -o | sort -u | less` - bruteforce search using ripgrep
     ref: [mock http request](https://gochronicles.com/benchmark-restful-apis/)
+19. write to a file without editor
+
+```sh
+cat << EOF > file.ext 
+contents....
+EOF
+```
 
 ## Nvidia card status
 
