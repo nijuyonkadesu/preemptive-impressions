@@ -99,6 +99,11 @@ eg: d 10 j > removes 10 lines
 - ([https://learnbyexample.github.io/tips/vim-tip-1/](https://learnbyexample.github.io/tips/vim-tip-1/))
 - `ctrl+v` multiple cursor `->` `I` insert (type) and press escape
 
+## Windo diffs
+
+- `_wt` - alias for :windo diff this
+- `_wo` - alias for :windo diff off
+
 ## Replace All:
 
 - Highlight with `v`
@@ -144,6 +149,8 @@ Replace with confirmation: `:s/search/replacement/gc`
 - `:retab` - space to tabs 
 - https://stackoverflow.com/questions/13306664/pipe-search-result-to-other-tab-window-buffer-in-vim
 - [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)
+
+- `:set spell` do spell checks on text
 
 ## Redirect search results to a new buffer
 
@@ -221,6 +228,7 @@ int another_important_function(int bytes, double precision);
 - `:G log -- %` commits made on current file
 - `:G diff-tree --no-commit-id --name-only -r <commit_id>` list of changed files of a commit
 - `:G diff --name-only temp/VP-686-query-profiling VP-686-query-profiling` - list of changed files between two branches
+- `:G rebase development -i --auto-squash` squashes all fixup commits in the correct order
 
 - `gh` select the right side changes on diff view - **need more guide**
 
