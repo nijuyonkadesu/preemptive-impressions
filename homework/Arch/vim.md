@@ -229,6 +229,7 @@ int another_important_function(int bytes, double precision);
 - `:G diff-tree --no-commit-id --name-only -r <commit_id>` list of changed files of a commit
 - `:G diff --name-only temp/VP-686-query-profiling VP-686-query-profiling` - list of changed files between two branches
 - `:G rebase development -i --auto-squash` squashes all fixup commits in the correct order
+- `:G reset HEAD~1 --soft` (default is soft btw) - undo a commit and put all the changes to stash
 
 - `gh` select the right side changes on diff view - **need more guide**
 

@@ -34,6 +34,7 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
 18. `rg '\b(in)\w+' Literature/ -i -o | sort -u | less` - bruteforce search using ripgrep
     ref: [mock http request](https://gochronicles.com/benchmark-restful-apis/)
 19. write to a file without editor
+20. `| sort -k4,4n` - sort based on the numbers present in position 4 of any line. add `r` next to `4n` to reverse
 
 ```sh
 cat << EOF > file.ext 

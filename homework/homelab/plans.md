@@ -23,6 +23,7 @@
     - try configuring
     - use firewalld (caution: it denys connection by default)
     - fail2ban (ssh)
+15. rsshub to track repo issues: [docs](https://docs.rsshub.app/deploy/) 
 
 # Clean Up:
 
