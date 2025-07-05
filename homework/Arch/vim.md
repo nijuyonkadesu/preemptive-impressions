@@ -15,10 +15,6 @@ lua/ - is ready to be acquired
 
 ## netrw
 
-- R rename
-- r reverse
-- s sort-by
-
 init - updates the files, make sure everything is ready,  
 after - once the above thing is done, now configure stuffs on initialized plugins.
 
@@ -43,6 +39,26 @@ highlight another line, and Paste
 
 **COMMAND - COUNT - MOTION**  
 eg: d 10 j > removes 10 lines
+
+#### Navigation
+
+- `r` reverse
+- `s` sort-by
+- `gh` toggle hidden files
+
+- `R` rename
+- `D` delete file
+- `u` equivalent to backspace. traverse last visited folder.
+- `-` go to parent folder
+- `%` create a file
+- `d` create a directory
+
+- `mf` mark files / directories
+- `mt` mark target directory - used my copy / move commands
+- `mc` copy the marked files
+- `mm` move the copied files
+- `mu` clear all previous markings
+- `mx` execute a command on the marked files. example: `rm -r`
 
 ---
 
@@ -116,9 +132,9 @@ Replace with confirmation: `:s/search/replacement/gc`
 - `%` - jump between brackets
 - `gd` - jump to definition
 - `gh` select the right side changes on diff view - **need more guide**
-- `gv` - select last selected 
+- `gv` - select last selected
 - `gi` - last insert position
-- `ga` - ascii, hex, octal of a character 
+- `ga` - ascii, hex, octal of a character
 - `ctrl w o` (close all window except the hightlighted)
 
 ---
@@ -146,7 +162,7 @@ Replace with confirmation: `:s/search/replacement/gc`
 - `:cn`, `:cp` - next / prev item in a quickfix list (better than `<Ctrl ww>` and switching back and forth)
 - `:ccl` - close quickfix list
 - `:cdo command` - apply the commands only on the files that that are present in quickfix list.
-- `:retab` - space to tabs 
+- `:retab` - space to tabs
 - https://stackoverflow.com/questions/13306664/pipe-search-result-to-other-tab-window-buffer-in-vim
 - [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)
 
