@@ -35,10 +35,17 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
     ref: [mock http request](https://gochronicles.com/benchmark-restful-apis/)
 19. write to a file without editor
 20. `| sort -k4,4n` - sort based on the numbers present in position 4 of any line. add `r` next to `4n` to reverse
+21. gnu core util's date. 
+    - `date -d '2pm ist'`
+    - `date -d 'next friday 4:30am utc'`
+    - `date -d '3 weeks ago 2pm pt'`
+    - `date -d 'now + 1 month'`
+    - `date -d '2025-12-31 18:45 + 7 days`
+22. `pastel color pink` - get color, mix colors, complement and many more: [pastel](https://github.com/sharkdp/pastel) 
 
 ```sh
 cat << EOF > file.ext 
-contents....
+put contents to a file without a editor....
 EOF
 ```
 

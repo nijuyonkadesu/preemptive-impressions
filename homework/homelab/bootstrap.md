@@ -68,6 +68,7 @@ mkdir ~/build
 # Modify the tmuxs script tho
 cd ~/build
 git clone --depth 1 https://github.com/neovim/neovim -b stable
+cd neovim
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make install
 
@@ -75,7 +76,7 @@ sudo make install
 sudo apt install ripgrep fd-find fzf
 sudo apt install npm python3.12-venv
 sudo apt install golang-go
-cd ~/.config && git clone https://github.com/nijuyonkadesu/dotfiles nvim
+cd ~/.config && git clone https://github.com/nijuyonkadesu/dotfiles && cd dotfiles && bash setup.sh
 
 # tmuxs
 mkdir logs
