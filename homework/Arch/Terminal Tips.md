@@ -346,3 +346,20 @@ when you do this, you push your program to background and stops it.
 ```sh
 PS1='[\u@\h \W]\$ '
 ```
+
+## Mount a MTP device (android)
+
+```sh
+sudo apt install go-mtpfs mtp-tools
+mtp detect
+# note down the vendor / device ids, add to udev rules
+sudo nvim /etc/udev/rules.d/69-mtp.rules
+go-mtpfs ~/android
+rsync -ah --progress src dest
+```
+
+69-mtp.rules: 
+```
+SUBSYSTEM=="usb", ATTR{idVendor}=="xxxx", ATTR{idProduct}=="xxxx", MODE="0666", GROUP="plugdev", SYMLINK+="libmtp"
+```
+
