@@ -207,3 +207,226 @@
 ## Intesting co-pilot nonsense
 
 Downcasting, Upcasting, Polymorphism, Inheritance, Composition, Aggregation, Association, Dependency, Encapsulation, Abstraction, Interface, Abstract Class, Concrete Class, Class, Object, Instance, Method, Function, Variable, Constant, Property, Attribute, Field, Parameter, Argument, Return Value, Type, Value, Reference, Pointer, Memory, Stack, Heap, Garbage Collection, Recursion, Iteration, Loop, Condition, Branch, Expression, Statement, Block, Scope, Namespace, Module, Package, Library, Framework, API, SDK, Compiler, Interpreter, Transpiler, Debugger, Profiler, Editor, IDE, Version Control, Repository, Branch, Commit, Merge, Pull Request, Issue, Ticket, Agile, Scrum, Kanban, Waterfall, Lean, XP, Pair Programming, TDD, BDD, DDD, CI, CD, DevOps, Microservices, Serverless, Container, Virtualization, Cloud, IaaS, PaaS, SaaS, FaaS, Web, HTTP, REST, SOAP, GraphQL, TCP, UDP, IP, DNS, CDN, SSL, TLS, CORS, CSP, JWT, OAuth, OpenID, SAML, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoperability, Security, Privacy, Anonymity, Identity, Access Control, Authorization, Authentication, Federation, SSO, MFA, RBAC, ABAC, ACL, CAP, BASE, ACID, CRUD, CQRS, Event Sourcing, DDD, Hexagonal, Onion, Clean, Micro, Serverless, Monolithic, SOA, REST, GraphQL, gRPC, WebSockets, SSE, PWA, SPA, SSR, CSR, SEO, AMP, AR, VR, AI, ML, DL, NLP, RPA, Blockchain, Cryptography, Cryptocurrency, Bitcoin, Ethereum, Smart Contract, Solidity, Wallet, Exchange, Mining, Hash, Proof of Work, Proof of Stake, Fork, ICO, Token, ERC20, ERC721, Gas, Scalability, Interoper
+
+---
+
+# Entity Composition System
+
+Propagating a data to another object is easy, but it is nightmare in a fairly complex oops system. It has to be propagated and requires changes in interface at often times.
+
+- OOPs draws boundaries at an entity level.
+- ECS draws boundaries at the system level. Entities are free to access by anyone.
+
+[source: youtube](https://www.youtube.com/watch?v=wo84LFzx5nI&t=6832s)
+
+`Data | logic` -> are completely separate -> this is not tree structure at all.
+
+**The Big OOPs, 37 year mistake:**
+
+> "A compile time hierarchy of encapsulation that matches the domain model"
+
+- template <datatype> -> use a class with your own type - okay.
+- `virtual functions (typ *ptr)` - without virtual the object assumes type typ. methods of derived class of this 'typ' cannot be accessed - because it is fixed during compile time. with virtual, the method of the actual object we pass is accessed instead of the one defined in the typ base class.
+
+ECS is more suitable for rigid, well defined systems. Like games, where the universe and how each piece interacts are well understood and known. 
+TODO: (but it that 100% true? - when to use which and when does it makes sense???)
+
+#### cpp example
+
+> [!NOTE]
+>
+> 1. Each system has access to all objects - all entities.
+> 2. you have type safety.
+> 3. just make the business logic and done. [MIND BLOWING]
+
+```cpp
+struct Transform {
+    Vector3 position;
+    Vector3 velocity;
+};
+
+struct Health {
+    int currentHealth;
+    int maxHealth;
+};
+
+struct PlayerInput {
+    bool moveLeft, moveRight, jump;
+};
+
+struct EnemyAI {
+    float attackCooldown;
+    float detectionRadius;
+};
+
+struct Renderable {
+    ModelID modelId;
+    TextureID textureId;
+};
+
+// Entity is just an ID
+using Entity = uint32_t;
+
+// Component storage
+class ComponentManager {
+    std::unordered_map<Entity, Transform> transforms;
+    std::unordered_map<Entity, Health> healths;
+    std::unordered_map<Entity, PlayerInput> playerInputs;
+    std::unordered_map<Entity, EnemyAI> enemyAIs;
+    std::unordered_map<Entity, Renderable> renderables;
+
+public:
+    template<typename T>
+    void AddComponent(Entity entity, const T& component);
+
+    template<typename T>
+    T& GetComponent(Entity entity);
+
+    template<typename T>
+    bool HasComponent(Entity entity) const;
+};
+
+// Systems operate on component data - NO virtual functions
+class MovementSystem {
+public:
+    void Update(ComponentManager& components, float deltaTime) {
+        // Process all entities with Transform components
+        for (auto& [entity, transform] : components.GetComponents<Transform>()) {
+            transform.position += transform.velocity * deltaTime;
+        }
+    }
+};
+
+class PlayerInputSystem {
+public:
+    void Update(ComponentManager& components, float deltaTime) {
+        // Process entities with both PlayerInput AND Transform
+        auto& inputs = components.GetComponents<PlayerInput>();
+        auto& transforms = components.GetComponents<Transform>();
+
+        for (auto& [entity, input] : inputs) {
+            if (transforms.find(entity) != transforms.end()) {
+                auto& transform = transforms[entity];
+
+                if (input.moveLeft) transform.velocity.x = -5.0f;
+                if (input.moveRight) transform.velocity.x = 5.0f;
+                if (input.jump) transform.velocity.y = 10.0f;
+            }
+        }
+    }
+};
+
+class EnemyAISystem {
+public:
+    void Update(ComponentManager& components, float deltaTime) {
+        auto& ais = components.GetComponents<EnemyAI>();
+        auto& transforms = components.GetComponents<Transform>();
+
+        for (auto& [entity, ai] : ais) {
+            if (transforms.find(entity) != transforms.end()) {
+                // AI logic here - no virtual functions
+                UpdateAI(ai, transforms[entity], deltaTime);
+            }
+        }
+    }
+
+private:
+    void UpdateAI(EnemyAI& ai, Transform& transform, float deltaTime) {
+        // Direct function call - no virtual dispatch
+        ai.attackCooldown -= deltaTime;
+        // ... AI logic
+    }
+};
+
+class RenderSystem {
+public:
+    void Render(ComponentManager& components) {
+        auto& renderables = components.GetComponents<Renderable>();
+        auto& transforms = components.GetComponents<Transform>();
+
+        // Batch process all renderable entities
+        for (auto& [entity, renderable] : renderables) {
+            if (transforms.find(entity) != transforms.end()) {
+                DrawModel(renderable.modelId, transforms[entity].position);
+            }
+        }
+    }
+};
+
+// Game loop - systems process components directly
+class Game {
+    ComponentManager components;
+    MovementSystem movementSystem;
+    PlayerInputSystem inputSystem;
+    EnemyAISystem aiSystem;
+    RenderSystem renderSystem;
+
+public:
+    void Update(float deltaTime) {
+        // Direct system calls - no virtual functions
+        inputSystem.Update(components, deltaTime);
+        aiSystem.Update(components, deltaTime);
+        movementSystem.Update(components, deltaTime);
+    }
+
+    void Render() {
+        renderSystem.Render(components);
+    }
+
+    Entity CreatePlayer() {
+        Entity player = GetNextEntityID();
+        components.AddComponent(player, Transform{{0, 0, 0}, {0, 0, 0}});
+        components.AddComponent(player, Health{100, 100});
+        components.AddComponent(player, PlayerInput{});
+        components.AddComponent(player, Renderable{PLAYER_MODEL, PLAYER_TEXTURE});
+        return player;
+    }
+
+    Entity CreateEnemy() {
+        Entity enemy = GetNextEntityID();
+        components.AddComponent(enemy, Transform{{10, 0, 0}, {0, 0, 0}});
+        components.AddComponent(enemy, Health{50, 50});
+        components.AddComponent(enemy, EnemyAI{0.0f, 5.0f});
+        components.AddComponent(enemy, Renderable{ENEMY_MODEL, ENEMY_TEXTURE});
+        return enemy;
+    }
+};
+
+```
+
+#### golang example
+
+```go
+type FileReader struct {
+    filename string
+}
+
+func NewFileReader(filename string) *FileReader {
+    return &FileReader{filename: filename
+}
+
+// Implements Read
+func (fr *FileReader) Read(p []byte) (int, error) {
+    file, err := os.Open(fr.filename)
+    if err != nil {
+        return 0, err
+    }
+    defer file.Close()
+
+    n, err = file.Read(p)
+    return n, nil
+}
+
+func main() {
+    reader := NewFileReader("example.txt")
+
+    // As long as reader has `Read` defined, this is valid - polymorphism
+    _, err := io.ReadAll(reader)
+    if err != nil {
+        fmt.Println("Error reading file:", err)
+        return
+    }
+
+    fmt.Println("File contents read successfully")
+}
+```
