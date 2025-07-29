@@ -35,19 +35,38 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
     ref: [mock http request](https://gochronicles.com/benchmark-restful-apis/)
 19. write to a file without editor
 20. `| sort -k4,4n` - sort based on the numbers present in position 4 of any line. add `r` next to `4n` to reverse
-21. gnu core util's date. 
+21. gnu core util's date.
     - `date -d '2pm ist'`
     - `date -d 'next friday 4:30am utc'`
     - `date -d '3 weeks ago 2pm pt'`
     - `date -d 'now + 1 month'`
     - `date -d '2025-12-31 18:45 + 7 days`
-22. `pastel color pink` - get color, mix colors, complement and many more: [pastel](https://github.com/sharkdp/pastel) 
+22. `pastel color pink` - get color, mix colors, complement and many more: [pastel](https://github.com/sharkdp/pastel)
 
 ```sh
-cat << EOF > file.ext 
+cat << EOF > file.ext
 put contents to a file without a editor....
 EOF
 ```
+
+## jq: Quick Reference
+
+- `jq 'map({id, key1})'`
+
+| Operation     | Syntax              | Example                       |
+| ------------- | ------------------- | ----------------------------- |
+| Access field  | `.field`            | `.name`                       |
+| Array index   | `.[0]`              | `.[0].name`                   |
+| Array slice   | `.[1:3]`            | `.[1:3]`                      |
+| Iterate array | `.[]`               | `.[].name`                    |
+| Filter        | `select(condition)` | `select(.age > 25)`           |
+| Map           | `map(expression)`   | `map(.name)`                  |
+| Map (nested)  | `map(expression)`   | `map({id, key1})`             |
+| Map (rename)  | `map(expression)`   | `map({id: .id, key1: .key1})` |
+| Sort          | `sort_by(.field)`   | `sort_by(.age)`               |
+| Group         | `group_by(.field)`  | `group_by(.city)`             |
+| Length        | `length`            | `.hobbies \| length`          |
+| Unique        | `unique`            | `.tags \| unique`             |
 
 ## Nvidia card status
 
@@ -358,8 +377,8 @@ go-mtpfs ~/android
 rsync -ah --progress src dest
 ```
 
-69-mtp.rules: 
+69-mtp.rules:
+
 ```
 SUBSYSTEM=="usb", ATTR{idVendor}=="xxxx", ATTR{idProduct}=="xxxx", MODE="0666", GROUP="plugdev", SYMLINK+="libmtp"
 ```
-

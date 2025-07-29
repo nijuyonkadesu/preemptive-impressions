@@ -96,3 +96,10 @@ package config_utils
 ---
 
 # Steps for setting up a project
+
+# Testing
+
+```go
+go test ./...
+go test ./internal/headers/
+```
