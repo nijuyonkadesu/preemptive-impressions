@@ -382,3 +382,6 @@ rsync -ah --progress src dest
 ```
 SUBSYSTEM=="usb", ATTR{idVendor}=="xxxx", ATTR{idProduct}=="xxxx", MODE="0666", GROUP="plugdev", SYMLINK+="libmtp"
 ```
+
+## Quake Mode in Windows terminal
+- borderless window mode: win key + backtic
