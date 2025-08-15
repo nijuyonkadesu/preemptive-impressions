@@ -201,3 +201,13 @@ sudo k8s enable load-balancer
 ```
 
 - TODO: expose all ingress in the machine as it is
+
+# rclone
+
+```sh
+sudo snap install rclone
+rclone config 
+# follow all the steps, then use --dry-run, and rclone sync command to sync. 
+# enable encryption by running rclone config > choose > crypt
+rclone copy big-compute/Dockerfile gdrive:testing/
+```

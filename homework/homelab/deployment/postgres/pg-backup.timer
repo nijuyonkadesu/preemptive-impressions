@@ -1,0 +1,10 @@
+[Unit]
+Description=Portable Postgres Backup
+
+[Timer]
+OnCalendar=2w
+AccuracySec=1h 
+
+[Install]
+WantedBy=timers.target
+

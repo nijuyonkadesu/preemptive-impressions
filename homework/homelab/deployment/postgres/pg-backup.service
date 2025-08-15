@@ -1,0 +1,17 @@
+[Unit]
+Description=Portable Postgres Backup
+Requires=portable-postgres.service
+After=portable-postgres.service
+
+[Service]
+Type=oneshot
+User=shichika
+ExecStart=/home/shichika/.local/bin/pg-backup.sh
+WorkingDirectory=/tmp
+StandardOutput=journal
+StandardError=journal
+EnvironmentFile=/etc/containers/homelab/portable-postgres.env
+EnvironmentFile=/etc/containers/homelab/telegram-bot-api.env
+
+# [Install]
+# WantedBy=multi-user.target
