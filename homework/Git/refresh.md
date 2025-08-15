@@ -8,6 +8,7 @@ git diff --staged #(same as cached)
 git commit -a #(automatically adds previously tracked file for commit)
 git rm log/\*.log #removes from tracking further (file is still in machine) (glob pattern)
 git log -S func_name #(find the last commit that added or removed a reference to a specific function)
+git rm -r --cached /path/to/folder # remove tracked files from git, but keep them in local
 ```
 
 ## .gitignore
