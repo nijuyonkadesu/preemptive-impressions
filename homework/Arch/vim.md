@@ -167,6 +167,7 @@ Replace with confirmation: `:s/search/replacement/gc`
 - [https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file](https://vi.stackexchange.com/questions/5941/summary-of-functions-in-current-file)
 
 - `:set spell` do spell checks on text
+- `:set linebreak` - wraps entire word around to the next line. (unline `wrap` which breaks the word)
 
 ## Redirect search results to a new buffer
 

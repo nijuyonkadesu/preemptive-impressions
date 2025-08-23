@@ -2,7 +2,7 @@
 Description=Portable Postgres Backup
 
 [Timer]
-OnCalendar=2w
+OnCalendar=3d
 AccuracySec=1h 
 
 [Install]
