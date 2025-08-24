@@ -211,3 +211,21 @@ rclone config
 # enable encryption by running rclone config > choose > crypt
 rclone copy big-compute/Dockerfile gdrive:testing/
 ```
+
+## Firewall
+
+```sh
+sudo ufw status verbose
+# SSH
+sudo ufw allow 22/tcp
+# Tailscale network interface
+sudo ufw allow in on tailscale0
+# Samba whitelist connections from localnetwork
+sudo ufw allow from 192.168.29.0/24 to any port 445 proto tcp
+# Test server - expose machine
+sudo ufw allow 22/tcp
+
+# Managing Rules
+sudo ufw status numbered
+sudo ufw delete 3
+```

@@ -6,7 +6,7 @@
 3. Only 100G is used. plan for the remaining storage... [DONE]
 4. flash bios X [DONE]
 5. backups setup
-6. openvpn? (physical firewall, site-to-site vpn, inc network knowledge)
+6. openvpn - Big failure. my isp does not accept ipv6 packets, even though it provides global addressable ipv6
 7. immich
 8. metallb
 9. A simple server / blog site with public certificates
