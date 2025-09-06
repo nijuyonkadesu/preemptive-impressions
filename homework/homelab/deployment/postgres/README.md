@@ -60,13 +60,10 @@ sudo systemctl start pg-backup.service
 # TODO: Rootless + autostart
 
 ```sh
-# Add user to necessary groups
-sudo usermod -aG containers shichika
+# docs: https://www.redhat.com/en/blog/container-systemd-persist-reboot
+loginctl show-user shichika | grep Linger
+loginctl enable-linger shichika
 
-# Configure subuid/subgid for rootless containers
-sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 shichika
-
-# Enable lingering so user services can run without login
-sudo loginctl enable-linger shichika
-
+mkdir -p ~/.config/systemd/user/
+mkdir -p ~/.config/containers/systemd/
 ```
