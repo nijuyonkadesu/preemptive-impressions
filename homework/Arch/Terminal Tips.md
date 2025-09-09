@@ -374,7 +374,7 @@ mtp detect
 # note down the vendor / device ids, add to udev rules
 sudo nvim /etc/udev/rules.d/69-mtp.rules
 go-mtpfs ~/android
-rsync -ah --progress src dest
+rsync -ah --info=progress2 src dest
 ```
 
 69-mtp.rules:
