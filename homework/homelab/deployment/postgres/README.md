@@ -21,6 +21,7 @@ docker run -d \
 
 ```sh
 docker exec -it postgres psql -U fine -d db
+sudo podman exec -it systemd-portable-postgres bash
 ```
 
 # Backup

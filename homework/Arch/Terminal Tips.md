@@ -385,3 +385,13 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="xxxx", ATTR{idProduct}=="xxxx", MODE="0666", 
 
 ## Quake Mode in Windows terminal
 - borderless window mode: win key + backtic
+
+## RSYNC
+
+In your termux (android), install rsyc `apt update && apt install rsync`, and run these:
+
+```sh
+termux-setup-storage
+rsync -azahP --info=progress2 -e ssh storage/shared/Reddit/ shichika@ustable:/srv/samba/share/temp/Reddit/
+rsync -azahP --info=progress2 -e ssh shichika@ustable:/srv/samba/share/temp/Reddit/  storage/shared/Reddit/
+```
