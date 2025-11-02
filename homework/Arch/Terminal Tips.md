@@ -384,6 +384,7 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="xxxx", ATTR{idProduct}=="xxxx", MODE="0666", 
 ```
 
 ## Quake Mode in Windows terminal
+
 - borderless window mode: win key + backtic
 
 ## RSYNC
@@ -394,4 +395,51 @@ In your termux (android), install rsyc `apt update && apt install rsync`, and ru
 termux-setup-storage
 rsync -azahP --info=progress2 -e ssh storage/shared/Reddit/ shichika@ustable:/srv/samba/share/temp/Reddit/
 rsync -azahP --info=progress2 -e ssh shichika@ustable:/srv/samba/share/temp/Reddit/  storage/shared/Reddit/
+```
+
+## scrcpy
+
+```
+mod = left(Alt)
+mod + o  turn off screen
+mod + shift  + o turn on screen
+
+#50 ms
+--video-buffer=50
+
+-K
+Physical Keyboard (linux)
+--otg --hid-keyboard
+otg keyboard (windows)
+```
+
+[scrcpy](https://github.com/Genymobile/scrcpy)
+
+```
+mod = Alt (left)
+Alt + LEFT / RIGHT = change orientation
+
+scrcpy --display-buffer=50 --window-borderless --window-x=0 --window-y=0 --window-height=1080
+
+# adb over tcp
+scrcpy --tcpip --window-borderless --window-x=0 --window-y=0 --window-height=1080 -e --hid-keyboard=uhid
+```
+
+### use device microphone on laptop - with VB-Audio
+
+```sh
+.\scrcpy.exe --no-video --audio-source=mic-voice-communication --audio-codec=opus
+```
+
+**Why `VOICE_COMMUNICATION` is What You Want:**
+When a standard app asks for the microphone, it often gets the raw (UNPROCESSED) or default (MIC) audio feed.
+When an app specifies the `AudioSource.VOICE_COMMUNICATION` stream, it's telling the Android system, "I am a voice call app (like `VoIP` or a phone call)."
+
+In response, the phone's operating system automatically applies its built-in, `hardware-accelerated (OEM)` processing—like **acoustic echo cancellation (AEC)** and **noise suppression (NS)** before handing the clean audio to the app.
+This is the method scrcpy uses, so you get the benefit of all your phone manufacturer's audio engineering, not a generic software filter.
+
+### interactive screen sharing
+
+```sh
+.\scrcpy.exe --video-buffer=50 --window-borderless --window-x=0 --window-y=0 --window-height=1080;
 ```
