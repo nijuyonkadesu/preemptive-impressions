@@ -115,6 +115,13 @@ eg: d 10 j > removes 10 lines
 - ([https://learnbyexample.github.io/tips/vim-tip-1/](https://learnbyexample.github.io/tips/vim-tip-1/))
 - `ctrl+v` multiple cursor `->` `I` insert (type) and press escape
 
+## normal mode commandline
+
+[ref](https://youtu.be/xGkL2N8w0H4?t=492) 
+
+- `:'<,'>norm _i{src=f,i}` - to get `^[` use Ctrl+v and then press escape. This command simply adds a flower bracked for the selected range. `_i` goes to the first character apart from whitespace and goes to insert mode. 
+- `:'<,'>norm I{src=f,i}`
+
 ## Windo diffs
 
 - `_wt` - alias for :windo diff this
@@ -125,6 +132,7 @@ eg: d 10 j > removes 10 lines
 - Highlight with `v`
 - press `':'  `
 - `s/\(\w.*\) `
+- TODO: use capture group to do substitution (slash 1 on first match) to do complex stuffs ig
 
 Replace with confirmation: `:s/search/replacement/gc`
 
