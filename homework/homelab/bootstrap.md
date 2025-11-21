@@ -216,16 +216,24 @@ rclone copy big-compute/Dockerfile gdrive:testing/
 
 ```sh
 sudo ufw status verbose
+sudo ufw app list
+
 # SSH
 sudo ufw allow 22/tcp
+sudo ufw allow from 192.168.29.0/24 to any app OpenSSH
+
 # Tailscale network interface
 sudo ufw allow in on tailscale0
+
 # Samba whitelist connections from localnetwork
-sudo ufw allow from 192.168.29.0/24 to any port 445 proto tcp
+sudo ufw allow from 192.168.29.0/24 to any port 445 proto tcp # almost same as the below
+sudo ufw allow from 192.168.29.0/24 to any app Samba
+
 # Test server - expose machine
 sudo ufw allow 22/tcp
 
 # Managing Rules
 sudo ufw status numbered
 sudo ufw delete 3
+sudo ufw reload
 ```
