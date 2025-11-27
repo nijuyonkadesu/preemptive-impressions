@@ -320,9 +320,19 @@ git diff --find-copies-harder -B -C
 :Gdiff 0956ab904
 :Gdiff @
 
+# Flow: list all the files in quickfix list -> open one of them, and run difftool vertical split. 
+# set modifiable if you want to do codeformat on both sides for easy comparison
+:G difftool --name-only main
+:Gvdiffsplit main
+:set modifiable
+
 # with delta & gh cli installed,
 # https://github.com/cli/cli/issues/6371
 gh pr diff 6389 | delta -s
+gh status # checks all repo, try it
+gh pr status # lists out my PRs in the current repo
+gh pr checkout 488 # checkout the PR branch
+
 ```
 
 ## Cherrypick
