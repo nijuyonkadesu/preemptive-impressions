@@ -319,6 +319,10 @@ git diff --find-copies-harder -B -C
 ```bash
 :Gdiff 0956ab904
 :Gdiff @
+
+# with delta & gh cli installed,
+# https://github.com/cli/cli/issues/6371
+gh pr diff 6389 | delta -s
 ```
 
 ## Cherrypick
