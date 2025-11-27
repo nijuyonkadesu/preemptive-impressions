@@ -24,6 +24,20 @@ brew install iterm2 # backup just incase
 brew install tgpt
 sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk \
      /Library/Java/JavaVirtualMachines/openjdk.jdk
+
+brew install lazydocker
+brew install dive
+brew install uv
+brew install flameshot
+brew install ubuntu/microk8s/microk8s
+brew install golang 
+brew install epenssl
+brew install baobab
+brew install gh
+brew install git-delta
+brew install watch
+brew install yq
+brew install jq
 ```
 
 Refer [[Arch/Terminal-Tips#kitty]] for kitty setup.
