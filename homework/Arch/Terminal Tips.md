@@ -49,6 +49,20 @@ put contents to a file without a editor....
 EOF
 ```
 
+### Prevent sleep temporarily: 
+
+Ctrl + C terminate.
+
+```sh
+
+# for mac
+caffinate -d 
+
+# for linux
+systemd-inhibit --what=idle:sleep:shutdown sleep infinity
+```
+
+
 ## jq: Quick Reference
 
 - `jq 'map({id, key1})'`
