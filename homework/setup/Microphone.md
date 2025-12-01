@@ -58,14 +58,52 @@ Maintain the same level of volume, high to low, and low to high. Not killing you
 
 ---
 
-Linux's native format is VT2, so VST pluging do not work here. Install `Clara` for hosting plugins and audio routing - closest equivalent of `Cantabile Lite` from windows.
+Linux's native format is VT2, so VST pluging do not work here. Install `Carla` for hosting plugins and audio routing - closest equivalent of `Cantabile Lite` from windows. Require pipewire to be installed and set as default.
 Equivalent of Reaper's VST plugins: 
 
 1. noise gate: x42-gate from x42 plugins
-2. noise subtraction: Calf Filter
+2. noise subtraction: noise-repellent, lsp-plugins. tonelib-noise-reducer. download `.deb` and install with debtap. [use this guide](https://www.baeldung.com/linux/arch-install-deb-package) 
 2. EQ: x42-eq, LSP Parametric EQ, Calf EQ
 3. Compressor: x42-dynamics, LSP compressor
 
-TODO: dependencies (pipewire / jack), what to do about pulseaudio?
-TODO: install Clara, and try these
-TODO: voicemeeter potato equivalent is not needed in linux?
+
+> [!WARNING]
+> Input souces and output can disappear after a disconnect - this is normal in pipewire. To solve the issue, create a virtual sink ([docs](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Virtual-Devices#create-a-sink)) and work with them in Carla. Also check out "Using LADSPA, LV2 and VST plugins" section in [arch wiki](https://wiki.archlinux.org/title/PipeWire). Oh, also read [this](https://forum.endeavouros.com/t/how-to-configure-pipewire-carla-so-that-it-remembers-the-configuration/36219/12) to know more about session issue.
+
+```sh
+# plugin host
+yay -S carla 
+
+# plugins
+yay -S calf x42-plugins
+sudo pacman -S noise-repellent lsp-plugins
+mkdir -p ~/.config/pipewire/pipewire.conf.d/
+nvim 10-default-null-sink.conf
+```
+
+
+TODO: add pics for both linux and windows
+TODO: maybe add these sinks in dotfiles too
+
+### sink confs
+
+1. Create a virtual sink
+2. Create a virtual source
+3. link the virtual source to the real mic using `pw-link`
+4. ahhhh sessions & links are not persisted by default?? need wireplumber now!?
+
+```conf
+
+
+```
+
+```sh
+systemctl --user restart pipewire
+pw-link -i
+pw-link -o
+
+# find your real devices and link them - wait, don't do this - use wireplumber
+pw-link alsa_input.usb-3142_fifine_Microphone-00.analog-stereo:capture_FL clean-mic-line-in:input_FL
+pw-link alsa_input.usb-3142_fifine_Microphone-00.analog-stereo:capture_FR clean-mic-line-in:input_FR
+
+```
