@@ -1,3 +1,4 @@
+# Windows Setup
 1. Install voicemeter [link](https://vb-audio.com/Voicemeeter/potato.htm) 
 2. Reaper 64bit VST plugins [link](https://www.reaper.fm/reaplugs/) 
 3. reboot your system
@@ -19,7 +20,7 @@ Adjust this based on your room's noise floor. This basically cuts off audio belo
 - Wet: Processed output %
 - Dry: Unprocessed output %, recommended to set this up a little, to assist with pre-open, to avoid cutting off frontend of your voice. (-25dB)
 
-# 1.b. Noise Subraction (reafir)
+## 1.b. Noise Subraction (reafir)
 
 - Records the ambient noise, and subtracts it from the source
 - Choose subtract from the dropdown
@@ -54,3 +55,17 @@ Maintain the same level of volume, high to low, and low to high. Not killing you
 - Good gain such that signal to noise ratio is the highest, so that noise can be cleaned up.
 - 10 o'clock: 
 - target: -15dB
+
+---
+
+Linux's native format is VT2, so VST pluging do not work here. Install `Clara` for hosting plugins and audio routing - closest equivalent of `Cantabile Lite` from windows.
+Equivalent of Reaper's VST plugins: 
+
+1. noise gate: x42-gate from x42 plugins
+2. noise subtraction: Calf Filter
+2. EQ: x42-eq, LSP Parametric EQ, Calf EQ
+3. Compressor: x42-dynamics, LSP compressor
+
+TODO: dependencies (pipewire / jack), what to do about pulseaudio?
+TODO: install Clara, and try these
+TODO: voicemeeter potato equivalent is not needed in linux?
