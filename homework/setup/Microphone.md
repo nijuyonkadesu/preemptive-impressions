@@ -345,3 +345,7 @@ wireplumber.profiles = {
 ```
 
 
+## Easier way and sanity friendly way to setup mic: 
+- Pavucontrol
+- easy effects
+
