@@ -329,9 +329,10 @@ Dec 05 01:49:50 sus wireplumber[140293]: Link #2 created and activated
 51-usb-mic-autoconnect.conf
 ```conf
 -- auto link USB mic to virtual source automatically, and wireplumber remembers it
+-- hindsight, not remember, it reconnects everytime 🤓
 wireplumber.components = [
   {
-    name = auto-link-usb-mic.lua 
+    name = /home/guts/.config/wireplumber/scripts/auto-link-usb-mic.lua 
     type = script/lua
     provides = custom.auto-link-usb-mic
   }
