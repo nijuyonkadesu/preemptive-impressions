@@ -92,10 +92,6 @@ TODO: maybe add these sinks in dotfiles too
 3. link the virtual source to the real mic using `pw-link`
 4. ahhhh sessions & links are not persisted by default?? need wireplumber now!?
 
-```conf
-
-
-```
 
 ```sh
 systemctl --user restart pipewire
@@ -106,4 +102,246 @@ pw-link -o
 pw-link alsa_input.usb-3142_fifine_Microphone-00.analog-stereo:capture_FL clean-mic-line-in:input_FL
 pw-link alsa_input.usb-3142_fifine_Microphone-00.analog-stereo:capture_FR clean-mic-line-in:input_FR
 
+# wiki: https://wiki.archlinux.org/title/WirePlumber
+# list all pipewire managed objects - sources, sinks, etc, find the ID, and use it in inspect command
+wpctl status
+wpctl inspect 98
+# note down `node.nick = "fifine Microphone"` or some other property for wireplumber matching
+
+# check default wireplumber .lua files under /usr/share/wireplumber/scripts/linking/
+mkdir -p ~/.config/wireplumber/wireplumber.conf.d/
+nvim ~/.config/wireplumber/wireplumber.conf.d/auto-link-usb-mic.conf
+
+# paste the conf contents & restart wireplumber or, run wpexec manually
+wpexec ~/.config/wireplumber/scripts/auto-link-usb-mic.lua
+
+systemctl --user restart wireplumber.service 
+
+# try qpwgraph on the side to visualize the links, and see if lua script actually works
+sudo pacman -S qpwgraph
 ```
+
+auto-link-usb-mic.conf
+
+```lua
+-- Make links GLOBAL (remove 'local') so they persist!
+r_link = nil
+l_link = nil
+mic_node = nil
+target_node = nil
+
+-- Simplified: Match by media class and check node name in the callback
+mic_om = ObjectManager {
+    Interest {
+        type = "node",
+        Constraint { "media.class", "equals", "Audio/Source" },
+    }
+}
+
+target_om = ObjectManager {
+    Interest {
+        type = "node",
+        Constraint { "node.name", "matches", "clean-mic-line-in" },
+    }
+}
+
+-- ObjectManager to monitor existing links
+link_om = ObjectManager {
+    Interest {
+        type = "link"
+    }
+}
+
+function checkAndLink()
+    -- Check if links already exist and are valid
+    if l_link and l_link["bound-id"] and l_link["bound-id"] ~= -1 and
+       r_link and r_link["bound-id"] and r_link["bound-id"] ~= -1 then
+        print("Fifine Script: Links already exist (created by us), skipping...")
+        return
+    end
+
+    if mic_node and target_node then
+        local mic_id = mic_node["bound-id"]
+        local target_id = target_node["bound-id"]
+        
+        if not mic_id or not target_id then
+            print("Fifine Script: Nodes not bound yet...")
+            return
+        end
+        
+        -- CHECK IF LINKS ALREADY EXIST between these nodes!
+        local existing_link_count = 0
+        for link in link_om:iterate() do
+            local out_node = tonumber(link.properties["link.output.node"])
+            local in_node = tonumber(link.properties["link.input.node"])
+            if out_node == mic_id and in_node == target_id then
+                existing_link_count = existing_link_count + 1
+                print("Fifine Script: Found existing link between nodes!")
+            end
+        end
+        
+        if existing_link_count >= 2 then
+            print("Fifine Script: Both stereo links already exist (created elsewhere), nothing to do!")
+            return
+        end
+        
+        print("Fifine Script: Nodes confirmed.")
+        print("   > Source: " .. (mic_node.properties["node.nick"] or mic_node.properties["node.name"]))
+        print("   > Target: " .. target_node.properties["node.name"])
+        print("   > Existing links: " .. existing_link_count .. "/2")
+        print("   > Action: Creating " .. (2 - existing_link_count) .. " link(s)...")
+
+        -- Only create links we need
+        if existing_link_count < 1 then
+            l_link = Link("link-factory", {
+                ["link.output.node"] = mic_id,
+                ["link.input.node"] = target_id,
+                ["object.linger"] = 1
+            })
+            
+            -- Use simple activation without callback!
+            l_link:activate(1)
+            print("Link #1 created and activated")
+        end
+        
+        if existing_link_count < 2 then
+            r_link = Link("link-factory", {
+                ["link.output.node"] = mic_id,
+                ["link.input.node"] = target_id,
+                ["object.linger"] = 1
+            })
+            
+            -- Use simple activation without callback!
+            r_link:activate(1)
+            print("Link #2 created and activated")
+        end
+    else
+        local mic_status = mic_node and "Found" or "MISSING"
+        local target_status = target_node and "Found" or "MISSING"
+        print("Fifine Script: Waiting... Mic: [" .. mic_status .. "] | Target: [" .. target_status .. "]")
+    end
+end
+
+target_om:connect("object-added", function(_, node)
+    print("Target added: " .. node.properties["node.name"])
+    target_node = node
+    checkAndLink()
+end)
+
+target_om:connect("object-removed", function(_, node)
+    if target_node == node then
+        print("Target removed: " .. node.properties["node.name"])
+        target_node = nil
+        l_link = nil
+        r_link = nil
+    end
+end)
+
+mic_om:connect("object-added", function(_, node)
+    local node_name = node.properties["node.name"] or "UNNAMED"
+    print("Mic OM caught: " .. node_name)
+    
+    -- Only set mic_node if it matches our Fifine mic
+    if node_name:match("3142_fifine_Microphone") then
+        print("Mic added: " .. (node.properties["node.nick"] or node.properties["node.name"]))
+        mic_node = node
+        checkAndLink()
+    end
+end)
+
+mic_om:connect("object-removed", function(_, node)
+    if mic_node == node then
+        print("Mic removed: " .. (node.properties["node.nick"] or node.properties["node.name"]))
+        mic_node = nil
+        l_link = nil
+        r_link = nil
+    end
+end)
+
+-- Add debug logging to see ALL nodes
+debug_om = ObjectManager {
+    Interest {
+        type = "node",
+        Constraint { "media.class", "equals", "Audio/Source" }
+    }
+}
+
+debug_om:connect("object-added", function(_, node)
+    print("DEBUG: Audio source node added: " .. (node.properties["node.name"] or "UNNAMED"))
+end)
+
+debug_om:activate()
+link_om:activate()
+target_om:activate()
+mic_om:activate()
+
+-- CRITICAL: Check for nodes that ALREADY EXIST before the script loaded!
+Core.sync(function()
+    print("Fifine Script: Checking for existing nodes after activation...")
+    
+    -- Check if target already exists
+    for target in target_om:iterate() do
+        if not target_node then
+            print("Found existing target: " .. target.properties["node.name"])
+            target_node = target
+        end
+    end
+    
+    -- Check if mic already exists
+    for node in mic_om:iterate() do
+        local node_name = node.properties["node.name"] or "UNNAMED"
+        if node_name:match("3142_fifine_Microphone") and not mic_node then
+            print("Found existing mic: " .. node_name)
+            mic_node = node
+        end
+    end
+    
+    -- Try to link if both exist
+    checkAndLink()
+end)
+
+print("Fifine Script: Loaded and monitoring for nodes...")
+```
+
+logs, proof of working:
+```log
+Dec 05 01:49:45 sus wireplumber[140293]: wp-device: SPA handle 'api.libcamera.enum.manager' could not be loaded; is it installed?
+Dec 05 01:49:45 sus wireplumber[140293]: s-monitors-libcamera: PipeWire's libcamera SPA plugin is missing or broken. Some camera types may not be supported.
+Dec 05 01:49:45 sus wireplumber[140293]: Fifine Script: Loaded and monitoring for nodes...
+Dec 05 01:49:45 sus wireplumber[140293]: Target added: clean-mic-line-in
+Dec 05 01:49:45 sus wireplumber[140293]: Fifine Script: Waiting... Mic: [MISSING] | Target: [Found]
+Dec 05 01:49:45 sus wireplumber[140293]: Fifine Script: Checking for existing nodes after activation...
+Dec 05 01:49:45 sus wireplumber[140293]: Fifine Script: Waiting... Mic: [MISSING] | Target: [Found]
+Dec 05 01:49:45 sus wireplumber[140293]: DEBUG: Audio source node added: alsa_input.pci-0000_05_00.6.analog-stereo
+Dec 05 01:49:45 sus wireplumber[140293]: Mic OM caught: alsa_input.pci-0000_05_00.6.analog-stereo
+Dec 05 01:49:50 sus wireplumber[140293]: DEBUG: Audio source node added: alsa_input.usb-3142_fifine_Microphone-00.analog-stereo
+Dec 05 01:49:50 sus wireplumber[140293]: Mic OM caught: alsa_input.usb-3142_fifine_Microphone-00.analog-stereo
+Dec 05 01:49:50 sus wireplumber[140293]: Mic added: fifine Microphone
+Dec 05 01:49:50 sus wireplumber[140293]: Fifine Script: Nodes confirmed.
+Dec 05 01:49:50 sus wireplumber[140293]:    > Source: fifine Microphone
+Dec 05 01:49:50 sus wireplumber[140293]:    > Target: clean-mic-line-in
+Dec 05 01:49:50 sus wireplumber[140293]:    > Existing links: 0/2
+Dec 05 01:49:50 sus wireplumber[140293]:    > Action: Creating 2 link(s)...
+Dec 05 01:49:50 sus wireplumber[140293]: Link #1 created and activated
+Dec 05 01:49:50 sus wireplumber[140293]: Link #2 created and activated
+```
+
+51-usb-mic-autoconnect.conf
+```conf
+-- auto link USB mic to virtual source automatically, and wireplumber remembers it
+wireplumber.components = [
+  {
+    name = auto-link-usb-mic.lua 
+    type = script/lua
+    provides = custom.auto-link-usb-mic
+  }
+]
+
+wireplumber.profiles = {
+  main = {
+    custom.auto-link-usb-mic = required
+  }
+}
+```
+
+
