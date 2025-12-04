@@ -81,6 +81,41 @@ mkdir -p ~/.config/pipewire/pipewire.conf.d/
 nvim 10-default-null-sink.conf
 ```
 
+10-default-null-sink.conf
+```conf
+context.objects = [
+    {   factory = adapter
+        args = {
+            factory.name     = support.null-audio-sink
+            node.name        = "clean-mic-line-in"
+            media.class      = Audio/Source/Virtual
+            audio.position   = [ FL FR ]
+            monitor.channel-volumes = true
+            monitor.passthrough = true
+            adapter.auto-port-config = {
+                mode = dsp
+                monitor = true
+                position = preserve
+            }
+        }
+    }
+    {   factory = adapter
+        args = {
+            factory.name     = support.null-audio-sink
+            node.name        = "clean-mic-line-out"
+            media.class      = Audio/Sink
+            audio.position   = [ FL FR ]
+            monitor.channel-volumes = true
+            monitor.passthrough = true
+            adapter.auto-port-config = {
+                mode = dsp
+                monitor = true
+                position = preserve
+            }
+        }
+    }
+]
+```
 
 TODO: add pics for both linux and windows
 TODO: maybe add these sinks in dotfiles too
@@ -121,8 +156,7 @@ systemctl --user restart wireplumber.service
 sudo pacman -S qpwgraph
 ```
 
-auto-link-usb-mic.conf
-
+auto-link-usb-mic.lua
 ```lua
 -- Make links GLOBAL (remove 'local') so they persist!
 r_link = nil
