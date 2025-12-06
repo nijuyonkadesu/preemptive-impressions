@@ -8,7 +8,15 @@
 
 # Notes:
 
-## 1.a. Noise Gate (reagate)
+## 1.a. Noise Subraction (reafir)
+
+- Records the ambient noise, and subtracts it from the source
+- Choose subtract from the dropdown
+
+> [!CAUTION]
+> Cure can be worse than the disease, if you overdo noise subtraction, by artificially making your chair creek or other common noises, you'll end up affecting the sound of your own voice. And that is not good.
+
+## 1.b. Noise Gate (reagate)
 
 Adjust this based on your room's noise floor. This basically cuts off audio below a certain threshold you set. 
 
@@ -19,14 +27,6 @@ Adjust this based on your room's noise floor. This basically cuts off audio belo
 
 - Wet: Processed output %
 - Dry: Unprocessed output %, recommended to set this up a little, to assist with pre-open, to avoid cutting off frontend of your voice. (-25dB)
-
-## 1.b. Noise Subraction (reafir)
-
-- Records the ambient noise, and subtracts it from the source
-- Choose subtract from the dropdown
-
-> [!CAUTION]
-> Cure can be worse than the disease, if you overdo noise subtraction, by artificially making your chair creek or other common noises, you'll end up affecting the sound of your own voice. And that is not good.
 
 ## 2. EQ (reaeq)
 
@@ -58,12 +58,14 @@ Maintain the same level of volume, high to low, and low to high. Not killing you
 
 ---
 
-Linux's native format is VT2, so VST pluging do not work here. Install `Carla` for hosting plugins and audio routing - closest equivalent of `Cantabile Lite` from windows. Require pipewire to be installed and set as default.
+# Linux Setup
+
+Linux's native format is VT2, so VST pluging do not work here. Install `Carla` for hosting plugins and audio routing - closest equivalent of `Cantabile Lite` from windows. Require pipewire to be installed and set as default., or try out [Ardour](https://www.youtube.com/watch?v=bfTAKv4htDE). 
 Equivalent of Reaper's VST plugins: 
 
-1. noise gate: x42-gate from x42 plugins
-2. noise subtraction: noise-repellent, lsp-plugins. tonelib-noise-reducer. download `.deb` and install with debtap. [use this guide](https://www.baeldung.com/linux/arch-install-deb-package) 
-2. EQ: x42-eq, LSP Parametric EQ, Calf EQ
+1. noise subtraction: noise-repellent ([usage guide with Ardour](https://www.youtube.com/watch?v=LeKyGoAmbFE)), lsp-plugins. tonelib-noise-reducer. download `.deb` and install with debtap. [use this guide](https://www.baeldung.com/linux/arch-install-deb-package) 
+2. noise gate: LSP gate
+2. EQ: x42-eq, LSP Parametric EQ (x8, stereo), Calf EQ
 3. Compressor: x42-dynamics, LSP compressor
 
 
@@ -120,7 +122,7 @@ context.objects = [
 TODO: add pics for both linux and windows
 TODO: maybe add these sinks in dotfiles too
 
-### sink confs
+### Overall steps
 
 1. Create a virtual sink
 2. Create a virtual source
@@ -378,6 +380,9 @@ wireplumber.profiles = {
   }
 }
 ```
+
+> [!WARNING]
+> wireplumber docs: [link](https://lira.epac.to/DOCS/wireplumber/html/scripting/lua_api/lua_object_interest_api.html), [another-link](https://pipewire.pages.freedesktop.org/wireplumber/policies/linking.html)  
 
 
 ## Easier way and sanity friendly way to setup mic: 
