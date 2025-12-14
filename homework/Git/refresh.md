@@ -322,22 +322,42 @@ git diff --find-copies-harder -B -C
 
 # Flow: list all the files in quickfix list -> open one of them, and run difftool vertical split. 
 # set modifiable if you want to do codeformat on both sides for easy comparison
+# use Alt + J (capital J) to automatically load the diff., Alt + J simply iterates the quickfix list (with my neovim configs)
 :G difftool --name-only main
 :Gvdiffsplit main
 :set modifiable
 
-# with delta & gh cli installed,
-# https://github.com/cli/cli/issues/6371
-gh pr diff 6389 | delta -s
-gh status # checks all repo, try it
-gh pr status # lists out my PRs in the current repo
-gh pr checkout 488 # checkout the PR branch
+# populates the results in a quickfix list
+:G grep "something" -q
 
 ```
 
 ## Cherrypick
 
 `:G cherrypick -x 0956ab904` - resolve the conflicts, commit
+
+
+## github cli
+
+```sh
+# with delta & gh cli installed,
+# https://github.com/cli/cli/issues/6371
+gh pr diff 6389 | delta -s
+gh status # checks all repo, try it
+gh pr status # lists out my PRs in the current repo
+gh pr checkout 488 # checkout the PR branch
+# opens up the browser with the PR / issue for the given number
+gh browse 1312
+# shows the pr content in terminal
+gh pr view 1312
+gh pr close 1312
+
+gh pr create -B feature/another-feature
+gh run list --branch development --workflow "Name of the workflow run"
+
+gh release create
+gh release list
+```
 
 ## GPT Generated
 

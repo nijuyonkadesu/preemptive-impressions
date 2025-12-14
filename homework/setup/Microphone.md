@@ -65,8 +65,8 @@ Equivalent of Reaper's VST plugins:
 
 1. noise subtraction: noise-repellent ([usage guide with Ardour](https://www.youtube.com/watch?v=LeKyGoAmbFE)), lsp-plugins. tonelib-noise-reducer. download `.deb` and install with debtap. [use this guide](https://www.baeldung.com/linux/arch-install-deb-package) 
 2. noise gate: LSP gate
-2. EQ: x42-eq, LSP Parametric EQ (x8, stereo), Calf EQ
-3. Compressor: x42-dynamics, LSP compressor
+3. EQ: x42-eq, LSP Parametric EQ (x8, stereo), Calf EQ (or skip it if noise gate already supports adding low and high pass filter, if that's the only thing you're going to set)
+4. Compressor: LSP compressor, x42-dynamics (reaction time should not be greater than lookahead time)
 
 
 > [!WARNING]
