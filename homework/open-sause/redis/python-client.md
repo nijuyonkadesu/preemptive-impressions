@@ -20,11 +20,13 @@ Project LOC: ~155k
 # Async operations
 
 - simple url & query constructions
+```py
 def extract_expire_flags(
     ex: Optional[ExpiryT] = None,
     px: Optional[ExpiryT] = None,
     exat: Optional[AbsExpiryT] = None,
     pxat: Optional[AbsExpiryT] = None,
+```
 - other resilient configurations
 
 # Pipelines
@@ -70,7 +72,7 @@ buffer is a simple BytesIO, nice, rest of the methods like read, readline, they'
 
 `import errno` - maps to host OS specific error codes, to provide platform independence
 
-There are lot of legacy unsupported workarounds still present in the codebase... like the assignment to ssl.SSLWantReadError in socket.py.
+There are lot of legacy unsupported workarounds still present in the codebase... like the assignment with ssl.SSLWantReadError in socket.py.
 
 In SSL/TLS, performing read might raise an write error, coz underneath some complex cryptographic operation with some negotiation might be running, in that case the SSL library has to write data to socket when we tried to access the data. nice.
 
@@ -81,3 +83,21 @@ Whitelisting exception classes with normal dicts, okay.
         # ...
 
 ```
+
+using object() to detect "whether the default value has been modified in a method" is quite ingenious (`_parsers/socket.py`).
+
+If you ever want to work with socket, humbly take a copy of socket.py ~
+
+organising classes from different python files in a flat structure with `__all__` in init.py.
+
+mystery: events... how are they fired and received? (check multidb/command_executor.py), how does setting new_database / new_pubsub is just enough? - oh, we call on_connect()
+
+`@property` for read-only encapsulation
+
+1. EventInterface, EventException
+2. Event (not a strict implementation, except method signature)
+3. EventDispatcher
+
+idk, but I feel the whole event stuff is a bit messy...
+
+the whole event thing, needs a revisit
