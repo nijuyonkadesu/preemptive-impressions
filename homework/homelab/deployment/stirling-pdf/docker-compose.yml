@@ -1,0 +1,15 @@
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:latest
+    container_name: stirling-pdf
+    ports:
+      - '9999:8080'
+    volumes:
+      - ./stirling-data:/configs
+    restart: unless-stopped
+    networks:
+      - no-internet
+
+networks:
+  no-internet:
+    internal: true
