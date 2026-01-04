@@ -94,12 +94,44 @@ mystery: events... how are they fired and received? (check multidb/command_execu
 
 `@property` for read-only encapsulation
 
-1. EventInterface, EventException
+1. EventListenerInterface & EventDispatcherInterface, EventException
+    - register_listener()
+    - listen()
+    - dispatch()
 2. Event (not a strict implementation, except method signature)
 3. EventDispatcher
 
 idk, but I feel the whole event stuff is a bit messy...
+it's not "really" event, there are actually just chains of callback. quite decisive.
 
-the whole event thing, needs a revisit
+what is the use of pybreaker... what is it doing? - to isolate the dead database, to prevent overwhelming already unhealthy db. (But if you're on kubernetes and, traffic is routed dynamically to different pods, then this is probably not needed (health probe does the similar stuffs like circuit breaker) - unless you connect to statefulsets directly)
 
-what is the use of pybreaker... what is it doing?
+using pybreaker to quickly switch to a fallback db.
+
+```lua
+Complete State Machine
+
+CLOSED
+   ↓ (failure threshold exceeded or health check fails)
+OPEN
+   ↓ (after grace period: 60s)
+HALF_OPEN
+   ↙ (health check passes)     ↘ (health check fails)  
+CLOSED                       OPEN
+
+```
+
+check `from redis.multidb.circuit import State as CBState`, state is completely tied up with callback event.
+
+Connection - ocsp (ssl socket connection)
+they're trying to get IP from the socket. it's behaviour can change based on the type of service (normal & headless service) is used in kubernetes.
+
+- normal: resolves to cluster ip, trafic is passed through kubeproxy and then sent to appropriate pods.
+- headless: resolved ips point to the actual pods themselves (cluster ip is None)
+
+typically, dbs are deployed as sts, which uses headless service. helpful when clients want to discover all database nodes. So, pybreaker does makes sense...
+
+threading.RLock does not deadlock when the same thread requests multiple locks at the same time. within redis-py, cache is maybe shared between different cache pools? so a single lock would unnecessarily block operation that once again reuse the same lock?
+
+
+
