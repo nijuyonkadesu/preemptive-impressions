@@ -36,3 +36,16 @@ lutris -i fate-stay-night-realta-nua-ultimate-edition.yml
 ```
 
 I was quite surprised how well games run, good thing I nuked windows.
+
+# switch to proprietary drivers
+
+I don't know, but performace drastically reduced... so reverting. I don't have time to configure every options in open driver
+
+```sh
+
+lspci -k | grep -A 3 -E "(VGA|3D)"
+glxinfo | grep "OpenGL renderer"
+
+sudo pacman -Rns nvidia-open-dkms
+sudo pacman -S nvidia-dkms
+```

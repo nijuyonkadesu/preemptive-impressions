@@ -17,6 +17,7 @@ https://github.com/kovidgoyal/kitty/issues/692 - create a new tab from current d
 brew install --cask maccy
 brew install --cask alt-tab
 brew install --cask kitty
+brew install --cask raycast
 brew install fzf
 brew install fd ripgrep libpq
 brew install java
@@ -44,6 +45,7 @@ Refer [[Arch/Terminal-Tips#kitty]] for kitty setup.
 
 set maccy shortcut to `^ + v`
 change alt-tab to show apps from current spaces only `⌥ + tab`
+diable spotlight from settings -> open raycast, press `⌘ + ,` to open preferences, reassign hotkey to `⌘ + space`
 
 # .zshrc
 
@@ -103,6 +105,8 @@ export MANPAGER="nvim +Man!"
 # Mac specific
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+#... Check dotfiles repo for uptodate values
 ```
 
 # Foobar2000
