@@ -459,3 +459,24 @@ This is the method scrcpy uses, so you get the benefit of all your phone manufac
 ```sh
 .\scrcpy.exe --video-buffer=50 --window-borderless --window-x=0 --window-y=0 --window-height=1080;
 ```
+
+## Slideshow with blur using mpv
+
+```sh
+mpv . \
+  --image-display-duration=1200 \
+  --fullscreen \
+  --shuffle \
+  --loop-playlist \
+  --no-osc \
+  --no-osd-bar \
+  --lavfi-complex="
+    [vid1]split=2[raw][bg];
+    [raw]scale=-1:1080:force_original_aspect_ratio=decrease[fg];
+    [bg]scale=1920:1080:force_original_aspect_ratio=increase,
+        crop=1920:1080,
+        boxblur=30:1[blur];
+    [blur][fg]overlay=(W-w)/2:(H-h)/2[vo]
+  "
+
+```
