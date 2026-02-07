@@ -134,4 +134,6 @@ typically, dbs are deployed as sts, which uses headless service. helpful when cl
 threading.RLock does not deadlock when the same thread requests multiple locks at the same time. within redis-py, cache is maybe shared between different cache pools? so a single lock would unnecessarily block operation that once again reuse the same lock?
 
 
+Variant of connection pool - one immediately raises error if no connection is available in the pool to share, the other waits for x seconds / indefinitely until a connection is available.
 
+TODO: None + Queue to fill up and block creation?? wait... check connection.py again
