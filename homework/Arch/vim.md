@@ -323,7 +323,8 @@ fusermount -u ~/sshfiles
 unpack uri provider: https://claude.ai/chat/71ec0667-1432-4247-bc7e-0700426bdc00
 
 ```r
-%s/C:/\/run\/media\/guts\/Acer/gI %s/\\/\//gI
+%s/C:/\/run\/media\/guts\/Acer/gI
+%s/\\/\//gI
 ```
 
 ## Run script and output to window
@@ -357,3 +358,13 @@ You get ^M character by presssing ctrl+v and then enter
 - `set magic`
 - `:s/,/,^M/g`
 - [ref](https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim)
+
+## Get items from drop down list from DND Beyond site
+
+Copy outerHTLMElement from inspect tab, put them in a temp.html file. prettier html format
+```
+:%!prettier --stdin-filepath %
+:v/<\/label/d
+:%s/<\/label/
+:%s/\/>/
+```
