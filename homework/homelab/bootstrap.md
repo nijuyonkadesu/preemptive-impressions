@@ -225,6 +225,9 @@ sudo ufw allow from 192.168.29.0/24 to any app OpenSSH
 # Tailscale network interface
 sudo ufw allow in on tailscale0
 
+# Check OS distribution and add public keys for tailscale
+# https://pkgs.tailscale.com/stable/
+
 # Samba whitelist connections from localnetwork
 sudo ufw allow from 192.168.29.0/24 to any port 445 proto tcp # almost same as the below
 sudo ufw allow from 192.168.29.0/24 to any app Samba
