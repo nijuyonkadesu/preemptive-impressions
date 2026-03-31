@@ -69,7 +69,7 @@ mkdir ~/build
 cd ~/build
 git clone --depth 1 https://github.com/neovim/neovim -b stable
 cd neovim
-make CMAKE_BUILD_TYPE=RelWithDebInfo
+make CMAKE_BUILD_TYPE=Release
 sudo make install
 
 # Final setup before launching neovim

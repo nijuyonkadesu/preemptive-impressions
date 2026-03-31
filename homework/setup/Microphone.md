@@ -63,10 +63,45 @@ Maintain the same level of volume, high to low, and low to high. Not killing you
 Linux's native format is VT2, so VST pluging do not work here. Install `Carla` for hosting plugins and audio routing - closest equivalent of `Cantabile Lite` from windows. Require pipewire to be installed and set as default., or try out [Ardour](https://www.youtube.com/watch?v=bfTAKv4htDE). 
 Equivalent of Reaper's VST plugins: 
 
-1. noise subtraction: noise-repellent ([usage guide with Ardour](https://www.youtube.com/watch?v=LeKyGoAmbFE)), lsp-plugins. tonelib-noise-reducer. download `.deb` and install with debtap. [use this guide](https://www.baeldung.com/linux/arch-install-deb-package) 
+1. noise subtraction: noise-repellent ([usage guide with Ardour](https://www.youtube.com/watch?v=LeKyGoAmbFE)), lsp-plugins. (or) tonelib-noise-reducer: download `.deb` and install with debtap. [use this guide](https://www.baeldung.com/linux/arch-install-deb-package) 
 2. noise gate: LSP gate
 3. EQ: x42-eq, LSP Parametric EQ (x8, stereo), Calf EQ (or skip it if noise gate already supports adding low and high pass filter, if that's the only thing you're going to set)
 4. Compressor: LSP compressor, x42-dynamics (reaction time should not be greater than lookahead time)
+
+
+**noise-repellent mode & type of reduction explaination (opencode generated) as of 2026-03-11** 
+
+
+| Index | Parameter           | Symbol          | What it does                                |
+| ----- | ------------------- | --------------- | ------------------------------------------- |
+| 0     | Learn noise profile | noise_learn     | Captures noise profile (0=off, 1=learn)     |
+| 1     | Mode                | aggressiveness  | -100 to +100: Bias for Intelligent Steering |
+| 2     | Reset noise profile | reset           | Clears captured profile                     |
+| 3     | Mode                | adaptive_noise  | 0=Manual, 1=Adaptive                        |
+| 4     | Type of reduction   | adaptive_method | 0=SPP-MMSE, 1=Brandt, 2=Martin              |
+
+
+Looking at the enum, index 1 is AGGRESSIVENESS and index 3 is ADAPTIVE_NOISE.
+
+File: subprojects/libspecbleach/src/shared/denoiser_logic/estimators/spp_mmse_noise_estimator.c
+
+1.  adaptive_noise = 0 (Manual mode - original SPP-MMSE):
+    - You capture a noise profile by setting noise_learn = 1
+    - The plugin subtracts that captured profile from input
+
+2.  adaptive_noise = 1 (Adaptive mode):
+    - Uses one of 3 estimation algorithms selected by adaptive_method:
+      - 0 = SPP-MMSE: Fast, speech-optimized
+      - 1 = Brandt: Music with broadband noise (vinyl/tape)
+      - 2 = Martin: General purpose, most reliable
+
+The aggressiveness parameter (-100% to +100%) biases between Mean/Max/Min profiles in the intelligent steering.
+
+From `lv2ttl/nrepellent-2d.ttl.in`:
+lv2:default 0 ;  (for adaptive_noise)
+
+From plugins/nrepellent-2d.c:505:
+`.adaptive_noise = self->adaptive_noise ? (int)*self->adaptive_noise : 0,`
 
 
 > [!WARNING]

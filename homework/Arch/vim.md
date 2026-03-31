@@ -338,6 +338,24 @@ https://superuser.com/questions/868920/open-the-output-of-a-shell-command-in-a-s
 - `:LspInfo` - get info
 - `LspStop 2` - give ID to detach a lsp from the buffer [ref](https://www.reddit.com/r/neovim/comments/pnl2zs/comment/hcq3of3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
+## Telescope Symbol Navigation
+
+Common LSP symbol kinds: Function, Method, Class, Interface, Constructor, Variable, Constant.     
+
+- `:Telescope lsp_document_symbols symbols=Function`
+- `:Telescope lsp_document_symbols symbols=Class`
+- `:Telescope lsp_document_symbols symbols=Function,Method,Class`
+- `:Telescope lsp_document_symbols symbols=Enum,Null,Struct`
+
+Then to fuzzy-filter over the results (e.g. type async to narrow results).
+- `:Telescope lsp_document_symbols symbols=Function initial_query=async` (TODO: idk how opencode Gwen 3.6 free found about `initial_query` options, I couldn't find it in telescope.nvim man pages yet)
+
+> [!NOTE]
+> For the full enum list, check [microsoft lsp docs](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_documentSymbol), scroll a bit down, and see `SymbolKind` definition
+
+> [!TIP]
+> telescope and treesitter should be upgraded together, and check supported neovim version in README.md. [treesitter docs](https://nvim-treesitter-nvim-treesitter.mintlify.app/installation) 
+
 ## Friendly Snippets
 
 https://github.com/rafamadriz/friendly-snippets/tree/main
