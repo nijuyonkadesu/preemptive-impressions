@@ -347,6 +347,7 @@ Common LSP symbol kinds: Function, Method, Class, Interface, Constructor, Variab
 - `:Telescope lsp_document_symbols symbols=Class`
 - `:Telescope lsp_document_symbols symbols=Function,Method,Class`
 - `:Telescope lsp_document_symbols symbols=Enum,Null,Struct`
+- `:Telescope resume` - continue popup window from where you left off. `Alt + e` to trigger telescope resume.
 
 Then to fuzzy-filter over the results (e.g. type async to narrow results).
 - `:Telescope lsp_document_symbols symbols=Function initial_query=async` (TODO: idk how opencode Gwen 3.6 free found about `initial_query` options, I couldn't find it in telescope.nvim man pages yet)
