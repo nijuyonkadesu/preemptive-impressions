@@ -340,7 +340,8 @@ https://superuser.com/questions/868920/open-the-output-of-a-shell-command-in-a-s
 
 ## Telescope Symbol Navigation
 
-Common LSP symbol kinds: Function, Method, Class, Interface, Constructor, Variable, Constant.     
+Common LSP symbol kinds: Function, Method, Class, Interface, Constructor, Variable, Constant.
+**accidental find**: instead of `symbols=Function` manually, just do lsp_document_symbols, then press `ctrl+l` on any entry, and you can now filter based on the symbol kind, and cycle through it. Try it.
 
 - `:Telescope lsp_document_symbols symbols=Function`
 - `:Telescope lsp_document_symbols symbols=Class`
