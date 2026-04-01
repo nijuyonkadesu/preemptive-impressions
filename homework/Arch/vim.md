@@ -117,9 +117,9 @@ eg: d 10 j > removes 10 lines
 
 ## normal mode commandline
 
-[ref](https://youtu.be/xGkL2N8w0H4?t=492) 
+[ref](https://youtu.be/xGkL2N8w0H4?t=492)
 
-- `:'<,'>norm _i{src=f,i}` - to get `^[` use Ctrl+v and then press escape. This command simply adds a flower bracked for the selected range. `_i` goes to the first character apart from whitespace and goes to insert mode. 
+- `:'<,'>norm _i{src=f,i}` - to get `^[` use Ctrl+v and then press escape. This command simply adds a flower bracked for the selected range. `_i` goes to the first character apart from whitespace and goes to insert mode.
 - `:'<,'>norm I{src=f,i}`
 
 ## Windo diffs
@@ -353,13 +353,30 @@ Common LSP symbol kinds: Function, Method, Class, Interface, Constructor, Variab
 > press TAB on telescope results to mark them (the little `+` icon), then press `Alt+q` instead of `Ctrl+q` to open quickfix list, but only with the items you marked earlier.
 
 Then to fuzzy-filter over the results (e.g. type async to narrow results).
+
 - `:Telescope lsp_document_symbols symbols=Function initial_query=async` (TODO: idk how opencode Gwen 3.6 free found about `initial_query` options, I couldn't find it in telescope.nvim man pages yet)
 
 > [!NOTE]
 > For the full enum list, check [microsoft lsp docs](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_documentSymbol), scroll a bit down, and see `SymbolKind` definition
 
 > [!TIP]
-> telescope and treesitter should be upgraded together, and check supported neovim version in README.md. [treesitter docs](https://nvim-treesitter-nvim-treesitter.mintlify.app/installation) 
+> telescope and treesitter should be upgraded together, and check supported neovim version in README.md. [treesitter docs](https://nvim-treesitter-nvim-treesitter.mintlify.app/installation)
+
+### Telescope fuzzy find patterns
+
+**Modifiers:** [docs](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+
+- `'wild` - exact match (no fuzzy) (includes "wild")
+- `^music` - starts with "music"
+- `.mp3$` - ends with ".mp3"
+- `!fire` - excludes items containing "fire"
+- `!^music` - doesn't start with "music"
+- `!.mp3$` - doesn't end with ".mp3"
+
+**Operators:**
+
+- `.json | .md ` - list both the results
+- `^core go$ | rb$ | py$` - starts with core, ends with go, rb, or py
 
 ## Friendly Snippets
 
@@ -385,6 +402,7 @@ You get ^M character by presssing ctrl+v and then enter
 ## Get items from drop down list from DND Beyond site
 
 Copy outerHTLMElement from inspect tab, put them in a temp.html file. prettier html format
+
 ```
 :%!prettier --stdin-filepath %
 :v/<\/label/d
