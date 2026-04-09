@@ -277,6 +277,10 @@ nvim -d file1 file2
 :G diff @
 :windo diffo
 :windo difft
+:Gdifftoolc branch-name
+:Gdifftoolc branch-name --names-only # all the changes opens in quickfix list
+:Gvdiffsplit branch-name
+:Gedit branch:file-name # supports tab completion
 ```
 
 ## SSH Filesystem
