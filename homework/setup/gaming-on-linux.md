@@ -49,3 +49,7 @@ glxinfo | grep "OpenGL renderer"
 sudo pacman -Rns nvidia-open-dkms
 sudo pacman -S nvidia-dkms
 ```
+
+update: 2026-04-19: since dec 2025 [announcement](https://archlinux.org/news/nvidia-590-driver-drops-pascal-support-main-packages-switch-to-open-kernel-modules/) nvidia-dkms is replaced with nvidia-open-dkms. but, running the -Rns & -S nvidia-dkms smhw brings the old performace back, alt + enter works.
+
+How could a reinstall of the same package after system upgrade can even make a difference? I dunno... maybe I'll search for it some other day...
