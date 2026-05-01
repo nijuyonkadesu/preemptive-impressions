@@ -44,6 +44,7 @@ https://unix.stackexchange.com/questions/737234/using-tree-for-sub-subdirectorie
 22. `pastel color pink` - get color, mix colors, complement and many more: [pastel](https://github.com/sharkdp/pastel)
 23. Find line of code in a github project `git ls-files -z | xargs -0 wc -l` -> xargs -0 means, read from stdin, wc -l keeps running as long as it receives the input from source (here it's stdin), and the git cmd prints all lines from all the files present in the codebase
 24. `find zips/ -type f -exec mv {} . \;` copy nested files to a single directory
+25. `zip -r "GameInfoBot_$(date +%Y-%m-%d).zip" . -x "*.git*" -x "*venv/*" -x "*__pycache__/*"` - zip files, excluding folders
 
 ```sh
 cat << EOF > file.ext
