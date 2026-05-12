@@ -150,6 +150,7 @@ Replace with confirmation: `:s/search/replacement/gc`
 - `{` - paragraph jump
 - `G` - to bottom
 - `gg` - to top
+- `<leader>gc` - comment lines in visual mode (select multiple lines and fire the keybind)
 - `:100` (exact jump)
 - `/fun` - search -`n / N`
 - `?fun  `
