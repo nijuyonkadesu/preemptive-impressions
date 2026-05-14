@@ -4,12 +4,20 @@ MM - Staged and yet modified again
 ```bash
 git add <file>
 git status -s
-git diff --staged #(same as cached)
 git commit -a #(automatically adds previously tracked file for commit)
 git rm log/\*.log #removes from tracking further (file is still in machine) (glob pattern)
 git log -S func_name #(find the last commit that added or removed a reference to a specific function)
 git rm -r --cached /path/to/folder # remove tracked files from git, but keep them in local
 ```
+
+| Goal                              | Command                  |
+| :-------------------------------- | :----------------------- |
+| **Only Unstaged**                 | git diff                 |
+| **Only Staged**                   | git diff --staged        |
+| **Both Staged & Unstaged**        | git diff HEAD            |
+| **Specific file (Total changes)** | git diff HEAD <file>     |
+| **Specific file (Only unstaged)** | git diff <file>          |
+| **Specific file (Only staged)**   | git diff --staged <file> |
 
 ## .gitignore
 
@@ -320,7 +328,7 @@ git diff --find-copies-harder -B -C
 :Gdiff 0956ab904
 :Gdiff @
 
-# Flow: list all the files in quickfix list -> open one of them, and run difftool vertical split. 
+# Flow: list all the files in quickfix list -> open one of them, and run difftool vertical split.
 # set modifiable if you want to do codeformat on both sides for easy comparison
 # use Alt + J (capital J) to automatically load the diff., Alt + J simply iterates the quickfix list (with my neovim configs)
 :G difftool --name-only main
@@ -335,7 +343,6 @@ git diff --find-copies-harder -B -C
 ## Cherrypick
 
 `:G cherrypick -x 0956ab904` - resolve the conflicts, commit
-
 
 ## github cli
 
