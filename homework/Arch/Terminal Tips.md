@@ -440,6 +440,7 @@ scrcpy --display-buffer=50 --window-borderless --window-x=0 --window-y=0 --windo
 
 # adb over tcp
 scrcpy --tcpip --window-borderless --window-x=0 --window-y=0 --window-height=1080 -e --hid-keyboard=uhid
+scrcpy --tcpip --window-borderless --window-x=0 --window-y=0 --window-height=1080 -e -K --video-codec=h265
 ```
 
 ### use device microphone on laptop - with VB-Audio

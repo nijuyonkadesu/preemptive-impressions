@@ -338,6 +338,9 @@ git diff --find-copies-harder -B -C
 # populates the results in a quickfix list
 :G grep "something" -q
 
+# get the merge commit, grab the commit hash, then see diff inlocal just like from github UI.
+:Gdifftoolc --name-only 354b4ad^ 354b4ad
+
 ```
 
 ## Cherrypick
