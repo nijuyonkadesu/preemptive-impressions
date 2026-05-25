@@ -8,6 +8,9 @@ Run these, and follow the instrucitons printed on terminal post install.
 1. Install
 ```sh
 yay -S voxtype-bin
+sudo pacman -S ydotool
+systemctl --user enable ydotool
+systemctl --user start ydotool
 
 # uses vulkan
 sudo voxtype setup gpu --enable
@@ -24,3 +27,6 @@ systemctl --user enable --now voxtype
 
 3. Configure shortcuts: refer [docs](https://github.com/peteonrails/voxtype#compositor-keybindings) 
 
+
+> [!NOTE]
+> wtype does not work in Plasma KDE systems.
