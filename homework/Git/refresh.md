@@ -240,6 +240,12 @@ git merge experiment
 # multiple branch rebasing
 git rebase --onto main server client
 
+# Consider the following branch scenario:
+# (old) main -> sprint (+8 commits) -> your-feature (+3 commits)
+# --onto is built for this scenarios like: "I want only the commits unique to my branch (+3), not the entire chain (excludes +8 commit from sprint branch)."
+# without onto, the entire chain (+8 & +3) all will be replayed to main branch. (from the common ancestor of main)
+git rebase --onto origin/main your-feature
+
 # then do the ffmerge
 git switch main
 git merge client
