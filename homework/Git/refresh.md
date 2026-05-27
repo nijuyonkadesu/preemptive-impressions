@@ -244,7 +244,10 @@ git rebase --onto main server client
 # (old) main -> sprint (+8 commits) -> your-feature (+3 commits)
 # --onto is built for this scenarios like: "I want only the commits unique to my branch (+3), not the entire chain (excludes +8 commit from sprint branch)."
 # without onto, the entire chain (+8 & +3) all will be replayed to main branch. (from the common ancestor of main)
-git rebase --onto origin/main your-feature
+# Syntax: git rebase --onto <new-base (origin/main)> <cut-point (sprint)>
+git switch your-feature
+git switch -c your-feature-rebase-copy # make sure to work on the copy (for safety ig?)
+git rebase --onto origin/main sprint
 
 # then do the ffmerge
 git switch main
