@@ -103,6 +103,9 @@ lv2:default 0 ;  (for adaptive_noise)
 From plugins/nrepellent-2d.c:505:
 `.adaptive_noise = self->adaptive_noise ? (int)*self->adaptive_noise : 0,`
 
+> [!NOTE]
+> TODO: clean this section with findings from https://claude.ai/chat/0760cde5-4955-484e-b71d-51b7731c73b7
+
 
 > [!WARNING]
 > Input souces and output can disappear after a disconnect - this is normal in pipewire. To solve the issue, create a virtual sink ([docs](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Virtual-Devices#create-a-sink)) and work with them in Carla. Also check out "Using LADSPA, LV2 and VST plugins" section in [arch wiki](https://wiki.archlinux.org/title/PipeWire). Oh, also read [this](https://forum.endeavouros.com/t/how-to-configure-pipewire-carla-so-that-it-remembers-the-configuration/36219/12) to know more about session issue.
@@ -424,3 +427,50 @@ wireplumber.profiles = {
 - Pavucontrol
 - easy effects
 
+
+---
+
+# Q: how to make your voice sound fuller, rich in texture?
+
+## [TODO] Iteration 1
+The technique you're looking for is called **harmonic excitation / presence enhancement**. Your voice sounds "fuller" because they're adding saturation (subtle harmonic distortion) and EQ shaping that emphasizes the presence band (~2-5 kHz) and rounds out the low-mids (~100-300 Hz).
+Add these two plugins to your chain (after compressor, before output):
+
+1. LSP Parametric EQ Stereo — boost ~100-150 Hz by 2-4 dB (warmth), cut 300-500 Hz by 1-2 dB (mud), boost 2-4 kHz by 2-3 dB (presence/definition), gentle shelf at 8-10 kHz (air)
+2. LSP Exciter Stereo — adds even-order harmonics that make the voice feel "rich" without being louder. Low mix, high-frequency band only.
+
+Your current chain has no EQ or saturation, so it sounds flat/clinical. Those two plugins will give you that "fuller" texture you're hearing.
+
+## [TODO] Iteration 2
+
+It's both talent AND heavy processing. Anime VA recordings go through much more than a simple mic chain — they're mixed like an instrument.
+What they do (studio-grade):
+
+- Multiband compression — not just a single compressor. Different frequency bands compressed independently (e.g., LSP Multiband Compressor). This gives that tight, controlled sound.
+- De-esser — tames harsh sibilance so they can boost highs without it sounding painful.
+- EQ shaping — huge low-mid scoop around 300-500 Hz (anime voices are intentionally "thin" in some ranges to cut through), then big boosts at presence bands.
+- Parallel compression — blend a slammed copy of the voice underneath the clean signal (New York compression). Adds body without making every word pump.
+- Subtle reverb — short room/hall, mixed very low. You don't hear it as reverb, just a sense of space/depth.
+- Pitch correction/formant shifting — some intentionally brighten the formants slightly (makes voice sound younger/more "anime").
+
+**Search terms to learn:**
+
+- "anime voice acting mixing techniques"
+- "voice over parallel compression"
+- "presence and air EQ for voice"
+- "vocal multiband compression"
+- "formant shifting voice"
+- "broadcast voice chain (de-esser -> compressor -> limiter -> exciter)"
+- "seiyuu recording setup / 声優 録音 機材"
+- "LPF and HPF for voice clarity"
+
+**Start with multiband compressor + de-esser + exciter in Carla, and you'll get 80% of the way there.**
+
+---
+
+Same but for english: No, the techniques stay the same. The only difference is frequency targets shift slightly:
+
+- English sibilance lives higher (~6-8 kHz) than Japanese (~4-6 kHz), so your de-esser frequency changes.
+- English voices benefit more from a presence boost at 3-5 kHz (consonant clarity) rather than the upper-mid push anime uses.
+- Low-end warmth (100-200 Hz) matters more for English deep/authoritative tone.
+Everything else — multiband comp, parallel comp, exciter/saturation, short reverb, formant shifting — is identical. Just tweak the EQ points by ear for your voice.
