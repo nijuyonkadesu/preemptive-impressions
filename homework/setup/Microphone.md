@@ -474,3 +474,15 @@ Same but for english: No, the techniques stay the same. The only difference is f
 - English voices benefit more from a presence boost at 3-5 kHz (consonant clarity) rather than the upper-mid push anime uses.
 - Low-end warmth (100-200 Hz) matters more for English deep/authoritative tone.
 Everything else — multiband comp, parallel comp, exciter/saturation, short reverb, formant shifting — is identical. Just tweak the EQ points by ear for your voice.
+
+## [TODO] Iteration 3 - to conditionally enable / disable chain of effects
+
+Carla supports MIDI CC mapping on plugin parameters. You can assign a keyboard key or MIDI button to toggle plugin wet/dry without touching the patchbay.
+For #2 (toggle parallel excitation):
+Put the parallel chain (exciter + saturator) in series after the compressor, but crank up its dry/wet mix. Map a MIDI CC to that mix parameter: 0% = dry (off), 100% = full effect. Carla remembers the CC mapping. One button press, done.
+
+For #3 (voice-activated loop):
+This is a bit trickier. You can:
+- Use the LSP Gate Stereo you already have — its sidechain/envelope follower can trigger a gate on the loop track. Route your voice as sidechain to a gate on the loop. When you speak, gate opens → loop plays. Not perfect but works in pure Carla.
+- Or run a small external script that watches for voice activity and sends MIDI CC to Carla. Tools: jack-midi-clock, csound, or a simple Python script with python-rtmidi.
+Simplest approach: Use Carla's parameter automation lanes. Record a button press as automation to toggle the parallel chain. No routing headaches
