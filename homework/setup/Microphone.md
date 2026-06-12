@@ -496,3 +496,32 @@ Most seamless options for your Wayland setup:
 Practical recommendation: Open Carla → go to the plugin's parameter → right-click → "MIDI Learn" → then open Carla's built-in keyboard (View → Keyboard). Tap any key on that virtual keyboard. Done. No external tools, no Wayland issues, no routing nightmares.
 
 [TODO] clean up once all is setup and finalized
+
+
+## Software female voice: [TODO] LMFAO, it would be hilarious, but fun
+
+Yes, but not with simple EQ/compression — those only make it sound like a man with a thin voice. The key is formant shifting, not pitch shifting.
+What you need:
+- Pitch shift (~+4 to +7 semitones) — raises fundamental frequency
+- Formant shift — shifts the resonant peaks of your vocal tract independently. This is what actually changes perceived gender. Without it, you just sound like Alvin and the Chipmunks.
+- Vocal tract length normalization — shortens the perceived vocal tract length.
+Linux plugins that can do this:
+- ZynAddSubFX or Calf Monosynth (formant filter) — partial
+- Rubber Band (LV2 version: rubberband-lv2) — can do pitch+formant separately
+- Autotalent or Zita-at1 (autotune with formant)
+- Sox (command-line) — pitch + bend but not real-time
+- Real-time solution: Rakarrack (LV2) — has a robust pitch shifter with formant preservation/alteration
+- LSP Pitch Shifter Stereo — shift pitch but it doesn't independently control formants well
+The hard truth: Free Linux LV2 plugins for realistic gender transformation are limited. People doing realistic real-time voice feminization either use:
+- Windows VSTs via yabridge (e.g., Little AlterBoy, Pitchproof, Melda MAutoPitch)
+- Dedicated voice changers like Clownfish (Windows, yabridge) or Voicemod
+- AI-based: RVC (Retrieval-based Voice Conversion) — real-time now possible on Linux, highest quality but needs GPU
+Search terms:
+- "formant shifting Linux LV2"
+- "voice gender transformation EQ formant"
+- "RVC voice changer Linux real-time"
+- "yabridge Little AlterBoy"
+- "vocal tract length normalization"
+- "spectral envelope shifting"
+With just LV2 plugins under Carla, you can get an androgynous sound but not a fully convincing female voice. For that, you need yabridge+VSTs or AI-based conversion.
+
