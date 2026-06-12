@@ -486,3 +486,13 @@ This is a bit trickier. You can:
 - Use the LSP Gate Stereo you already have — its sidechain/envelope follower can trigger a gate on the loop track. Route your voice as sidechain to a gate on the loop. When you speak, gate opens → loop plays. Not perfect but works in pure Carla.
 - Or run a small external script that watches for voice activity and sends MIDI CC to Carla. Tools: jack-midi-clock, csound, or a simple Python script with python-rtmidi.
 Simplest approach: Use Carla's parameter automation lanes. Record a button press as automation to toggle the parallel chain. No routing headaches
+
+### keybind: MIDI setup workaround
+Most seamless options for your Wayland setup:
+1. Carla's built-in keyboard (easiest, no extra software) — click the keyboard icon in Carla toolbar. Click any key → it sends MIDI. Map that to your plugin's wet/dry parameter via MIDI learn. Just click a key on screen whenever you want the effect.
+2. vmpk (Virtual MIDI Piano Keyboard) — runs alongside Carla, can be minimized. It maps PC keyboard keys to MIDI notes (Z-M, Q-U etc.). Set it to output on the same MIDI bus, assign a note to toggle your effect.
+3. Best for your use case: Carla LADSPA "midi through" trick — Add a MIDI CC controller plugin (like MIDI CC to Audio or similar). You can route a simple button in Carla's own patchbay without needing external MIDI at all — just automate the parameter directly in the Carla sequence.
+
+Practical recommendation: Open Carla → go to the plugin's parameter → right-click → "MIDI Learn" → then open Carla's built-in keyboard (View → Keyboard). Tap any key on that virtual keyboard. Done. No external tools, no Wayland issues, no routing nightmares.
+
+[TODO] clean up once all is setup and finalized
