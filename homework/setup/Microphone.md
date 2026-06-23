@@ -60,6 +60,9 @@ Maintain the same level of volume, high to low, and low to high. Not killing you
 
 # Linux Setup
 
+> [!WARNING]
+> ALSA by applieds a huge gain (+21db) when I increased input volume from system settings, so run `alsamixer` and press `F6`, find your microphone, use tab, go to capture, and reduce the gain to +0. Set the microphone knob to 100%, and adjust your carla plugin gains accordingly
+
 Linux's native format is VT2, so VST pluging do not work here. Install `Carla` for hosting plugins and audio routing - closest equivalent of `Cantabile Lite` from windows. Require pipewire to be installed and set as default., or try out [Ardour](https://www.youtube.com/watch?v=bfTAKv4htDE). 
 Equivalent of Reaper's VST plugins: 
 
