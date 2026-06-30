@@ -482,3 +482,15 @@ mpv . \
   "
 
 ```
+
+## OGG to MP3 conversion
+
+```sh
+ffmpeg -i input.ogg -c:a libmp3lame -q:a 2 output.mp3
+
+# -c    -> codec: LAME mp3
+# :a    -> apply to "audio stream"
+# -q    -> quality level 0 to 9 (highest to lowest)
+
+```
+
