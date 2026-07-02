@@ -494,3 +494,15 @@ ffmpeg -i input.ogg -c:a libmp3lame -q:a 2 output.mp3
 
 ```
 
+# wake up agent right after session limit reset: 
+
+```sh
+systemd-run --user --on-calendar="2026-07-02 19:00:00" --unit=tmux-continue /home/shichika/test/tmux_continue.sh
+systemctl --user list-timers --all | grep tmux
+
+# tmux_continue.sh contents:
+#!/bin/bash
+SESSION="fandom"
+tmux send-keys -t "$SESSION" "continue" Enter
+
+```
