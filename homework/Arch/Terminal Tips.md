@@ -506,3 +506,8 @@ SESSION="fandom"
 tmux send-keys -t "$SESSION" "continue" Enter
 
 ```
+
+## Find mounted folders through dolphin (KDE) filemanager
+
+`find "$(findmnt -rn -t fuse.kio-fuse -o TARGET)" -maxdepth 3 -type d`
+

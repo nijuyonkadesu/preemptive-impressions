@@ -32,6 +32,7 @@ Paste this override (without quotes):
 [Service]
 Environment="OLLAMA_CONTEXT_LENGTH=65536"
 Environment="OLLAMA_KEEP_ALIVE=24h"
+Environment="OLLAMA_HOST=0.0.0.0:11434"
 ```
 
 Restart Ollama server:
@@ -41,6 +42,12 @@ sudo systemctl restart ollama
 ```
 
 ---
+
+## Downloading Models
+
+```sh
+ollama pull hf.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive:Q4_K_M
+```
 
 ## 🚀 Running Models
 
@@ -91,3 +98,8 @@ ollama ps
   }
 }
 ```
+
+# Tiny Benchmark Prompt
+
+"Had I really done something that warranted him reevaluating his opinion of me?" - break down the sentance structure of this. I want to create more sentence in similar tone and format. what's the fundamental essence of that I need to grasp to reproduce this
+
