@@ -1,7 +1,9 @@
 services:
   vaapi:
     devices:
-      - /dev/dri:/dev/dri
+      # renderD128 only: the cardN number moves with kernel/driver updates
+      # (simpledrm took card0 after the 7.0.0-43 kernel update)
+      - /dev/dri/renderD128
     environment:
       - LIBVA_DRIVER_NAME=radeonsi
 

@@ -21,6 +21,7 @@ services:
       - ${UPLOAD_LOCATION}:/data
       - /etc/localtime:/etc/localtime:ro
       - /home/shichika/immich/upload/copied:/external
+      - /srv/samba/share/telegram-media-review/library:/sao
     env_file:
       - .env
     ports:
