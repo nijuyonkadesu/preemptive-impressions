@@ -68,3 +68,5 @@ loginctl enable-linger shichika
 mkdir -p ~/.config/systemd/user/
 mkdir -p ~/.config/containers/systemd/
 ```
+
+[TODO] obsolete in 2026-11-10 (after ubuntu 26 update)

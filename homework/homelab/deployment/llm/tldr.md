@@ -1,16 +1,59 @@
-# TL;DR
+# Download guff model weights
 
-This repository contains setup instructions for running local LLMs with OpenCode using Ollama. It includes installation steps, system service configuration to increase context length, and examples for running different Qwen models (7B, 128K context, 27B). The setup supports local development and testing of large language models using OpenCode's framework.
+- Download models of your choice and run them with llama.cpp
 
-## Quick Start
+```sh
+mkdir ~/models
 
-1. Install Ollama: `curl -fsSL https://ollama.com/install.sh | sh`
-2. Configure Ollama service to increase context length to 65536
-3. Run a model: `ollama run qwen2.5:7b`
-4. Configure OpenCode to use Ollama at `http://localhost:11434/v1`
+uvx --from "huggingface_hub[cli]" hf download unsloth/Qwen3.8-27B-GGUF \
+  --include "Qwen3.8-27B-UD-Q4_K_M.gguf" "mmproj-F16.gguf" "MTP/mtp-Qwen3.8-27B-Q4_0.gguf" \
+  --local-dir ~/models/qwen3.8-27b
 
-## Models
+llama serve \
+  --models-dir ~/models/ \
+  --models-preset ~/models/presets.ini \
+  --host 0.0.0.0 \
+  --port 11434 \
+  --models-max 2 \
+  -t 8 \
+  -tb 8 \
+  -ngl 0 \
+  -c $((64*1024)) \
+  --sleep-idle-seconds $((5*60*60)) \
+  -fa on
 
-- Qwen 2.5 (7B) - Better quality, needs 16GB+ RAM
-- Qwen 2.5 Coder (128K context) - Required for OpenCode
-- Qwen 3.5 (27B)
+# Maybe add them if really needed. Sending a hi-res image blocked GPU?, while with mmproj-offload disabled, CPUs were revving for very long time.
+# --no-mmproj-offload \
+# --image-max-tokens 16384
+```
+
+## Sample preset.ini
+
+```ini
+# Per-model overrides for the llama.cpp router.
+# Only needed here to enable the MTP draft head for Qwen3.8-27B.
+[qwen3.8-27b]
+model = /home/shichika/models/qwen3.8-27b/Qwen3.8-27B-UD-Q4_K_M.gguf
+mmproj = /home/shichika/models/qwen3.8-27b/mmproj-F16.gguf
+ctx-size = 65536
+flash-attn = on
+spec-type = draft-mtp
+spec-draft-model = /home/shichika/models/qwen3.8-27b/MTP/mtp-Qwen3.8-27B-Q4_0.gguf
+
+# Qwen3-TTS 0.6B - mmproj name is not "mmproj-*", so it must be set explicitly.
+# Smaller ctx than the global 64k: TTS prompts are short and 64k KV is wasted RAM.
+[qwen3-tts-0.6b]
+model = /home/shichika/models/qwen3-tts-0.6b/Qwen3-TTS-12Hz-0.6B-Base.Q8_0.gguf
+mmproj = /home/shichika/models/qwen3-tts-0.6b/Qwen3-TTS-12Hz-0.6B-Base.mmproj-Q8_0.gguf
+ctx-size = 8192
+flash-attn = on
+
+# PocketTTS (Kyutai) - English, no voice cloning. 25 built-in voices live in
+# the mmproj: alba anna azelma bill_boerst ... giovanni ... vera
+[pocket-tts]
+model = /home/shichika/models/pocket-tts/pocket-tts-english.gguf
+mmproj = /home/shichika/models/pocket-tts/mmproj-pocket-tts-english.gguf
+ctx-size = 4096
+flash-attn = on
+```
+
